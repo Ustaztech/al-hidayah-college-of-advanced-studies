@@ -1,0 +1,106 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --ahcas-green: #006B35;
+    --ahcas-green-dark: #004D26;
+    --ahcas-green-light: #008743;
+    --ahcas-gold: #D4A62A;
+    --ahcas-gold-hover: #B88D1D;
+    --ahcas-orange: #F58220;
+    --ahcas-charcoal: #252B33;
+    --ahcas-bg-soft: #F3F6F3;
+    --ahcas-card-bg: #FFFFFF;
+    --ahcas-text-main: #252B33;
+    --ahcas-text-muted: #5A6472;
+    --ahcas-border: #E2E8F0;
+
+    --font-scale: 1rem;
+  }
+
+  html[data-theme="dark"] {
+    --ahcas-bg-soft: #12181F;
+    --ahcas-card-bg: #1A222C;
+    --ahcas-text-main: #F1F5F9;
+    --ahcas-text-muted: #94A3B8;
+    --ahcas-border: #2D3748;
+  }
+
+  html[data-high-contrast="true"] {
+    --ahcas-green: #004020;
+    --ahcas-gold: #A67C00;
+    --ahcas-orange: #D05000;
+    --ahcas-text-main: #000000;
+    --ahcas-bg-soft: #FFFFFF;
+    --ahcas-border: #000000;
+  }
+
+  html[data-high-contrast="true"][data-theme="dark"] {
+    --ahcas-text-main: #FFFFFF;
+    --ahcas-bg-soft: #000000;
+    --ahcas-card-bg: #0A0A0A;
+    --ahcas-border: #FFFFFF;
+  }
+
+  html[data-text-scale="small"] {
+    font-size: 87.5%; /* 14px */
+  }
+  html[data-text-scale="normal"] {
+    font-size: 100%; /* 16px */
+  }
+  html[data-text-scale="large"] {
+    font-size: 112.5%; /* 18px */
+  }
+
+  body {
+    background-color: var(--ahcas-bg-soft);
+    color: var(--ahcas-text-main);
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+    line-height: 1.6;
+    transition: background-color 0.25s ease, color 0.25s ease;
+  }
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--ahcas-bg-soft);
+}
+::-webkit-scrollbar-thumb {
+  background: #CBD5E1;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94A3B8;
+}
+
+/* Print styles for Admission Letters, ID Cards & Receipts */
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  .printable-document {
+    background: white !important;
+    color: black !important;
+    box-shadow: none !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+  }
+}
+
+/* Keyframe animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+  animation: fadeIn 0.3s ease-out forwards;
+}
