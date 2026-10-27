@@ -97,18 +97,8 @@ export const calculateIJMBGrade = (ca: number, exam: number): {
 const bootstrapDatabase = () => {
   // Production RBAC: Bootstrap ONLY the Chief Administrator account
   if (!localStorage.getItem(KEYS.USERS)) {
-    const seedUsers: UserAccount[] = [
-      {
-        id: 'usr-admin-01',
-        name: 'Chief Dr. Muhammad Baba Suleiman, PhD',
-        email: 'admin@alhidayahcollege.com.ng',
-        passwordHash: hashPassword('Admin@AHCAS2026!'),
-        role: 'STAFF',
-        subRole: 'SUPER_ADMIN',
-        phone: '08056350078',
-        createdAt: '2026-01-01'
-      }
-    ];
+    const seedUsers: UserAccount[] = [];
+    // Never seed privileged users or passwords in public source.
     localStorage.setItem(KEYS.USERS, JSON.stringify(seedUsers));
   }
 

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { supabaseApi } from '../../services/supabaseApi';
 
 import {
   GraduationCap,
@@ -23,7 +24,7 @@ import { INSTITUTION_INFO } from '../../data/ijmbData';
 export const AuthPage: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { login, register, authError, setAuthError, role } = useAuth();
+  const { login, register, authError, setAuthError } = useAuth();
 
   const isRegisterRoute = location.pathname.includes('register');
   const [isSignUp, setIsSignUp] = useState(isRegisterRoute);
@@ -64,13 +65,17 @@ export const AuthPage: React.FC = () => {
         }, 600);
       } else {
         await login(email, password);
+        const stored = sessionStorage.getItem('ahcas_supabase_session');
+        const token = stored ? (JSON.parse(stored) as { access_token: string }).access_token : '';
+        const profiles = token ? await supabaseApi.getMyProfile(token) : [];
+        const signedInRole = profiles[0]?.role?.toUpperCase() || 'APPLICANT';
         setSuccessMsg('Signed in successfully! Redirecting...');
         
         // Dynamic Role-Based Redirect after authentication
         setTimeout(() => {
-          if (['SUPER_ADMIN','REGISTRAR','BURSAR','LECTURER'].includes(role)) {
+          if (['SUPER_ADMIN','REGISTRAR','BURSAR','LECTURER'].includes(signedInRole)) {
             navigate('/admin/dashboard');
-          } else if (role === 'STUDENT') {
+          } else if (signedInRole === 'STUDENT') {
             navigate('/student/dashboard');
           } else {
             navigate('/apply');
