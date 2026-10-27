@@ -20,7 +20,7 @@ if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(cleanEmail))throw new Error('Invalid admin
 if(new URL(redirectTo).protocol!=='https:')throw new Error('Redirect must use HTTPS');
 try {
  // Invites the account holder. Supabase Auth delivers an invitation email and password-setup link.
- const invitation = await api('/auth/v1/invite',{method:'POST',body:JSON.stringify({email:cleanEmail,redirect_to:redirectTo})});
+ const invitation = await api('/auth/v1/invite?redirect_to='+encodeURIComponent(redirectTo),{method:'POST',body:JSON.stringify({email:cleanEmail})});
  const id = invitation.id ?? invitation.user?.id;
  if(!id) throw new Error('Invite accepted but no user ID returned. Verify manually in Supabase Auth.');
  // Promote ONLY the newly invited identity. Never accept role claims from the browser.
