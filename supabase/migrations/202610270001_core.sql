@@ -169,9 +169,26 @@ revoke all on public.profiles, public.applications, public.students, public.cour
 grant select on public.profiles,public.applications,public.students,public.course_registrations,
  public.results,public.payments,public.audit_events to authenticated;
 grant insert on public.applications, public.course_registrations, public.results to authenticated;
-grant update (details,status,submitted_at) on public.applications to authenticated;
+grant update (details,submitted_at) on public.applications to authenticated;
+-- Applicant submission and registrar decisions must use audited SECURITY DEFINER RPCs.
 grant update (status) on public.course_registrations to authenticated;
 grant update (ca_score,exam_score,published,entered_by) on public.results to authenticated;
 grant select on public.programmes,public.courses to anon,authenticated;
 grant insert,update,delete on public.programmes,public.courses to authenticated;
 -- Review and admission provisioning must occur in trusted Edge Functions/service-role transactions.
+
+-- Application submission is a single state transition controlled by ownership.
+create or replace function public.submit_my_application(application_uuid uuid)
+returns public.applications language plpgsql security definer set search_path = ''
+as $$
+declare record public.applications;
+begin
+ update public.applications a
+ set status='submitted', submitted_at=now()
+ where a.id=application_uuid and a.applicant_id=auth.uid() and a.status='draft'
+ returning a.* into record;
+ if not found then raise exception 'Application not found or not eligible for submission'; end if;
+ return record;
+end $$;
+revoke all on function public.submit_my_application(uuid) from public,anon;
+grant execute on function public.submit_my_application(uuid) to authenticated;

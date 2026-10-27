@@ -96,9 +96,9 @@ export function App() {
               <Route path="/login" element={<AuthPage />} />
 
               {/* Application Portal Routes (Exact Match to Image 3) */}
-              <Route path="/apply" element={<ApplicantPortal />} />
-              <Route path="/apply/home" element={<ApplicationPortalHome />} />
-              <Route path="/apply/requirements" element={<ApplicationRequirements />} />
+              <Route path="/apply" element={<ProtectedRoute allowedRoles={['APPLICANT']}><ApplicantPortal /></ProtectedRoute>} />
+              <Route path="/apply/home" element={<ProtectedRoute allowedRoles={['APPLICANT']}><ApplicationPortalHome /></ProtectedRoute>} />
+              <Route path="/apply/requirements" element={<ProtectedRoute allowedRoles={['APPLICANT']}><ApplicationRequirements /></ProtectedRoute>} />
               <Route path="/apply/register" element={<ApplicantPortal />} />
               <Route path="/apply/status" element={<ApplicantPortal />} />
               <Route path="/applications" element={<ApplicantPortal />} />

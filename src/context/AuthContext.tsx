@@ -1,134 +1,95 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
-import { db, UserAccount } from '../services/db';
-import { StudentRecord, ApplicationRecord } from '../types';
+import React, { createContext, useContext, useState, useEffect, useCallback } from 'react';
+import { supabaseApi, type AuthSession } from '../services/supabaseApi';
+import type { UserAccount } from '../services/db';
+import type { StudentRecord, ApplicationRecord } from '../types';
 
-export type UserRole = 'GUEST' | 'APPLICANT' | 'STUDENT' | 'LECTURER' | 'BURSAR' | 'REGISTRAR' | 'SUPER_ADMIN';
-
-interface AuthContextType {
-  currentUser: UserAccount | null;
-  role: UserRole;
-  studentData: StudentRecord | null;
-  applicantData: ApplicationRecord | null;
-  login: (emailOrId: string, pass: string) => Promise<void>;
-  register: (name: string, email: string, pass: string, role: 'APPLICANT' | 'STUDENT' | 'STAFF', subRole?: any, phone?: string) => Promise<void>;
-  switchDemoView: (type: 'STUDENT' | 'APPLICANT' | 'REGISTRAR' | 'BURSAR' | 'SUPER_ADMIN') => void;
-  logout: () => void;
-  authError: string;
-  setAuthError: (err: string) => void;
-  refreshUserData: () => void;
+export type UserRole = 'GUEST'|'APPLICANT'|'STUDENT'|'LECTURER'|'BURSAR'|'REGISTRAR'|'SUPER_ADMIN';
+type Context = {
+ currentUser: UserAccount | null; role: UserRole;
+ studentData: StudentRecord | null; applicantData: ApplicationRecord | null;
+ login: (email: string, password: string) => Promise<void>;
+ register: (name:string,email:string,password:string,role:'APPLICANT'|'STUDENT'|'STAFF',subRole?:unknown,phone?:string)=>Promise<void>;
+ switchDemoView: (type:'STUDENT'|'APPLICANT'|'REGISTRAR'|'BURSAR'|'SUPER_ADMIN')=>void;
+ logout:()=>void; authError:string;setAuthError:(error:string)=>void;refreshUserData:()=>void;
+};
+const AuthContext = createContext<Context|undefined>(undefined);
+const STORAGE_KEY = 'ahcas_supabase_session';
+const staff = ['LECTURER','BURSAR','REGISTRAR','SUPER_ADMIN'];
+function toAccount(profile: {id:string;full_name:string;role:string;phone?:string},email:string): UserAccount {
+ const role = profile.role.toUpperCase();
+ return {id: profile.id,name:profile.full_name,email,passwordHash:'',role:staff.includes(role)?'STAFF':role==='STUDENT'?'STUDENT':'APPLICANT',subRole:staff.includes(role)?role as UserAccount['subRole']:undefined,phone:profile.phone,createdAt:''};
 }
-
-const AuthContext = createContext<AuthContextType | undefined>(undefined);
-
-export const AuthProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [currentUser, setCurrentUser] = useState<UserAccount | null>(() => db.getSession());
-  const [authError, setAuthError] = useState<string>('');
-  const [studentData, setStudentData] = useState<StudentRecord | null>(null);
-  const [applicantData, setApplicantData] = useState<ApplicationRecord | null>(null);
-
-  const refreshUserData = () => {
-    const session = db.getSession();
-    setCurrentUser(session);
-
-    if (session) {
-      if (session.role === 'STUDENT') {
-        const students = db.getStudents();
-        const found = students.find((s: StudentRecord) => s.email.toLowerCase() === session.email.toLowerCase() || s.matric_number === session.matricNumber) || students[0];
-        setStudentData(found);
-      } else if (session.role === 'APPLICANT') {
-        const apps = db.getApplications();
-        const found = apps.find((a: ApplicationRecord) => a.email.toLowerCase() === session.email.toLowerCase() || a.ref_number === session.refNumber) || apps[0];
-        setApplicantData(found);
-      }
-    } else {
-      setStudentData(null);
-      setApplicantData(null);
+export const AuthProvider: React.FC<{children:React.ReactNode}> = ({children})=>{
+ const [currentUser,setCurrentUser]=useState<UserAccount|null>(null);
+ const [authError,setAuthError]=useState('');
+ const [loading,setLoading]=useState(true);
+ const [session,setSession]=useState<AuthSession|null>(null);
+ const [studentData]=useState<StudentRecord|null>(null);
+ const [applicantData]=useState<ApplicationRecord|null>(null);
+ const persist=(value:AuthSession|null)=>{
+  setSession(value);
+  if(value) sessionStorage.setItem(STORAGE_KEY,JSON.stringify(value));
+  else sessionStorage.removeItem(STORAGE_KEY);
+ };
+ const loadProfile=useCallback(async(value:AuthSession)=>{
+  const profiles=await supabaseApi.getMyProfile(value.access_token);
+  if(!profiles.length) throw new Error('Account profile is not available.');
+  const account=toAccount(profiles[0],value.user.email||'');
+  setCurrentUser(account);
+ },[]);
+ useEffect(()=>{
+  let active=true;
+  const restore=async()=>{
+   try {
+    const raw=sessionStorage.getItem(STORAGE_KEY);
+    if(raw) {
+     const old=JSON.parse(raw) as AuthSession;
+     const refreshed=await supabaseApi.refresh(old.refresh_token);
+     if(!active)return;
+     await loadProfile(refreshed);
+     if(active)persist(refreshed);
     }
+   } catch {
+    if(active){persist(null);setCurrentUser(null);}
+   } finally {if(active)setLoading(false);}
   };
-
-  useEffect(() => {
-    refreshUserData();
-  }, [currentUser?.id]);
-
-  const login = async (emailOrId: string, pass: string) => {
-    setAuthError('');
-    try {
-      const user = db.authenticateUser(emailOrId, pass);
-      db.setSession(user);
-      setCurrentUser(user);
-      refreshUserData();
-    } catch (err: any) {
-      setAuthError(err.message || 'Login failed.');
-      throw err;
-    }
-  };
-
-  const register = async (name: string, email: string, pass: string, role: 'APPLICANT' | 'STUDENT' | 'STAFF', subRole?: any, phone?: string) => {
-    setAuthError('');
-    try {
-      const newUser = db.registerUser(name, email, pass, role, subRole, phone);
-      db.setSession(newUser);
-      setCurrentUser(newUser);
-      refreshUserData();
-    } catch (err: any) {
-      setAuthError(err.message || 'Registration failed.');
-      throw err;
-    }
-  };
-
-  const switchDemoView = (type: 'STUDENT' | 'APPLICANT' | 'REGISTRAR' | 'BURSAR' | 'SUPER_ADMIN') => {
-    const users = db.getUsers();
-    let target: UserAccount | undefined;
-
-    if (type === 'STUDENT') {
-      target = users.find((u: UserAccount) => u.role === 'STUDENT');
-    } else if (type === 'APPLICANT') {
-      target = users.find((u: UserAccount) => u.role === 'APPLICANT');
-    } else {
-      target = users.find((u: UserAccount) => u.role === 'STAFF' && u.subRole === type);
-    }
-
-    if (target) {
-      db.setSession(target);
-      setCurrentUser(target);
-      refreshUserData();
-    }
-  };
-
-  const logout = () => {
-    db.setSession(null);
-    setCurrentUser(null);
-    setStudentData(null);
-    setApplicantData(null);
-  };
-
-  const computeEffectiveRole = (): UserRole => {
-    if (!currentUser) return 'GUEST';
-    if (currentUser.role === 'STAFF') return (currentUser.subRole as UserRole) || 'SUPER_ADMIN';
-    return currentUser.role as UserRole;
-  };
-
-  return (
-    <AuthContext.Provider value={{
-      currentUser,
-      role: computeEffectiveRole(),
-      studentData,
-      applicantData,
-      login,
-      register,
-      switchDemoView,
-      logout,
-      authError,
-      setAuthError,
-      refreshUserData
-    }}>
-      {children}
-    </AuthContext.Provider>
-  );
+  void restore();
+  return ()=>{active=false;};
+ },[loadProfile]);
+ // Access tokens remain in session-only storage; never use the legacy db session.
+ useEffect(()=>{
+  if(!session?.refresh_token)return;
+  const delay=Math.max(30000,(session.expires_in-90)*1000);
+  const timer=window.setTimeout(async()=>{
+   try {
+    const updated=await supabaseApi.refresh(session.refresh_token);
+    await loadProfile(updated);persist(updated);
+   } catch {persist(null);setCurrentUser(null);}
+  },delay);
+  return ()=>window.clearTimeout(timer);
+ },[session,loadProfile]);
+ const login=async(email:string,password:string)=>{
+  setAuthError('');
+  try {
+   const next=await supabaseApi.signIn(email,password);
+   await loadProfile(next);persist(next);
+  } catch(e){const message=e instanceof Error?e.message:'Sign in failed';setAuthError(message);throw e;}
+ };
+ const register=async(name:string,email:string,password:string,role:'APPLICANT'|'STUDENT'|'STAFF')=>{
+  setAuthError('');
+  if(role!=='APPLICANT')throw new Error('Student and staff accounts must be provisioned by the Registrar.');
+  try{
+   const next=await supabaseApi.signUp(email,password,name);
+   if(!next.access_token) throw new Error('Account registered. Please complete email confirmation before signing in.');
+   await loadProfile(next);persist(next);
+  }catch(e){const message=e instanceof Error?e.message:'Registration failed';setAuthError(message);throw e;}
+ };
+ const logout=()=>{persist(null);setCurrentUser(null);};
+ const role:UserRole=!currentUser?'GUEST':currentUser.role==='STAFF'?(currentUser.subRole||'GUEST'):currentUser.role;
+ const refreshUserData=()=>{if(session)void loadProfile(session).catch(()=>logout());};
+ const switchDemoView=()=>{setAuthError('Demo role switching is disabled for security.');};
+ return <AuthContext.Provider value={{currentUser,role,studentData,applicantData,login,register,switchDemoView,logout,authError,setAuthError,refreshUserData}}>
+ {loading?<div className="min-h-screen flex items-center justify-center text-emerald-900">Checking secure session…</div>:children}
+ </AuthContext.Provider>;
 };
-
-export const useAuth = () => {
-  const context = useContext(AuthContext);
-  if (!context) throw new Error('useAuth must be used within AuthProvider');
-  return context;
-};
+export function useAuth(){const ctx=useContext(AuthContext);if(!ctx)throw new Error('AuthProvider is required');return ctx;}

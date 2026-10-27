@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { db } from '../../services/db';
+
 import {
   GraduationCap,
   Users,
@@ -23,7 +23,7 @@ import { INSTITUTION_INFO } from '../../data/ijmbData';
 export const AuthPage: React.FC = () => {
   const location = useLocation();
   const navigate = useNavigate();
-  const { login, register, authError, setAuthError } = useAuth();
+  const { login, register, authError, setAuthError, role } = useAuth();
 
   const isRegisterRoute = location.pathname.includes('register');
   const [isSignUp, setIsSignUp] = useState(isRegisterRoute);
@@ -68,10 +68,9 @@ export const AuthPage: React.FC = () => {
         
         // Dynamic Role-Based Redirect after authentication
         setTimeout(() => {
-          const session = db.getSession();
-          if (session?.role === 'STAFF') {
+          if (['SUPER_ADMIN','REGISTRAR','BURSAR','LECTURER'].includes(role)) {
             navigate('/admin/dashboard');
-          } else if (session?.role === 'STUDENT') {
+          } else if (role === 'STUDENT') {
             navigate('/student/dashboard');
           } else {
             navigate('/apply');
