@@ -13,7 +13,10 @@ import {
   Building,
   FileSpreadsheet,
   Layers,
-  ChevronRight
+  ChevronRight,
+  CreditCard,
+  GraduationCap,
+  ArrowRight
 } from 'lucide-react';
 import { AuthSessionUser } from '../../../lib/types';
 import { PortalHeader } from '../../../components/layout/PortalHeader';
@@ -152,7 +155,58 @@ export const StaffDashboardClient: React.FC<StaffDashboardClientProps> = ({ user
             </div>
           </div>
 
+          {/* Role-Specific Specialised Desk Access */}
+          {(user.roles.includes('bursar') || user.roles.includes('registrar') || user.roles.includes('super_admin') || user.roles.includes('college_admin')) && (
+            <div className="bg-gradient-to-br from-slate-900 to-[#196855] rounded-2xl p-6 text-white shadow-lg">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-bold uppercase tracking-wider bg-amber-400 text-slate-900">
+                  Specialised Institutional Desk
+                </span>
+              </div>
+              <h3 className="text-lg font-bold font-serif mb-4">Your Assigned Administrative Desks</h3>
+
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {(user.roles.includes('bursar') || user.roles.includes('super_admin') || user.roles.includes('college_admin')) && (
+                  <Link
+                    href="/admin/bursary"
+                    className="flex items-center justify-between p-4 bg-white/10 hover:bg-white/20 rounded-xl border border-white/10 transition-all group"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-[#e69912]/20 text-[#e69912] flex items-center justify-center">
+                        <CreditCard size={20} />
+                      </div>
+                      <div>
+                        <p className="font-bold text-white text-sm">Bursary & Payments Desk</p>
+                        <p className="text-[11px] text-emerald-200">Remita RRR reconciliation & invoicing</p>
+                      </div>
+                    </div>
+                    <ArrowRight size={16} className="text-emerald-300 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                )}
+
+                {(user.roles.includes('registrar') || user.roles.includes('super_admin') || user.roles.includes('college_admin')) && (
+                  <Link
+                    href="/admin/matriculation"
+                    className="flex items-center justify-between p-4 bg-white/10 hover:bg-white/20 rounded-xl border border-white/10 transition-all group"
+                  >
+                    <div className="flex items-center gap-3">
+                      <div className="w-10 h-10 rounded-xl bg-emerald-400/20 text-emerald-300 flex items-center justify-center">
+                        <GraduationCap size={20} />
+                      </div>
+                      <div>
+                        <p className="font-bold text-white text-sm">Registry Matriculation Desk</p>
+                        <p className="text-[11px] text-emerald-200">Matriculation numbers & clearance slips</p>
+                      </div>
+                    </div>
+                    <ArrowRight size={16} className="text-emerald-300 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                )}
+              </div>
+            </div>
+          )}
+
           {/* Academic Modules Overview for Staff (Step 2 Future Modules marked clearly) */}
+
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <h3 className="text-base font-bold font-serif text-gray-900">

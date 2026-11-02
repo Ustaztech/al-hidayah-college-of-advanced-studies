@@ -33,9 +33,9 @@ export const ROLE_DASHBOARD_MAP: Record<UserRoleName, string> = {
   lecturer: '/staff/dashboard',
   staff: '/staff/dashboard',
   hod: '/staff/dashboard',
-  registrar: '/staff/dashboard',
+  registrar: '/admin/matriculation',
   examination_officer: '/staff/dashboard',
-  bursar: '/staff/dashboard',
+  bursar: '/admin/bursary',
   applicant: '/application/dashboard'
 };
 
@@ -43,9 +43,15 @@ export function getPrimaryDashboardForRoles(roles: UserRoleName[]): string {
   if (roles.includes('super_admin') || roles.includes('college_admin')) {
     return '/admin/dashboard';
   }
+  if (roles.includes('bursar')) {
+    return '/admin/bursary';
+  }
+  if (roles.includes('registrar')) {
+    return '/admin/matriculation';
+  }
   if (
     roles.some(r =>
-      ['lecturer', 'staff', 'hod', 'registrar', 'examination_officer', 'bursar'].includes(r)
+      ['lecturer', 'staff', 'hod', 'examination_officer'].includes(r)
     )
   ) {
     return '/staff/dashboard';
