@@ -48,12 +48,10 @@ export const AdmissionRequirements: React.FC = () => {
         
         {/* Header */}
         <div className="border-b border-slate-200 dark:border-slate-800 pb-6">
-          <div className="flex items-center gap-2 mb-1">
-            <span className="text-xs font-black text-[#006B35] dark:text-emerald-400 uppercase tracking-wider">
-              Statutory Admissions Manual
+          <div className="flex items-center gap-2 mb-2">
+            <span className="text-xs font-black text-[#196855] dark:text-emerald-400 uppercase tracking-wider bg-emerald-50 dark:bg-emerald-950/60 px-2.5 py-0.5 rounded-full border border-emerald-200 dark:border-emerald-800">
+              Admissions Guidelines
             </span>
-            <span className="text-slate-400">•</span>
-            <span className="text-xs text-[#D4A62A] font-bold">Code: {INSTITUTION_INFO.documentCode}</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold font-serif text-slate-900 dark:text-white">
             Entry Qualifications, Combinations & Cut-Off Points
@@ -67,7 +65,7 @@ export const AdmissionRequirements: React.FC = () => {
         <div className="bg-[#F8FAFC] dark:bg-slate-800 rounded-3xl p-6 sm:p-8 border border-slate-200 dark:border-slate-700 grid grid-cols-1 md:grid-cols-2 gap-8 shadow-sm">
           <div className="space-y-4">
             <div className="flex items-center gap-2.5">
-              <div className="p-2 bg-emerald-100 dark:bg-emerald-950 text-[#006B35] rounded-xl">
+              <div className="p-2 bg-emerald-100 dark:bg-emerald-950 text-[#196855] rounded-xl">
                 <Award size={20} />
               </div>
               <h2 className="text-lg font-bold font-serif text-slate-900 dark:text-white">
@@ -76,15 +74,15 @@ export const AdmissionRequirements: React.FC = () => {
             </div>
             <ul className="text-xs text-slate-700 dark:text-slate-300 space-y-2.5 leading-relaxed">
               <li className="flex items-start gap-2">
-                <CheckCircle2 size={16} className="text-[#006B35] shrink-0 mt-0.5" />
+                <CheckCircle2 size={16} className="text-[#196855] shrink-0 mt-0.5" />
                 <span>Candidates must possess a minimum of <strong>five (5) credits at O-Levels</strong> (3 basic subjects plus Mathematics and English) from WAEC, NECO, or NABTEB in not more than two (2) sittings.</span>
               </li>
               <li className="flex items-start gap-2">
-                <CheckCircle2 size={16} className="text-[#006B35] shrink-0 mt-0.5" />
+                <CheckCircle2 size={16} className="text-[#196855] shrink-0 mt-0.5" />
                 <span><strong>Educationally Less Developed States (ELDS) Policy:</strong> Deficiency is allowed in either Mathematics for Arts candidates or English for Science candidates (and not in both subjects). This deficiency must be remedied before the completion of the IJMB programme.</span>
               </li>
               <li className="flex items-start gap-2">
-                <CheckCircle2 size={16} className="text-[#006B35] shrink-0 mt-0.5" />
+                <CheckCircle2 size={16} className="text-[#196855] shrink-0 mt-0.5" />
                 <span>Candidates admitted with two (2) O-Level sittings must have five (5) credits before final registration.</span>
               </li>
             </ul>
@@ -92,7 +90,7 @@ export const AdmissionRequirements: React.FC = () => {
 
           <div className="space-y-4 border-t md:border-t-0 md:border-l border-slate-200 dark:border-slate-700 md:pl-8 pt-6 md:pt-0">
             <div className="flex items-center gap-2.5">
-              <div className="p-2 bg-amber-100 dark:bg-amber-950 text-[#D4A62A] rounded-xl">
+              <div className="p-2 bg-amber-100 dark:bg-amber-950 text-[#e69912] rounded-xl">
                 <CreditCard size={20} />
               </div>
               <h2 className="text-lg font-bold font-serif text-slate-900 dark:text-white">
@@ -109,8 +107,8 @@ export const AdmissionRequirements: React.FC = () => {
                 <span className="font-mono font-bold text-amber-600 dark:text-amber-400">₦{TUITION_SCHEDULE.ijmb.secondInstallment.toLocaleString()}</span>
               </div>
               <div className="p-3 bg-emerald-50 dark:bg-emerald-950/40 rounded-xl border border-emerald-300 flex justify-between items-center font-bold">
-                <span className="text-[#006B35] dark:text-emerald-300">One-Time Full Payment:</span>
-                <span className="font-mono text-[#006B35] dark:text-emerald-300">₦{TUITION_SCHEDULE.ijmb.oneTimePayment.toLocaleString()}</span>
+                <span className="text-[#196855] dark:text-emerald-300">One-Time Full Payment:</span>
+                <span className="font-mono text-[#196855] dark:text-emerald-300">₦{TUITION_SCHEDULE.ijmb.oneTimePayment.toLocaleString()}</span>
               </div>
               <div className="flex justify-between items-center text-[11px] text-slate-500 pt-1">
                 <span>Application Form Fee: <strong>₦10,500</strong></span>
@@ -126,7 +124,7 @@ export const AdmissionRequirements: React.FC = () => {
             onClick={() => setActiveTab('combinations')}
             className={`px-4 py-2.5 rounded-2xl text-xs font-bold transition-all ${
               activeTab === 'combinations'
-                ? 'bg-[#006B35] text-white shadow-md'
+                ? 'bg-[#196855] text-white shadow-md'
                 : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200'
             }`}
           >
@@ -136,7 +134,7 @@ export const AdmissionRequirements: React.FC = () => {
             onClick={() => setActiveTab('cutoffs')}
             className={`px-4 py-2.5 rounded-2xl text-xs font-bold transition-all ${
               activeTab === 'cutoffs'
-                ? 'bg-[#006B35] text-white shadow-md'
+                ? 'bg-[#196855] text-white shadow-md'
                 : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200'
             }`}
           >
@@ -146,7 +144,7 @@ export const AdmissionRequirements: React.FC = () => {
             onClick={() => setActiveTab('documents')}
             className={`px-4 py-2.5 rounded-2xl text-xs font-bold transition-all ${
               activeTab === 'documents'
-                ? 'bg-[#006B35] text-white shadow-md'
+                ? 'bg-[#196855] text-white shadow-md'
                 : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200'
             }`}
           >
@@ -156,7 +154,7 @@ export const AdmissionRequirements: React.FC = () => {
             onClick={() => setActiveTab('tuition')}
             className={`px-4 py-2.5 rounded-2xl text-xs font-bold transition-all ${
               activeTab === 'tuition'
-                ? 'bg-[#D4A62A] text-black shadow-md font-black'
+                ? 'bg-[#e69912] text-black shadow-md font-black'
                 : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200'
             }`}
           >
@@ -195,7 +193,7 @@ export const AdmissionRequirements: React.FC = () => {
                 <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
                   {filteredCombinations.map(combo => (
                     <tr key={combo.code} className="hover:bg-white dark:hover:bg-slate-700/40 transition-colors">
-                      <td className="py-3 px-4 font-mono font-bold text-[#006B35] dark:text-emerald-400 whitespace-nowrap">
+                      <td className="py-3 px-4 font-mono font-bold text-[#196855] dark:text-emerald-400 whitespace-nowrap">
                         {combo.code}
                       </td>
                       <td className="py-3 px-4 font-semibold text-slate-900 dark:text-white">
@@ -223,7 +221,7 @@ export const AdmissionRequirements: React.FC = () => {
                   onClick={() => setFacultyFilter(fac)}
                   className={`px-3 py-1.5 rounded-xl text-xs font-bold transition-all ${
                     facultyFilter === fac
-                      ? 'bg-[#006B35] text-white shadow-xs'
+                      ? 'bg-[#196855] text-white shadow-xs'
                       : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200'
                   }`}
                 >
@@ -239,14 +237,14 @@ export const AdmissionRequirements: React.FC = () => {
                   className="p-4 bg-[#F8FAFC] dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 flex justify-between items-center shadow-xs"
                 >
                   <div>
-                    <span className="text-[10px] text-[#006B35] dark:text-emerald-400 font-bold uppercase block">
+                    <span className="text-[10px] text-[#196855] dark:text-emerald-400 font-bold uppercase block">
                       {item.faculty}
                     </span>
                     <h4 className="text-xs font-bold text-slate-900 dark:text-white mt-0.5">
                       {item.course}
                     </h4>
                   </div>
-                  <div className="px-3 py-1.5 bg-[#D4A62A] text-black font-mono font-black text-xs rounded-xl shadow-xs">
+                  <div className="px-3 py-1.5 bg-[#e69912] text-black font-mono font-black text-xs rounded-xl shadow-xs">
                     {item.points} pts
                   </div>
                 </div>
@@ -268,7 +266,7 @@ export const AdmissionRequirements: React.FC = () => {
                   key={idx}
                   className="p-4 bg-[#F8FAFC] dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 flex items-center gap-3 shadow-xs"
                 >
-                  <div className="w-8 h-8 rounded-xl bg-white dark:bg-slate-700 text-[#006B35] dark:text-emerald-400 font-black flex items-center justify-center text-xs shrink-0 shadow-xs">
+                  <div className="w-8 h-8 rounded-xl bg-white dark:bg-slate-700 text-[#196855] dark:text-emerald-400 font-black flex items-center justify-center text-xs shrink-0 shadow-xs">
                     {idx + 1}
                   </div>
                   <span className="text-xs font-bold text-slate-800 dark:text-slate-200">
@@ -303,7 +301,7 @@ export const AdmissionRequirements: React.FC = () => {
                       <td className="py-3 px-4 font-bold text-slate-900 dark:text-white">
                         {cp.programme}
                       </td>
-                      <td className="py-3 px-4 font-semibold text-[#006B35] dark:text-emerald-400">
+                      <td className="py-3 px-4 font-semibold text-[#196855] dark:text-emerald-400">
                         {cp.mode}
                       </td>
                       <td className="py-3 px-4 font-mono font-bold text-amber-600 dark:text-amber-400">
@@ -323,7 +321,7 @@ export const AdmissionRequirements: React.FC = () => {
         <div className="pt-6 border-t border-slate-200 dark:border-slate-800 flex justify-center">
           <Link
             to="/apply/register"
-            className="px-8 py-3.5 bg-[#006B35] hover:bg-[#004D26] text-white font-black rounded-xl text-xs sm:text-sm shadow-xl transition-all flex items-center gap-2"
+            className="px-8 py-3.5 bg-[#196855] hover:bg-[#196855] text-white font-black rounded-xl text-xs sm:text-sm shadow-xl transition-all flex items-center gap-2"
           >
             <span>Proceed to Online Application (₦10,500)</span>
             <ArrowRight size={16} />

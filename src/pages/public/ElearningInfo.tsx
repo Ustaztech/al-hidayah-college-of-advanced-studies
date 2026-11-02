@@ -8,9 +8,9 @@ export const ElearningInfo: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-12">
         
         {/* Banner with African CBT Image Background */}
-        <div className="relative rounded-3xl overflow-hidden shadow-2xl border-b-4 border-[#D4A62A]">
+        <div className="relative rounded-3xl overflow-hidden shadow-2xl border-b-4 border-[#e69912]">
           <img src="/african-cbt-lab.jpg" alt="African Students CBT Lab" className="w-full h-80 sm:h-96 object-cover" />
-          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-[#004D26]/90 to-transparent p-8 sm:p-12 flex flex-col justify-center text-white">
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950/95 via-[#196855]/90 to-transparent p-8 sm:p-12 flex flex-col justify-center text-white">
             <div className="max-w-2xl space-y-3">
               <span className="px-3.5 py-1 bg-amber-400 text-black text-xs font-black rounded-full uppercase">
                 Digital Learning Hub & CBT
@@ -22,7 +22,7 @@ export const ElearningInfo: React.FC = () => {
                 Streamlining lecture materials, continuous assessment quizzes, CBT objective testing, and auto-graded computer examinations.
               </p>
               <div className="pt-2">
-                <Link to="/student/dashboard" className="px-6 py-3 bg-[#D4A62A] hover:bg-[#b88d1d] text-black font-extrabold rounded-2xl text-xs sm:text-sm inline-flex items-center gap-2 shadow-xl transition-all">
+                <Link to="/student/dashboard" className="px-6 py-3 bg-[#e69912] hover:bg-[#b88d1d] text-black font-extrabold rounded-2xl text-xs sm:text-sm inline-flex items-center gap-2 shadow-xl transition-all">
                   <Monitor size={18} />
                   <span>Launch CBT Examination Hall →</span>
                 </Link>
@@ -33,12 +33,12 @@ export const ElearningInfo: React.FC = () => {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="p-6 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
-            <Clock className="text-[#006B35]" size={28} />
+            <Clock className="text-[#196855]" size={28} />
             <h3 className="font-extrabold text-base text-slate-900 dark:text-white font-serif">Server-Timed Testing</h3>
             <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Exams enforce authoritative server-side countdown timers with automated submission on time expiration.</p>
           </div>
           <div className="p-6 bg-white dark:bg-slate-900 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm space-y-3">
-            <ShieldCheck className="text-[#D4A62A]" size={28} />
+            <ShieldCheck className="text-[#e69912]" size={28} />
             <h3 className="font-extrabold text-base text-slate-900 dark:text-white font-serif">Anti-Switch Deterrents</h3>
             <p className="text-xs text-slate-600 dark:text-slate-400 leading-relaxed">Browser focus monitoring and anti-copy deterrents ensure fair, auditable testing environments.</p>
           </div>

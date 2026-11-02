@@ -9,7 +9,7 @@ export const NEWS_DATA: NewsArticle[] = [
     summary: 'The Executive Chairman, Dr. Muhammad Baba Suleiman, PhD (Magajin Ilimin Abaji), officially announces commencement of 2026/2027 IJMB A-Level and Citi Polytechnic Abuja affiliated ND admissions.',
     content: `The Executive Chairman of Al-Hidayah College of Advanced Studies (AHCAS), Dr. Muhammad Baba Suleiman, PhD (Magajin Ilimin Abaji), along with Centre Coordinator Mall. Ibrahim Idris Gambo, wishes to inform qualified secondary school leavers, parents, and the general public that online application forms for the 2026/2027 academic session are officially open.
 
-Under Document Code AHC/IJMB/OQAM/2026, the College offers 73 approved IJMB A-Level Subject Combinations, securing Direct Entry 200 Level admission into premier universities in Nigeria and abroad without UTME JAMB.
+The College offers 73 approved IJMB A-Level Subject Combinations, securing Direct Entry 200 Level admission into premier universities in Nigeria and abroad without UTME JAMB.
 
 Tuition is flexibly structured in approved installments (1st Installment: ₦154,000; 2nd Installment: ₦105,500; Single Full Clearance: ₦258,500). The official application form fee is ₦10,500.
 

@@ -8,14 +8,14 @@ export const StatsSection: React.FC = () => {
       value: '2,400+',
       description: 'Across ND, HND & IJMB programmes',
       icon: Users,
-      color: 'text-[#006B35]'
+      color: 'text-[#196855]'
     },
     {
       label: 'Accredited Academic Programmes',
       value: '14+',
       description: 'ND, HND & IJMB Direct Entry options',
       icon: GraduationCap,
-      color: 'text-[#D4A62A]'
+      color: 'text-[#e69912]'
     },
     {
       label: 'Qualified Academic & Tech Staff',

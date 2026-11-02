@@ -35,13 +35,13 @@ export const LoadingScreen: React.FC<{ onLoaded?: () => void }> = ({ onLoaded })
       }`}
     >
       {/* Background Subtle Gradient Glow */}
-      <div className="absolute w-96 h-96 bg-[#006B35]/20 rounded-full blur-3xl pointer-events-none animate-pulse"></div>
+      <div className="absolute w-96 h-96 bg-[#196855]/20 rounded-full blur-3xl pointer-events-none animate-pulse"></div>
 
       <div className="relative z-10 flex flex-col items-center space-y-6 text-center px-4">
         
         {/* Animated Crest & Pulsing Gold Ring */}
         <div className="relative flex items-center justify-center">
-          <div className="w-28 h-28 rounded-full border-4 border-t-[#D4A62A] border-r-[#006B35] border-b-[#F58220] border-l-transparent animate-spin"></div>
+          <div className="w-28 h-28 rounded-full border-4 border-t-[#e69912] border-r-[#196855] border-b-[#F58220] border-l-transparent animate-spin"></div>
           <img
             src="/ahcas-crest.jpg"
             alt="AHCAS Crest"
@@ -55,7 +55,7 @@ export const LoadingScreen: React.FC<{ onLoaded?: () => void }> = ({ onLoaded })
           <h1 className="text-xl sm:text-2xl font-extrabold font-serif tracking-tight text-white">
             AL-HIDAYAH COLLEGE OF ADVANCED STUDIES
           </h1>
-          <p className="text-xs text-[#D4A62A] font-medium tracking-wider uppercase font-sans">
+          <p className="text-xs text-[#e69912] font-medium tracking-wider uppercase font-sans">
             Abaji, Federal Capital Territory, Nigeria
           </p>
           <p className="text-[11px] text-gray-400 italic">
@@ -67,7 +67,7 @@ export const LoadingScreen: React.FC<{ onLoaded?: () => void }> = ({ onLoaded })
         <div className="w-64 max-w-xs space-y-2">
           <div className="h-1.5 w-full bg-gray-800 rounded-full overflow-hidden p-0.5 border border-gray-700">
             <div
-              className="h-full bg-gradient-to-r from-[#006B35] via-[#D4A62A] to-[#F58220] rounded-full transition-all duration-200"
+              className="h-full bg-gradient-to-r from-[#196855] via-[#e69912] to-[#F58220] rounded-full transition-all duration-200"
               style={{ width: `${progress}%` }}
             ></div>
           </div>

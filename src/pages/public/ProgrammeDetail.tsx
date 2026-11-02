@@ -13,13 +13,13 @@ export const ProgrammeDetail: React.FC = () => {
       <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
         {/* Back Link */}
-        <Link to="/programmes/nd" className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-500 hover:text-[#006B35]">
+        <Link to="/programmes/nd" className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-500 hover:text-[#196855]">
           <ArrowLeft size={14} />
           Back to All Programmes
         </Link>
 
         {/* Programme Header Card */}
-        <div className="p-8 bg-[#006B35] text-white rounded-3xl border-b-4 border-[#D4A62A] space-y-4">
+        <div className="p-8 bg-[#196855] text-white rounded-3xl border-b-4 border-[#e69912] space-y-4">
           <div className="flex flex-wrap items-center gap-2 text-xs">
             <span className="px-3 py-1 bg-amber-400 text-black font-extrabold rounded-full uppercase">
               {prog.category} Programme
@@ -49,7 +49,7 @@ export const ProgrammeDetail: React.FC = () => {
           <div className="pt-4 flex flex-wrap gap-3">
             <Link
               to={`/apply/register?programme=${prog.id}`}
-              className="px-6 py-3 bg-[#D4A62A] hover:bg-[#b88d1d] text-black font-extrabold rounded-xl text-sm flex items-center gap-2 shadow-md"
+              className="px-6 py-3 bg-[#e69912] hover:bg-[#b88d1d] text-black font-extrabold rounded-xl text-sm flex items-center gap-2 shadow-md"
             >
               <UserCheck size={18} />
               <span>Apply for {prog.title}</span>
@@ -63,13 +63,13 @@ export const ProgrammeDetail: React.FC = () => {
           {/* Entry Requirements */}
           <div className="p-6 bg-[#F3F6F3] dark:bg-gray-800/60 rounded-2xl border border-gray-200 dark:border-gray-700 space-y-4">
             <h2 className="text-lg font-bold font-serif text-gray-900 dark:text-white flex items-center gap-2">
-              <CheckCircle className="text-[#006B35]" size={20} />
+              <CheckCircle className="text-[#196855]" size={20} />
               Entry Requirements
             </h2>
             <ul className="space-y-2.5 text-xs text-gray-700 dark:text-gray-300">
               {prog.entryRequirements.map((req, idx) => (
                 <li key={idx} className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#006B35] shrink-0 mt-1.5"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#196855] shrink-0 mt-1.5"></span>
                   <span>{req}</span>
                 </li>
               ))}
@@ -79,13 +79,13 @@ export const ProgrammeDetail: React.FC = () => {
           {/* Curriculum Highlights */}
           <div className="p-6 bg-[#F3F6F3] dark:bg-gray-800/60 rounded-2xl border border-gray-200 dark:border-gray-700 space-y-4">
             <h2 className="text-lg font-bold font-serif text-gray-900 dark:text-white flex items-center gap-2">
-              <BookOpen className="text-[#D4A62A]" size={20} />
+              <BookOpen className="text-[#e69912]" size={20} />
               Curriculum & Practical Modules
             </h2>
             <ul className="space-y-2 text-xs text-gray-700 dark:text-gray-300">
               {prog.curriculumHighlights.map((curr, idx) => (
                 <li key={idx} className="flex items-start gap-2">
-                  <span className="w-1.5 h-1.5 rounded-full bg-[#D4A62A] shrink-0 mt-1.5"></span>
+                  <span className="w-1.5 h-1.5 rounded-full bg-[#e69912] shrink-0 mt-1.5"></span>
                   <span>{curr}</span>
                 </li>
               ))}
@@ -110,7 +110,7 @@ export const ProgrammeDetail: React.FC = () => {
 
           <div className="pt-4 border-t border-gray-200 dark:border-gray-700 flex justify-between items-center text-xs">
             <span className="text-gray-500">Estimated Tuition & Fees:</span>
-            <span className="font-extrabold text-[#006B35] dark:text-emerald-400 text-sm">{prog.feeEstimate}</span>
+            <span className="font-extrabold text-[#196855] dark:text-emerald-400 text-sm">{prog.feeEstimate}</span>
           </div>
         </div>
 

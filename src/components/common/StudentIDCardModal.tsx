@@ -24,15 +24,15 @@ export const StudentIDCardModal: React.FC<StudentIDCardModalProps> = ({
       <div className="bg-white text-slate-900 w-full max-w-xl rounded-2xl shadow-2xl overflow-hidden border-2 border-emerald-800">
         
         {/* Header Bar */}
-        <div className="bg-[#0B132B] text-white p-3 px-5 flex justify-between items-center no-print border-b-2 border-[#D4A62A]">
+        <div className="bg-[#0B132B] text-white p-3 px-5 flex justify-between items-center no-print border-b-2 border-[#e69912]">
           <div className="flex items-center gap-2">
-            <Award className="text-[#D4A62A]" size={18} />
+            <Award className="text-[#e69912]" size={18} />
             <span className="font-bold text-xs sm:text-sm">Official Digital Student Identity Card</span>
           </div>
           <div className="flex items-center gap-3">
             <button
               onClick={() => window.print()}
-              className="flex items-center gap-1 px-3 py-1 bg-[#D4A62A] text-black font-extrabold rounded-lg text-xs hover:bg-[#b88d1d] shadow-xs cursor-pointer"
+              className="flex items-center gap-1 px-3 py-1 bg-[#e69912] text-black font-extrabold rounded-lg text-xs hover:bg-[#b88d1d] shadow-xs cursor-pointer"
             >
               <Printer size={13} />
               <span>Print ID Card</span>
@@ -47,7 +47,7 @@ export const StudentIDCardModal: React.FC<StudentIDCardModalProps> = ({
         <div className="p-6 bg-slate-100 dark:bg-slate-900 space-y-6 flex flex-col items-center printable-document">
           
           {/* Front Side Card */}
-          <div className="w-[340px] h-[215px] bg-gradient-to-br from-[#006B35] via-[#004D26] to-[#0B132B] text-white rounded-2xl shadow-xl p-4 flex flex-col justify-between relative border-2 border-[#D4A62A] overflow-hidden">
+          <div className="w-[340px] h-[215px] bg-gradient-to-br from-[#196855] via-[#196855] to-[#0B132B] text-white rounded-2xl shadow-xl p-4 flex flex-col justify-between relative border-2 border-[#e69912] overflow-hidden">
             
             {/* Header branding */}
             <div className="flex items-center gap-2 border-b border-emerald-600/60 pb-2">
@@ -60,7 +60,7 @@ export const StudentIDCardModal: React.FC<StudentIDCardModalProps> = ({
                   OF ADVANCED STUDIES, ABAJI
                 </span>
               </div>
-              <span className="ml-auto text-[7px] bg-[#D4A62A] text-black font-black px-1.5 py-0.5 rounded uppercase">
+              <span className="ml-auto text-[7px] bg-[#e69912] text-black font-black px-1.5 py-0.5 rounded uppercase">
                 STUDENT
               </span>
             </div>
@@ -70,7 +70,7 @@ export const StudentIDCardModal: React.FC<StudentIDCardModalProps> = ({
               <img
                 src={student.passport_photo || '/provost-mbsuleiman.jpg'}
                 alt={student.full_name}
-                className="w-16 h-20 object-cover rounded-xl border-2 border-[#D4A62A] bg-white shadow-xs"
+                className="w-16 h-20 object-cover rounded-xl border-2 border-[#e69912] bg-white shadow-xs"
               />
               <div className="space-y-0.5 text-[10px] font-sans">
                 <span className="text-amber-300 text-[8px] uppercase font-bold block">STUDENT NAME</span>
@@ -86,7 +86,7 @@ export const StudentIDCardModal: React.FC<StudentIDCardModalProps> = ({
 
             {/* Footer Card */}
             <div className="flex justify-between items-center text-[8px] border-t border-emerald-600/60 pt-1 text-emerald-200">
-              <span>RC: <strong>{INSTITUTION_INFO.rcNumber}</strong></span>
+              <span>CAMPUS: <strong>ABAJI, ABUJA</strong></span>
               <span>EXPIRY: <strong>AUG 2027</strong></span>
             </div>
           </div>
@@ -111,7 +111,7 @@ export const StudentIDCardModal: React.FC<StudentIDCardModalProps> = ({
 
             <div className="border-t border-slate-200 pt-1.5 flex justify-between items-center text-[8px] text-slate-500">
               <span className="italic font-serif">Mall. Usman Saidu (Registrar)</span>
-              <span className="font-bold text-[#006B35]">{INSTITUTION_INFO.website}</span>
+              <span className="font-bold text-[#196855]">{INSTITUTION_INFO.website}</span>
             </div>
           </div>
 

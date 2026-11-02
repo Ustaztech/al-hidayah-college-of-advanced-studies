@@ -19,6 +19,9 @@ export const INSTITUTION_INFO = {
   securityCodePrefix: 'AHCAS/IJMB/2026/2027',
   formFeeNgn: 10500,
   resultCollectionFeeNgn: 17000,
+  provost: 'Dr. Muhammad Baba Suleiman, PhD (Magajin Ilimin Abaji)',
+  registrar: 'Mall. Ibrahim Idris Gambo',
+  examOfficer: 'Mall. Usman Saidu',
   collaborations: [
     'Sam Ale College of Advanced Studies',
     'FCT Mass Agency for Education',

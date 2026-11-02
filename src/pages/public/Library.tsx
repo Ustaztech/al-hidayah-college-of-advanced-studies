@@ -3,8 +3,68 @@ import { ELIBRARY_RESOURCES, INSTITUTION_INFO } from '../../data/ijmbData';
 import { BookOpen, Search, ExternalLink, Globe, Database, FileText, CheckCircle2, Bookmark, Sparkles } from 'lucide-react';
 
 export const Library: React.FC = () => {
-  const [activeTab, setActiveTab] = useState<'oer' | 'databases' | 'journals' | 'pastquestions'>('oer');
+  const [activeTab, setActiveTab] = useState<'oer' | 'databases' | 'journals' | 'pastquestions' | 'physical'>('oer');
   const [searchQuery, setSearchQuery] = useState('');
+  const [reservationNotice, setReservationNotice] = useState('');
+
+  // Physical library holdings at Abaji Study Centre
+  const [physicalBooks, setPhysicalBooks] = useState([
+    {
+      isbn: '978-0199147335',
+      title: 'Advanced Biology for A-Level (Oxford)',
+      author: 'Michael Kent',
+      callNumber: '570.76 KEN',
+      shelfLocation: 'Science Wing Shelf B-04',
+      totalCopies: 8,
+      availableCopies: 6,
+      category: 'Biology'
+    },
+    {
+      isbn: '978-0198392910',
+      title: 'Advanced Physics Fifth Edition',
+      author: 'Tom Duncan',
+      callNumber: '530.076 DUN',
+      shelfLocation: 'Science Wing Shelf P-02',
+      totalCopies: 10,
+      availableCopies: 7,
+      category: 'Physics'
+    },
+    {
+      isbn: '978-0199146338',
+      title: 'Calculus and Pure Mathematics for A-Level',
+      author: 'L. Bostock & S. Chandler',
+      callNumber: '515.076 BOS',
+      shelfLocation: 'Mathematics Wing Shelf M-01',
+      totalCopies: 12,
+      availableCopies: 9,
+      category: 'Mathematics'
+    },
+    {
+      isbn: '978-0521532845',
+      title: 'Economics: Principles and Policy (A-Level)',
+      author: 'William J. Baumol & Alan S. Blinder',
+      callNumber: '330.076 BAU',
+      shelfLocation: 'Social Sciences Shelf E-03',
+      totalCopies: 6,
+      availableCopies: 4,
+      category: 'Economics'
+    },
+    {
+      isbn: '978-0415392570',
+      title: 'The English Legal System (A-Level Law Text)',
+      author: 'Jacqueline Martin',
+      callNumber: '349.42 MAR',
+      shelfLocation: 'Law Collection Shelf L-01',
+      totalCopies: 5,
+      availableCopies: 3,
+      category: 'Law'
+    }
+  ]);
+
+  const handleReserveBook = (title: string) => {
+    setReservationNotice(`Hold reservation placed for "${title}". Please collect at the Study Centre Circulation Desk within 24 hours.`);
+    setTimeout(() => setReservationNotice(''), 5000);
+  };
 
   const filterBySearch = (list: any[]) => {
     if (!searchQuery) return list;
@@ -21,9 +81,9 @@ export const Library: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-10">
         
         {/* Header Banner */}
-        <div className="bg-gradient-to-r from-[#004D26] to-[#006B35] text-white p-8 sm:p-10 rounded-3xl relative overflow-hidden border-b-4 border-[#D4A62A] shadow-xl">
+        <div className="bg-gradient-to-r from-[#196855] to-[#196855] text-white p-8 sm:p-10 rounded-3xl relative overflow-hidden border-b-4 border-[#e69912] shadow-xl">
           <div className="max-w-3xl space-y-3 relative z-10">
-            <span className="px-3 py-1 bg-[#D4A62A] text-black text-xs font-black rounded-full uppercase tracking-wider">
+            <span className="px-3 py-1 bg-[#e69912] text-black text-xs font-black rounded-full uppercase tracking-wider">
               Official E-Library & Digital Resource Repository
             </span>
             <h1 className="text-3xl sm:text-4xl font-black font-serif tracking-tight">
@@ -46,7 +106,7 @@ export const Library: React.FC = () => {
               onClick={() => setActiveTab('oer')}
               className={`px-4 py-2.5 rounded-2xl text-xs font-bold transition-all flex items-center gap-2 ${
                 activeTab === 'oer'
-                  ? 'bg-[#006B35] text-white shadow-md'
+                  ? 'bg-[#196855] text-white shadow-md'
                   : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200'
               }`}
             >
@@ -58,7 +118,7 @@ export const Library: React.FC = () => {
               onClick={() => setActiveTab('databases')}
               className={`px-4 py-2.5 rounded-2xl text-xs font-bold transition-all flex items-center gap-2 ${
                 activeTab === 'databases'
-                  ? 'bg-[#006B35] text-white shadow-md'
+                  ? 'bg-[#196855] text-white shadow-md'
                   : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200'
               }`}
             >
@@ -70,7 +130,7 @@ export const Library: React.FC = () => {
               onClick={() => setActiveTab('journals')}
               className={`px-4 py-2.5 rounded-2xl text-xs font-bold transition-all flex items-center gap-2 ${
                 activeTab === 'journals'
-                  ? 'bg-[#006B35] text-white shadow-md'
+                  ? 'bg-[#196855] text-white shadow-md'
                   : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200'
               }`}
             >
@@ -82,12 +142,24 @@ export const Library: React.FC = () => {
               onClick={() => setActiveTab('pastquestions')}
               className={`px-4 py-2.5 rounded-2xl text-xs font-bold transition-all flex items-center gap-2 ${
                 activeTab === 'pastquestions'
-                  ? 'bg-[#D4A62A] text-black shadow-md font-black'
+                  ? 'bg-[#e69912] text-black shadow-md font-black'
                   : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200'
               }`}
             >
               <FileText size={15} />
               <span>IJMB Past Question Papers</span>
+            </button>
+
+            <button
+              onClick={() => setActiveTab('physical')}
+              className={`px-4 py-2.5 rounded-2xl text-xs font-bold transition-all flex items-center gap-2 ${
+                activeTab === 'physical'
+                  ? 'bg-[#196855] text-white shadow-md'
+                  : 'bg-slate-100 dark:bg-slate-800 text-slate-700 dark:text-slate-300 hover:bg-slate-200'
+              }`}
+            >
+              <Bookmark size={15} />
+              <span>Physical Catalogue & Circulation</span>
             </button>
           </div>
 
@@ -115,17 +187,17 @@ export const Library: React.FC = () => {
               {filterBySearch(ELIBRARY_RESOURCES.oer).map((res, idx) => (
                 <div
                   key={idx}
-                  className="bg-[#F8FAFC] dark:bg-slate-800 p-6 rounded-3xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between shadow-xs hover:shadow-md hover:border-[#006B35] transition-all group"
+                  className="bg-[#F8FAFC] dark:bg-slate-800 p-6 rounded-3xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between shadow-xs hover:shadow-md hover:border-[#196855] transition-all group"
                 >
                   <div className="space-y-3">
                     <div className="flex items-start justify-between">
-                      <span className="text-[10px] bg-emerald-100 dark:bg-emerald-950 text-[#006B35] dark:text-emerald-300 font-extrabold px-2.5 py-1 rounded-full uppercase">
+                      <span className="text-[10px] bg-emerald-100 dark:bg-emerald-950 text-[#196855] dark:text-emerald-300 font-extrabold px-2.5 py-1 rounded-full uppercase">
                         {res.category}
                       </span>
-                      <BookOpen size={18} className="text-[#006B35]" />
+                      <BookOpen size={18} className="text-[#196855]" />
                     </div>
 
-                    <h3 className="text-base font-bold font-serif text-slate-900 dark:text-white group-hover:text-[#006B35] transition-colors">
+                    <h3 className="text-base font-bold font-serif text-slate-900 dark:text-white group-hover:text-[#196855] transition-colors">
                       {res.title}
                     </h3>
 
@@ -139,7 +211,7 @@ export const Library: React.FC = () => {
                       href={res.url}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#006B35] dark:text-emerald-400 hover:text-[#004D26]"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#196855] dark:text-emerald-400 hover:text-[#196855]"
                     >
                       <span>Access Online Repository</span>
                       <ExternalLink size={13} />
@@ -162,11 +234,11 @@ export const Library: React.FC = () => {
               {filterBySearch(ELIBRARY_RESOURCES.researchDatabases).map((res, idx) => (
                 <div
                   key={idx}
-                  className="bg-[#F8FAFC] dark:bg-slate-800 p-6 rounded-3xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between shadow-xs hover:shadow-md hover:border-[#D4A62A] transition-all group"
+                  className="bg-[#F8FAFC] dark:bg-slate-800 p-6 rounded-3xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between shadow-xs hover:shadow-md hover:border-[#e69912] transition-all group"
                 >
                   <div className="space-y-3">
                     <div className="flex items-center gap-3">
-                      <div className="p-2.5 bg-amber-100 dark:bg-amber-950 text-[#D4A62A] rounded-xl">
+                      <div className="p-2.5 bg-amber-100 dark:bg-amber-950 text-[#e69912] rounded-xl">
                         <Database size={20} />
                       </div>
                       <h3 className="text-base font-bold font-serif text-slate-900 dark:text-white group-hover:text-amber-600 transition-colors">
@@ -184,7 +256,7 @@ export const Library: React.FC = () => {
                       href={res.url}
                       target="_blank"
                       rel="noreferrer"
-                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#D4A62A] hover:text-amber-600"
+                      className="inline-flex items-center gap-1.5 text-xs font-bold text-[#e69912] hover:text-amber-600"
                     >
                       <span>Connect to Database</span>
                       <ExternalLink size={13} />
@@ -252,10 +324,10 @@ export const Library: React.FC = () => {
               {filterBySearch(ELIBRARY_RESOURCES.pastQuestions).map((res, idx) => (
                 <div
                   key={idx}
-                  className="bg-white dark:bg-slate-800 p-6 rounded-3xl border-2 border-[#D4A62A] flex flex-col justify-between shadow-lg"
+                  className="bg-white dark:bg-slate-800 p-6 rounded-3xl border-2 border-[#e69912] flex flex-col justify-between shadow-lg"
                 >
                   <div className="space-y-3">
-                    <div className="p-2.5 bg-amber-100 dark:bg-amber-950 text-[#D4A62A] rounded-xl w-fit">
+                    <div className="p-2.5 bg-amber-100 dark:bg-amber-950 text-[#e69912] rounded-xl w-fit">
                       <FileText size={22} />
                     </div>
 
@@ -273,7 +345,7 @@ export const Library: React.FC = () => {
                       href={res.url}
                       target="_blank"
                       rel="noreferrer"
-                      className="w-full py-2.5 bg-[#006B35] hover:bg-[#004D26] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-colors"
+                      className="w-full py-2.5 bg-[#196855] hover:bg-[#196855] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-1.5 transition-colors"
                     >
                       <span>Download Past Questions</span>
                       <ExternalLink size={13} />
@@ -281,6 +353,88 @@ export const Library: React.FC = () => {
                   </div>
                 </div>
               ))}
+            </div>
+          </div>
+        )}
+
+        {/* Tab 5: Physical Book Catalogue & Circulation */}
+        {activeTab === 'physical' && (
+          <div className="space-y-6">
+            <div className="p-4 bg-emerald-50 dark:bg-emerald-950/40 rounded-2xl border border-emerald-200 text-xs text-emerald-900 dark:text-emerald-200 flex justify-between items-center flex-wrap gap-2">
+              <div>
+                <strong>Study Centre Reading Hall Catalogue:</strong> Physical textbooks, revision manuals, and reference works held on open shelves at the JSS Agyana Road Study Centre.
+              </div>
+              <span className="text-[10px] font-mono text-emerald-700 dark:text-emerald-400 font-bold">
+                Standard Loan: 14 Days • Maximum 2 Books
+              </span>
+            </div>
+
+            {reservationNotice && (
+              <div className="p-3 bg-emerald-100 dark:bg-emerald-950 border border-emerald-500 rounded-xl text-xs text-emerald-900 dark:text-emerald-200 flex items-center gap-2">
+                <CheckCircle2 size={16} className="text-[#196855] shrink-0" />
+                <span>{reservationNotice}</span>
+              </div>
+            )}
+
+            <div className="bg-white dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 overflow-hidden shadow-xs">
+              <table className="w-full text-left text-xs">
+                <thead className="bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-300 font-bold uppercase text-[10px]">
+                  <tr>
+                    <th className="p-4">Book Title & Author</th>
+                    <th className="p-4">Subject</th>
+                    <th className="p-4">Call Number / Shelf</th>
+                    <th className="p-4">ISBN</th>
+                    <th className="p-4">Availability</th>
+                    <th className="p-4 text-right">Circulation Action</th>
+                  </tr>
+                </thead>
+                <tbody className="divide-y divide-slate-100 dark:divide-slate-700/60">
+                  {physicalBooks
+                    .filter(b => searchQuery === '' || b.title.toLowerCase().includes(searchQuery.toLowerCase()) || b.author.toLowerCase().includes(searchQuery.toLowerCase()))
+                    .map(b => (
+                      <tr key={b.isbn} className="hover:bg-slate-50 dark:hover:bg-slate-700/30">
+                        <td className="p-4">
+                          <span className="font-bold text-slate-900 dark:text-white block">{b.title}</span>
+                          <span className="text-[11px] text-slate-500">{b.author}</span>
+                        </td>
+                        <td className="p-4">
+                          <span className="px-2 py-0.5 rounded text-[10px] font-bold bg-slate-100 dark:bg-slate-700 text-slate-700 dark:text-slate-300">
+                            {b.category}
+                          </span>
+                        </td>
+                        <td className="p-4">
+                          <span className="font-mono font-bold text-slate-800 dark:text-slate-200 block">{b.callNumber}</span>
+                          <span className="text-[10px] text-slate-400">{b.shelfLocation}</span>
+                        </td>
+                        <td className="p-4 font-mono text-slate-500 text-[10px]">{b.isbn}</td>
+                        <td className="p-4">
+                          <span
+                            className={`px-2.5 py-0.5 rounded-full text-[10px] font-black ${
+                              b.availableCopies > 0
+                                ? 'bg-emerald-100 text-[#196855]'
+                                : 'bg-red-100 text-red-800'
+                            }`}
+                          >
+                            {b.availableCopies} of {b.totalCopies} Available
+                          </span>
+                        </td>
+                        <td className="p-4 text-right">
+                          <button
+                            onClick={() => handleReserveBook(b.title)}
+                            disabled={b.availableCopies <= 0}
+                            className={`px-3 py-1.5 rounded-xl font-bold text-[11px] transition-colors cursor-pointer ${
+                              b.availableCopies > 0
+                                ? 'bg-[#196855] hover:bg-[#196855] text-white shadow-xs'
+                                : 'bg-slate-200 text-slate-400 cursor-not-allowed'
+                            }`}
+                          >
+                            Place Book Hold
+                          </button>
+                        </td>
+                      </tr>
+                    ))}
+                </tbody>
+              </table>
             </div>
           </div>
         )}

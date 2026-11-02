@@ -42,14 +42,14 @@ export const AdmissionsGuide: React.FC = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <span className="text-xs font-black text-[#D4A62A] uppercase tracking-widest block mb-1">
-            Section 3: Admission Policy & Procedure
+          <span className="text-xs font-black text-[#e69912] uppercase tracking-widest block mb-1">
+            Admissions Procedure
           </span>
           <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 dark:text-white font-serif tracking-tight">
             5-Stage Official Admission Workflow
           </h2>
           <p className="mt-2 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
-            Governed by the Al-Hidayah Operations & Quality Assurance Manual (Document Code: {INSTITUTION_INFO.documentCode}).
+            Clear, transparent steps from initial online application to official matriculation and lecture resumption.
           </p>
         </div>
 
@@ -59,14 +59,14 @@ export const AdmissionsGuide: React.FC = () => {
             return (
               <div
                 key={idx}
-                className="relative p-5 bg-[#F8FAFC] dark:bg-slate-800/80 rounded-3xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between shadow-xs hover:shadow-md hover:border-[#006B35] transition-all group"
+                className="relative p-5 bg-[#F8FAFC] dark:bg-slate-800/80 rounded-3xl border border-slate-200 dark:border-slate-700 flex flex-col justify-between shadow-xs hover:shadow-md hover:border-[#196855] transition-all group"
               >
                 <div>
                   <div className="flex items-center justify-between mb-3">
-                    <span className="text-2xl font-black text-[#006B35] dark:text-emerald-400 font-serif">
+                    <span className="text-2xl font-black text-[#196855] dark:text-emerald-400 font-serif">
                       {s.step}
                     </span>
-                    <div className="p-2 rounded-xl bg-white dark:bg-slate-700 text-[#006B35] dark:text-emerald-400 shadow-xs group-hover:bg-[#006B35] group-hover:text-white transition-colors">
+                    <div className="p-2 rounded-xl bg-white dark:bg-slate-700 text-[#196855] dark:text-emerald-400 shadow-xs group-hover:bg-[#196855] group-hover:text-white transition-colors">
                       <Icon size={18} />
                     </div>
                   </div>
@@ -78,7 +78,7 @@ export const AdmissionsGuide: React.FC = () => {
                   </p>
                 </div>
 
-                <div className="pt-3 mt-3 border-t border-slate-200 dark:border-slate-700 text-[10px] font-bold text-[#006B35] dark:text-emerald-400 uppercase tracking-wider">
+                <div className="pt-3 mt-3 border-t border-slate-200 dark:border-slate-700 text-[10px] font-bold text-[#196855] dark:text-emerald-400 uppercase tracking-wider">
                   Phase {idx + 1}
                 </div>
               </div>
@@ -89,7 +89,7 @@ export const AdmissionsGuide: React.FC = () => {
         <div className="mt-10 text-center flex flex-wrap justify-center gap-3">
           <Link
             to="/apply/register"
-            className="inline-flex items-center gap-2 px-7 py-3 bg-[#006B35] hover:bg-[#004D26] text-white font-black rounded-xl shadow-lg transition-all text-xs sm:text-sm"
+            className="inline-flex items-center gap-2 px-7 py-3 bg-[#196855] hover:bg-[#196855] text-white font-black rounded-xl shadow-lg transition-all text-xs sm:text-sm"
           >
             <span>Proceed to Application Submission (₦10,500)</span>
             <ArrowRight size={15} />

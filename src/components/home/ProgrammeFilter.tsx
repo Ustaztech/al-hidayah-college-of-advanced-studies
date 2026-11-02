@@ -17,7 +17,7 @@ export const ProgrammeFilter: React.FC = () => {
         
         {/* Section Title */}
         <div className="text-center max-w-3xl mx-auto mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#006B35]/10 dark:bg-emerald-950/40 text-[#006B35] dark:text-emerald-400 rounded-full text-xs font-bold mb-3">
+          <div className="inline-flex items-center gap-2 px-3 py-1 bg-[#196855]/10 dark:bg-emerald-950/40 text-[#196855] dark:text-emerald-400 rounded-full text-xs font-bold mb-3">
             <BookOpen size={14} />
             <span>Academic Programmes</span>
           </div>
@@ -37,7 +37,7 @@ export const ProgrammeFilter: React.FC = () => {
               onClick={() => setActiveTab(tab)}
               className={`px-5 py-2.5 rounded-xl font-bold text-xs sm:text-sm transition-all shadow-xs ${
                 activeTab === tab
-                  ? 'bg-[#006B35] text-white shadow-md'
+                  ? 'bg-[#196855] text-white shadow-md'
                   : 'bg-white dark:bg-gray-800 text-gray-700 dark:text-gray-300 hover:bg-gray-100 border border-gray-200 dark:border-gray-700'
               }`}
             >
@@ -60,7 +60,7 @@ export const ProgrammeFilter: React.FC = () => {
               <div>
                 <div className="flex justify-between items-start gap-2 mb-3">
                   <span className={`text-[10px] font-extrabold px-2.5 py-1 rounded-md uppercase tracking-wider ${
-                    p.category === 'ND' ? 'bg-emerald-100 text-[#006B35] dark:bg-emerald-950/60 dark:text-emerald-300' :
+                    p.category === 'ND' ? 'bg-emerald-100 text-[#196855] dark:bg-emerald-950/60 dark:text-emerald-300' :
                     p.category === 'HND' ? 'bg-amber-100 text-amber-800 dark:bg-amber-950/60 dark:text-amber-300' :
                     p.category === 'IJMB' ? 'bg-orange-100 text-orange-800 dark:bg-orange-950/60 dark:text-orange-300' :
                     'bg-blue-100 text-blue-800 dark:bg-blue-950/60 dark:text-blue-300'
@@ -74,7 +74,7 @@ export const ProgrammeFilter: React.FC = () => {
                   </span>
                 </div>
 
-                <h3 className="text-lg font-bold text-gray-900 dark:text-white font-serif group-hover:text-[#006B35] dark:group-hover:text-emerald-400 transition-colors">
+                <h3 className="text-lg font-bold text-gray-900 dark:text-white font-serif group-hover:text-[#196855] dark:group-hover:text-emerald-400 transition-colors">
                   {p.title}
                 </h3>
 
@@ -86,7 +86,7 @@ export const ProgrammeFilter: React.FC = () => {
                 <div className="space-y-1.5 border-t border-gray-100 dark:border-gray-800 pt-3 mb-4">
                   <span className="text-[11px] font-bold text-gray-700 dark:text-gray-300 block">Entry Highlight:</span>
                   <div className="flex items-start gap-1.5 text-xs text-gray-600 dark:text-gray-400">
-                    <CheckCircle size={14} className="text-[#006B35] shrink-0 mt-0.5" />
+                    <CheckCircle size={14} className="text-[#196855] shrink-0 mt-0.5" />
                     <span className="line-clamp-2">{p.entryRequirements[0]}</span>
                   </div>
                 </div>
@@ -95,7 +95,7 @@ export const ProgrammeFilter: React.FC = () => {
               <div className="pt-4 border-t border-gray-100 dark:border-gray-800 flex items-center justify-between">
                 <Link
                   to={`/programmes/${p.slug}`}
-                  className="text-xs font-bold text-[#006B35] dark:text-emerald-400 hover:underline flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
+                  className="text-xs font-bold text-[#196855] dark:text-emerald-400 hover:underline flex items-center gap-1 group-hover:translate-x-0.5 transition-transform"
                 >
                   <span>View Details & Curriculum</span>
                   <ArrowRight size={14} />
@@ -103,7 +103,7 @@ export const ProgrammeFilter: React.FC = () => {
 
                 <Link
                   to="/apply/register"
-                  className="px-3 py-1.5 bg-[#D4A62A] hover:bg-[#b88d1d] text-black font-bold text-xs rounded-lg shadow-xs transition-colors"
+                  className="px-3 py-1.5 bg-[#e69912] hover:bg-[#b88d1d] text-black font-bold text-xs rounded-lg shadow-xs transition-colors"
                 >
                   Apply
                 </Link>

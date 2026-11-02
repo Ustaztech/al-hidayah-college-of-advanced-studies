@@ -10,8 +10,8 @@ export const Staff: React.FC = () => {
         
         {/* Header Banner */}
         <div className="border-b border-slate-200 dark:border-slate-800 pb-6">
-          <span className="text-xs font-black text-[#006B35] dark:text-emerald-400 uppercase tracking-wider block mb-1">
-            Academic Operations Manual (AHC/IJMB/OQAM/2026)
+          <span className="text-xs font-black text-[#196855] dark:text-emerald-400 uppercase tracking-wider block mb-1">
+            Academic Governance & Delivery Standards
           </span>
           <h1 className="text-3xl sm:text-4xl font-extrabold font-serif text-slate-900 dark:text-white">
             Academic Structure & Delivery Model
@@ -24,7 +24,7 @@ export const Staff: React.FC = () => {
         {/* Delivery Standards Summary */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           <div className="p-6 bg-emerald-50 dark:bg-emerald-950/40 rounded-3xl border border-emerald-200 dark:border-emerald-800 space-y-2">
-            <Clock className="text-[#006B35] dark:text-emerald-400" size={24} />
+            <Clock className="text-[#196855] dark:text-emerald-400" size={24} />
             <h3 className="font-bold text-sm text-slate-900 dark:text-white font-serif">
               6 Lecture Hours / Week
             </h3>
@@ -34,7 +34,7 @@ export const Staff: React.FC = () => {
           </div>
 
           <div className="p-6 bg-amber-50 dark:bg-amber-950/40 rounded-3xl border border-amber-200 dark:border-amber-800 space-y-2">
-            <BookOpen className="text-[#D4A62A]" size={24} />
+            <BookOpen className="text-[#e69912]" size={24} />
             <h3 className="font-bold text-sm text-slate-900 dark:text-white font-serif">
               3 Practical Hours / Week
             </h3>
@@ -77,7 +77,7 @@ export const Staff: React.FC = () => {
               <tbody className="divide-y divide-slate-200 dark:divide-slate-700">
                 {ACADEMIC_GOVERNANCE_STRUCTURE.map((item, idx) => (
                   <tr key={idx} className="hover:bg-white/60 dark:hover:bg-slate-700/40 transition-colors">
-                    <td className="py-3.5 px-4 font-bold text-[#006B35] dark:text-emerald-400 whitespace-nowrap">
+                    <td className="py-3.5 px-4 font-bold text-[#196855] dark:text-emerald-400 whitespace-nowrap">
                       {item.position}
                     </td>
                     <td className="py-3.5 px-4 font-semibold text-slate-900 dark:text-white whitespace-nowrap">
@@ -106,7 +106,7 @@ export const Staff: React.FC = () => {
           </div>
 
           <div className="p-6 bg-white dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700 space-y-3">
-            <span className="text-[11px] font-bold text-[#D4A62A] uppercase">Faculty Division 2</span>
+            <span className="text-[11px] font-bold text-[#e69912] uppercase">Faculty Division 2</span>
             <h3 className="text-base font-bold font-serif text-slate-900 dark:text-white">
               Arts, Law & Humanities Directorate
             </h3>

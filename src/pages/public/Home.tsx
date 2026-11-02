@@ -1,12 +1,9 @@
 import React, { useState } from 'react';
 import { Hero } from '../../components/home/Hero';
-import { QuickLinksGrid } from '../../components/home/QuickLinksGrid';
 import { RectorWelcome } from '../../components/home/RectorWelcome';
-import { StatsSection } from '../../components/home/StatsSection';
-import { ProgrammeFilter } from '../../components/home/ProgrammeFilter';
-import { AdmissionsGuide } from '../../components/home/AdmissionsGuide';
-import { StudentServicesGrid } from '../../components/home/StudentServicesGrid';
+import { InteractiveCourseFinder } from '../../components/home/InteractiveCourseFinder';
 import { WhyAHCAS } from '../../components/home/WhyAHCAS';
+import { CampusGallery } from '../../components/home/CampusGallery';
 import { NewsPreview } from '../../components/home/NewsPreview';
 import { CalendarPreview } from '../../components/home/CalendarPreview';
 import { FAQAccordion } from '../../components/home/FAQAccordion';
@@ -18,20 +15,32 @@ export const Home: React.FC = () => {
   const navigate = useNavigate();
 
   return (
-    <div className="space-y-0">
+    <div className="space-y-0 bg-[#F4F6F5] selection:bg-[#196855] selection:text-white">
+      {/* 1. Hero Showcase matching alhidayahcollege.com with 10-Col Slider & Top News */}
       <Hero onOpenScratchCardModal={() => setScratchModalOpen(true)} />
-      <QuickLinksGrid onOpenScratchCardModal={() => setScratchModalOpen(true)} />
+
+      {/* 2. Welcome & Administrative Messages + Quick Links, Mission, Vision */}
       <RectorWelcome />
-      <StatsSection />
-      <ProgrammeFilter />
-      <AdmissionsGuide />
-      <StudentServicesGrid />
+
+      {/* 3. Interactive Direct Entry 200L Career & Subject Combination Matcher */}
+      <InteractiveCourseFinder />
+
+      {/* 4. Why Us? 6 Strategic Institutional Highlights */}
       <WhyAHCAS />
+
+      {/* 5. Campus Media & Orientation Showcase */}
+      <CampusGallery />
+
+      {/* 6. News and Events Highlights */}
       <NewsPreview />
+
+      {/* 7. School Academic Calendar & Session Milestones */}
       <CalendarPreview />
+
+      {/* 8. Frequently Asked Questions */}
       <FAQAccordion />
 
-      {/* Scratch Card Result Verification Modal */}
+      {/* Scratch Card Verification Modal */}
       <ScratchCardModal
         isOpen={scratchModalOpen}
         onClose={() => setScratchModalOpen(false)}
@@ -44,3 +53,5 @@ export const Home: React.FC = () => {
     </div>
   );
 };
+
+export default Home;

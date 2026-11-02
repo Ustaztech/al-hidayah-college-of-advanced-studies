@@ -10,11 +10,9 @@ export const Management: React.FC = () => {
         {/* Header Banner */}
         <div className="border-b border-slate-200 dark:border-slate-800 pb-6">
           <div className="flex items-center gap-2 mb-2">
-            <span className="text-xs font-black text-[#006B35] dark:text-emerald-400 uppercase tracking-wider">
+            <span className="text-xs font-black text-[#196855] dark:text-emerald-400 uppercase tracking-wider">
               Leadership & Principal Officers
             </span>
-            <span className="text-slate-400">•</span>
-            <span className="text-xs text-[#D4A62A] font-bold">RC: {INSTITUTION_INFO.rcNumber}</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold font-serif text-slate-900 dark:text-white">
             Governing Council & Administrative Directorate
@@ -25,10 +23,10 @@ export const Management: React.FC = () => {
         </div>
 
         {/* Featured Founder & Executive Chairman Card */}
-        <div className="bg-gradient-to-br from-[#004D26] via-[#006B35] to-[#0F172A] text-white rounded-3xl p-6 sm:p-10 shadow-2xl border-4 border-[#D4A62A] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div className="bg-gradient-to-br from-[#196855] via-[#196855] to-[#0F172A] text-white rounded-3xl p-6 sm:p-10 shadow-2xl border-4 border-[#e69912] grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
           
           <div className="lg:col-span-5 relative flex justify-center">
-            <div className="relative rounded-2xl overflow-hidden border-2 border-[#D4A62A] shadow-2xl w-full max-w-sm">
+            <div className="relative rounded-2xl overflow-hidden border-2 border-[#e69912] shadow-2xl w-full max-w-sm">
               <img
                 src="/provost-mbsuleiman.jpg"
                 alt="Dr. MB Suleiman, PhD (Magajin Ilimin Abaji)"
@@ -47,7 +45,7 @@ export const Management: React.FC = () => {
 
           <div className="lg:col-span-7 space-y-4">
             <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-400/20 border border-amber-400/40 rounded-full text-xs font-bold text-amber-200">
-              <Award size={14} className="text-[#D4A62A]" />
+              <Award size={14} className="text-[#e69912]" />
               <span>Founder & Executive Chairman</span>
             </div>
 
@@ -97,7 +95,7 @@ export const Management: React.FC = () => {
               </div>
 
               <div>
-                <span className="text-[11px] font-black text-[#006B35] dark:text-emerald-400 uppercase tracking-widest block">
+                <span className="text-[11px] font-black text-[#196855] dark:text-emerald-400 uppercase tracking-widest block">
                   IJMB Academic Programme
                 </span>
                 <h3 className="text-lg font-bold font-serif text-slate-900 dark:text-white">
@@ -117,14 +115,14 @@ export const Management: React.FC = () => {
 
             <div className="pt-4 border-t border-slate-200 dark:border-slate-700 mt-4 flex items-center justify-between text-xs text-slate-500">
               <span>Study Centre Lead</span>
-              <span className="font-bold text-[#006B35] dark:text-emerald-400">JSS Agyana Rd Centre</span>
+              <span className="font-bold text-[#196855] dark:text-emerald-400">JSS Agyana Rd Centre</span>
             </div>
           </div>
 
           {/* Mall. Usman Saidu */}
           <div className="bg-[#F8FAFC] dark:bg-slate-800 rounded-3xl p-6 border border-slate-200 dark:border-slate-700 flex flex-col justify-between shadow-sm hover:shadow-md transition-shadow">
             <div className="space-y-4">
-              <div className="rounded-2xl overflow-hidden border-2 border-[#D4A62A] bg-slate-950 h-64">
+              <div className="rounded-2xl overflow-hidden border-2 border-[#e69912] bg-slate-950 h-64">
                 <img
                   src="/registrar-usman-saidu.jpg"
                   alt="Mall. Usman Saidu"
@@ -133,13 +131,13 @@ export const Management: React.FC = () => {
               </div>
 
               <div>
-                <span className="text-[11px] font-black text-[#D4A62A] uppercase tracking-widest block">
+                <span className="text-[11px] font-black text-[#e69912] uppercase tracking-widest block">
                   Registry & Examinations
                 </span>
                 <h3 className="text-lg font-bold font-serif text-slate-900 dark:text-white">
                   Mall. Usman Saidu
                 </h3>
-                <p className="text-xs text-[#006B35] dark:text-emerald-400 font-semibold">
+                <p className="text-xs text-[#196855] dark:text-emerald-400 font-semibold">
                   Registrar / Examination Officer
                 </p>
               </div>
@@ -153,7 +151,7 @@ export const Management: React.FC = () => {
 
             <div className="pt-4 border-t border-slate-200 dark:border-slate-700 mt-4 flex items-center justify-between text-xs text-slate-500">
               <span>Verification Desk</span>
-              <span className="font-bold text-[#D4A62A]">Registry Active</span>
+              <span className="font-bold text-[#e69912]">Registry Active</span>
             </div>
           </div>
 

@@ -2,14 +2,14 @@
 
 @layer base {
   :root {
-    --ahcas-green: #006B35;
-    --ahcas-green-dark: #004D26;
-    --ahcas-green-light: #008743;
-    --ahcas-gold: #D4A62A;
-    --ahcas-gold-hover: #B88D1D;
-    --ahcas-orange: #F58220;
+    --ahcas-green: #196855;
+    --ahcas-green-dark: #196855;
+    --ahcas-green-light: #196855;
+    --ahcas-gold: #e69912;
+    --ahcas-gold-hover: #c98207;
+    --ahcas-orange: #e69912;
     --ahcas-charcoal: #252B33;
-    --ahcas-bg-soft: #F3F6F3;
+    --ahcas-bg-soft: #F4F6F5;
     --ahcas-card-bg: #FFFFFF;
     --ahcas-text-main: #252B33;
     --ahcas-text-muted: #5A6472;
@@ -101,6 +101,175 @@
   to { opacity: 1; transform: translateY(0); }
 }
 
+@keyframes pulseGlow {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50% { opacity: 0.7; transform: scale(1.04); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
 .animate-fade-in {
   animation: fadeIn 0.3s ease-out forwards;
 }
+
+.animate-pulse-glow {
+  animation: pulseGlow 6s infinite ease-in-out;
+}
+
+.shimmer-effect {
+  background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.15) 50%, rgba(255,255,255,0) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 3s infinite;
+}
+
+/* Institutional Design System Utilities */
+.ahcas-card {
+  background-color: var(--ahcas-card-bg);
+  border: 1px solid var(--ahcas-border);
+  border-radius: 1.25rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 77, 38, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03);
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.ahcas-card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 25px -5px rgba(0, 77, 38, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.05);
+  border-color: #e69912;
+}
+
+.glass-panel {
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+html[data-theme="dark"] .glass-panel {
+  background: rgba(18, 24, 31, 0.85);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.glass-dark {
+  background: rgba(0, 38, 19, 0.85);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(212, 166, 42, 0.25);
+}
+
+.text-gold-gradient {
+  background: linear-gradient(135deg, #F3C85C 0%, #e69912 50%, #A67C00 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-emerald-gradient {
+  background: linear-gradient(135deg, #10B981 0%, #196855 50%, #196855 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ahcas-badge-gold {
+  background-color: #FEF3C7;
+  color: #92400E;
+  border: 1px solid #FCD34D;
+  font-weight: 800;
+  font-size: 0.7rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.ahcas-badge-green {
+  background-color: #ECFDF5;
+  color: #065F46;
+  border: 1px solid #A7F3D0;
+  font-weight: 800;
+  font-size: 0.7rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: 9999px;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* alhidayahcollege.com Styles */
+.card-view {
+  background: #ffffff;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.07);
+  border-radius: 4px;
+  border: 1px solid #e2e8f0;
+}
+
+.p-title {
+  position: relative;
+  padding-bottom: 8px;
+  margin-bottom: 16px;
+  font-weight: 700;
+  color: #196855;
+}
+
+.p-title::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background-color: #e69912;
+}
+
+.btn-fill-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e69912;
+  color: #ffffff !important;
+  font-weight: 700;
+  border: 1px solid #e69912;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-fill-primary:hover {
+  background-color: #c98207;
+  border-color: #c98207;
+  color: #ffffff !important;
+}
+
+.btn-fill-red {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #E3493D;
+  color: #ffffff !important;
+  font-weight: 700;
+  border: 1px solid #E3493D;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-fill-red:hover {
+  background-color: #c43025;
+  border-color: #c43025;
+}
+
+.btn-fill-white {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #ffffff;
+  color: #e69912 !important;
+  font-weight: 700;
+  border: 1px solid #ffffff;
+  transition: all 0.2s ease-in-out;
+}
+
+.btn-fill-white:hover {
+  background-color: #e69912;
+  color: #ffffff !important;
+  border-color: #e69912;
+}
+

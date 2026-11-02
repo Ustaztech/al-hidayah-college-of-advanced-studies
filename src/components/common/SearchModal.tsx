@@ -32,7 +32,7 @@ export const SearchModal: React.FC = () => {
         
         {/* Search Input Bar */}
         <div className="p-4 border-b border-gray-200 dark:border-gray-800 flex items-center gap-3">
-          <Search size={20} className="text-[#006B35] shrink-0" />
+          <Search size={20} className="text-[#196855] shrink-0" />
           <input
             type="text"
             autoFocus
@@ -66,7 +66,7 @@ export const SearchModal: React.FC = () => {
           {filteredProgrammes.length > 0 && (
             <div>
               <h4 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3 flex items-center gap-2">
-                <BookOpen size={14} className="text-[#006B35]" />
+                <BookOpen size={14} className="text-[#196855]" />
                 Matching Programmes ({filteredProgrammes.length})
               </h4>
               <div className="space-y-2">
@@ -77,10 +77,10 @@ export const SearchModal: React.FC = () => {
                     className="p-3 bg-gray-50 dark:bg-gray-800/60 rounded-xl hover:bg-emerald-50 dark:hover:bg-emerald-950/40 cursor-pointer flex justify-between items-center group transition-colors"
                   >
                     <div>
-                      <span className="font-bold text-sm text-[#006B35] dark:text-emerald-400 block">{p.title}</span>
+                      <span className="font-bold text-sm text-[#196855] dark:text-emerald-400 block">{p.title}</span>
                       <span className="text-xs text-gray-500">{p.department} • {p.duration}</span>
                     </div>
-                    <ArrowRight size={16} className="text-gray-400 group-hover:text-[#006B35] transition-transform group-hover:translate-x-1" />
+                    <ArrowRight size={16} className="text-gray-400 group-hover:text-[#196855] transition-transform group-hover:translate-x-1" />
                   </div>
                 ))}
               </div>
@@ -90,7 +90,7 @@ export const SearchModal: React.FC = () => {
           {filteredNews.length > 0 && (
             <div>
               <h4 className="text-xs font-bold uppercase tracking-wider text-gray-400 mb-3 flex items-center gap-2">
-                <Newspaper size={14} className="text-[#D4A62A]" />
+                <Newspaper size={14} className="text-[#e69912]" />
                 News & Announcements ({filteredNews.length})
               </h4>
               <div className="space-y-2">
@@ -104,7 +104,7 @@ export const SearchModal: React.FC = () => {
                       <span className="font-bold text-sm text-gray-900 dark:text-gray-100 block">{n.title}</span>
                       <span className="text-xs text-gray-500">{n.publishDate} • {n.category}</span>
                     </div>
-                    <ArrowRight size={16} className="text-gray-400 group-hover:text-[#D4A62A] transition-transform group-hover:translate-x-1" />
+                    <ArrowRight size={16} className="text-gray-400 group-hover:text-[#e69912] transition-transform group-hover:translate-x-1" />
                   </div>
                 ))}
               </div>
@@ -113,7 +113,7 @@ export const SearchModal: React.FC = () => {
 
           {query.trim() && filteredProgrammes.length === 0 && filteredNews.length === 0 && (
             <div className="text-center py-8 text-gray-500 text-sm">
-              No matching records found for "{query}". Try checking our <button onClick={() => handleNavigate('/faqs')} className="text-[#006B35] underline">FAQs section</button>.
+              No matching records found for "{query}". Try checking our <button onClick={() => handleNavigate('/faqs')} className="text-[#196855] underline">FAQs section</button>.
             </div>
           )}
         </div>

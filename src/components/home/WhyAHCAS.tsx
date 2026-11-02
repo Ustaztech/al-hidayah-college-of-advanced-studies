@@ -1,99 +1,97 @@
 import React from 'react';
-import { Shield, Cpu, Scale, GraduationCap, MapPin, HeartHandshake, CheckCircle2, Award, BookOpen, Laptop, Users } from 'lucide-react';
-import { INSTITUTION_INFO } from '../../data/ijmbData';
+import { Link } from 'react-router-dom';
+import { GraduationCap, BookOpen, ShieldCheck, Cpu, Users, Briefcase, CalendarCheck } from 'lucide-react';
 
 export const WhyAHCAS: React.FC = () => {
-  const pillars = [
+  const whyCards = [
     {
       title: 'Academic Excellence',
-      description: 'Programmes delivered by qualified and experienced professionals committed to student success and university admission.',
-      icon: GraduationCap
+      icon: GraduationCap,
+      text: 'Programmes delivered by qualified and experienced professionals committed to student success in direct university entry and technical diplomas.'
     },
     {
       title: 'Moral and Discipline',
-      description: 'An institution that fosters discipline, respect, responsibility, and ethical leadership in service to humanity.',
-      icon: Scale
+      icon: ShieldCheck,
+      text: 'An institution that fosters discipline, respect, responsibility, ethical conduct, and dedicated service to humanity.'
     },
     {
       title: 'Proven Track Record',
-      description: 'Graduates acquire practical competencies that maximize direct university admission (200 Level) and employment prospects.',
-      icon: Award
+      icon: CalendarCheck,
+      text: 'Students acquire practical competence that improves their higher education progression and direct employment prospects.'
     },
     {
-      title: 'Modern Facilities',
-      description: 'Well-equipped study centre at JSS Agyana Road, high-speed ICT centers, e-library, e-laboratory (JavaLab), and e-learning facilities.',
-      icon: Laptop
+      title: 'Facilities',
+      icon: Cpu,
+      text: 'Training that promotes self-reliance and enterprise creation, equipped with modern e-library, science laboratories and e-learning facilities.'
     },
     {
       title: 'Qualified Staffing',
-      description: 'Comprehensive academic mentorship from qualified lecturers and tutors possessing a minimum of Master’s Degree credentials.',
-      icon: Users
+      icon: Users,
+      text: 'Comprehensive academic mentorship systems with credentialed faculty holding minimum Masters Degree qualifications in relevant fields.'
     },
     {
       title: 'Hands-on Practicals',
-      description: 'Professional skills relevant to industry and workplace requirements, digital literacy, and enterprise creation training.',
-      icon: Cpu
+      icon: Briefcase,
+      text: 'Professional Skills: practical competence relevant to workplace requirements. Digital Literacy: ability to use technology effectively in academic and professional contexts.'
     }
   ];
 
   return (
-    <section className="py-16 bg-white border-b border-slate-200">
+    <section
+      className="py-16 relative bg-cover bg-center bg-fixed"
+      style={{
+        backgroundImage: `linear-gradient(rgba(17, 78, 63, 0.88), rgba(25, 104, 85, 0.92)), url('https://alhidayahcollege.com/uploads/264C8D4E27C1/frontend_image/library.jpg')`
+      }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          
-          <div className="lg:col-span-5 space-y-4">
-            <div className="inline-flex items-center gap-2 px-3 py-1 bg-amber-100 text-amber-900 rounded-full text-xs font-bold">
-              <span>Why Choose AHCAS</span>
-            </div>
-            <h2 className="text-3xl sm:text-4xl font-extrabold text-slate-900 font-serif tracking-tight leading-tight">
-              Why Study at Al-Hidayah College of Advanced Studies?
-            </h2>
-            <p className="text-sm text-slate-600 leading-relaxed">
-              Established with a firm commitment to academic rigor, digital innovation, and moral character. We provide structured pathways into 200-Level university degree programmes and National Diploma certifications.
-            </p>
+        {/* Section Heading with distinct text shadow matching alhidayahcollege.com */}
+        <div className="text-center mb-12">
+          <h2
+            className="text-3xl sm:text-4xl md:text-5xl font-black text-white font-serif tracking-tight"
+            style={{ textShadow: '2px 2px 4px rgba(80, 20, 10, 0.8)' }}
+          >
+            Why Us?
+          </h2>
+          <div className="w-16 h-1 bg-[#e69912] mx-auto mt-3 rounded"></div>
+        </div>
 
-            <div className="p-4 bg-emerald-50/70 rounded-2xl border border-emerald-200 flex items-center gap-4">
-              <img src="/official-logo.jpg" alt="AHCAS Crest" className="h-14 w-auto bg-white p-1 rounded-xl shadow-xs" />
-              <div>
-                <span className="font-bold text-sm text-[#006B35] block font-serif">
-                  AHCAS Institutional Seal
-                </span>
-                <p className="text-xs text-amber-700 font-serif italic font-bold">
-                  “{INSTITUTION_INFO.crestMotto}”
-                </p>
-                <span className="text-[10px] text-slate-500 font-mono">
-                  RC: {INSTITUTION_INFO.rcNumber} • Approved Manual Aug 2025
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div className="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-4">
-            {pillars.map((p, idx) => {
-              const Icon = p.icon;
-              return (
-                <div
-                  key={idx}
-                  className="p-5 bg-slate-50 rounded-2xl border border-slate-200 space-y-2 hover:border-emerald-500 transition-colors"
-                >
-                  <div className="p-2.5 bg-emerald-100 text-[#006B35] rounded-xl w-fit shadow-xs">
-                    <Icon size={20} />
+        {/* 6 Grid Cards */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {whyCards.map((card, idx) => {
+            const Icon = card.icon;
+            return (
+              <div
+                key={idx}
+                className="card-view p-6 text-center flex flex-col justify-between hover:-translate-y-1 transition-transform duration-200 border-t-4 border-[#e69912]"
+              >
+                <div>
+                  <div className="w-14 h-14 rounded-2xl bg-[#196855]/10 text-[#196855] flex items-center justify-center mx-auto mb-3.5 shadow-xs border border-[#196855]/15">
+                    <Icon size={26} className="text-[#196855]" />
                   </div>
-                  <h3 className="text-sm font-bold text-slate-900 font-serif">
-                    {p.title}
+                  <h3 className="text-base sm:text-lg font-bold text-[#196855] font-serif mb-2">
+                    {card.title}
                   </h3>
-                  <p className="text-xs text-slate-600 leading-relaxed">
-                    {p.description}
+                  <p className="text-xs sm:text-sm text-gray-600 leading-relaxed text-justify">
+                    {card.text}
                   </p>
                 </div>
-              );
-            })}
-          </div>
-
+                <div className="mt-4 pt-3 border-t border-gray-100 flex justify-center">
+                  <Link
+                    to="/about"
+                    className="text-xs font-bold text-[#e69912] hover:text-[#c98207] transition-colors"
+                  >
+                    Learn more →
+                  </Link>
+                </div>
+              </div>
+            );
+          })}
         </div>
 
       </div>
     </section>
   );
 };
+
+export default WhyAHCAS;

@@ -41,7 +41,7 @@ export const CheckStatus: React.FC = () => {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
         <div className="text-center max-w-xl mx-auto space-y-2">
-          <span className="text-xs font-black text-[#006B35] dark:text-emerald-400 uppercase tracking-widest block">
+          <span className="text-xs font-black text-[#196855] dark:text-emerald-400 uppercase tracking-widest block">
             Admissions Screening & Decision Portal
           </span>
           <h1 className="text-3xl font-extrabold font-serif text-slate-900 dark:text-white">
@@ -66,11 +66,11 @@ export const CheckStatus: React.FC = () => {
                   placeholder="AHCAS/IJMB/2026/00142"
                   value={refInput}
                   onChange={e => setRefInput(e.target.value)}
-                  className="flex-1 px-4 py-2.5 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-xs sm:text-sm font-mono tracking-wider focus:ring-2 focus:ring-[#006B35]"
+                  className="flex-1 px-4 py-2.5 bg-white dark:bg-slate-900 border border-slate-300 dark:border-slate-700 rounded-xl text-xs sm:text-sm font-mono tracking-wider focus:ring-2 focus:ring-[#196855]"
                 />
                 <button
                   type="submit"
-                  className="px-6 py-2.5 bg-[#006B35] hover:bg-[#004D26] text-white font-bold rounded-xl text-xs sm:text-sm flex items-center justify-center gap-1.5 shrink-0 shadow-md"
+                  className="px-6 py-2.5 bg-[#196855] hover:bg-[#196855] text-white font-bold rounded-xl text-xs sm:text-sm flex items-center justify-center gap-1.5 shrink-0 shadow-md"
                 >
                   <Search size={16} />
                   <span>Verify Status</span>
@@ -82,7 +82,7 @@ export const CheckStatus: React.FC = () => {
               <button
                 type="button"
                 onClick={() => setScratchModalOpen(true)}
-                className="text-[#D4A62A] hover:underline font-bold"
+                className="text-[#e69912] hover:underline font-bold"
               >
                 Verify Scratch Card PIN
               </button>
@@ -108,7 +108,7 @@ export const CheckStatus: React.FC = () => {
                 <h3 className="text-xl font-bold font-serif text-slate-900 dark:text-white">
                   {applicant.full_name}
                 </h3>
-                <p className="text-xs font-mono text-[#006B35] dark:text-emerald-400">
+                <p className="text-xs font-mono text-[#196855] dark:text-emerald-400">
                   Ref: {applicant.ref_number} • State: {applicant.state_of_origin}
                 </p>
               </div>
@@ -116,7 +116,7 @@ export const CheckStatus: React.FC = () => {
               <div>
                 <span className={`px-4 py-1.5 rounded-full text-xs font-extrabold uppercase tracking-wider inline-flex items-center gap-1.5 ${
                   applicant.status === 'Admitted'
-                    ? 'bg-emerald-100 text-[#006B35] dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-400'
+                    ? 'bg-emerald-100 text-[#196855] dark:bg-emerald-950 dark:text-emerald-300 border border-emerald-400'
                     : 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300 border border-amber-400'
                 }`}>
                   <CheckCircle2 size={14} />
@@ -132,7 +132,7 @@ export const CheckStatus: React.FC = () => {
               </div>
               <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700">
                 <span className="text-slate-500 block">Study Centre:</span>
-                <strong className="text-[#006B35] dark:text-emerald-400 font-bold">{applicant.study_centre || INSTITUTION_INFO.studyCentre}</strong>
+                <strong className="text-[#196855] dark:text-emerald-400 font-bold">{applicant.study_centre || INSTITUTION_INFO.studyCentre}</strong>
               </div>
               <div className="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-700">
                 <span className="text-slate-500 block">Assigned Subject Combination:</span>
@@ -147,7 +147,7 @@ export const CheckStatus: React.FC = () => {
             <div className="pt-4 border-t border-slate-200 dark:border-slate-700 flex flex-wrap gap-3">
               <button
                 onClick={() => setSlipModalOpen(true)}
-                className="px-5 py-2.5 bg-[#D4A62A] hover:bg-[#b88d1d] text-black font-extrabold rounded-xl text-xs flex items-center gap-1.5 shadow-md"
+                className="px-5 py-2.5 bg-[#e69912] hover:bg-[#b88d1d] text-black font-extrabold rounded-xl text-xs flex items-center gap-1.5 shadow-md"
               >
                 <Printer size={15} />
                 <span>View / Print Registration Slip</span>
@@ -156,7 +156,7 @@ export const CheckStatus: React.FC = () => {
               {applicant.status === 'Admitted' && (
                 <button
                   onClick={() => setLetterModalOpen(true)}
-                  className="px-5 py-2.5 bg-[#006B35] hover:bg-[#004D26] text-white font-extrabold rounded-xl text-xs flex items-center gap-1.5 shadow-md"
+                  className="px-5 py-2.5 bg-[#196855] hover:bg-[#196855] text-white font-extrabold rounded-xl text-xs flex items-center gap-1.5 shadow-md"
                 >
                   <Award size={15} />
                   <span>Download Official Admission Letter</span>

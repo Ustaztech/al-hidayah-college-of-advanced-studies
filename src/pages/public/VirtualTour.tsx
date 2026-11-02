@@ -3,20 +3,98 @@ import { Compass, MapPin, Building, ShieldCheck, CheckCircle2, Award, Camera } f
 import { INSTITUTION_INFO } from '../../data/ijmbData';
 
 export const VirtualTour: React.FC = () => {
-  const [selectedLocation, setSelectedLocation] = useState<string>('study-centre');
+  const [selectedLocation, setSelectedLocation] = useState<string>('lecture-hall');
 
   const tourLocations = [
     {
-      id: 'study-centre',
-      name: 'JSS Agyana Road Study Centre (Abaji)',
-      category: 'Academic Study Facilities',
-      description: 'Official AHCAS IJMB academic study centre located on Agyana Road, Abaji Abuja. Features dedicated lecture rooms, administrative units, and external inspection readiness in collaboration with the FCT Department of Higher Education.',
-      image: '/liaison-officer-study-centre.jpg',
+      id: 'orientation-podium',
+      name: 'Official Study Centre Dais & Academic Dais (Abaji)',
+      category: 'Official Ceremonies',
+      description: 'The official AHCAS podium at JSS Agyana Road, Abaji, where academic leadership delivers matriculation addresses, orientation directives, and code of conduct inductions.',
+      image: '/ahcas-orientation-podium-full.jpg',
       highlights: [
-        'Dedicated IJMB Lecture Classrooms',
+        'Accredited IJMB Dais & Institutional Crest',
+        'Directorate Address & Guidance Stage',
+        'Study Centre Governance & Briefing Hub',
+        'Matriculation & Oath Induction Venue'
+      ]
+    },
+    {
+      id: 'matriculated-assembly',
+      name: 'Matriculated 2026/2027 Student Cohort Assembly',
+      category: 'Student Body & Cohort',
+      description: 'The newly enrolled student cohort gathered at the study centre for academic orientation, code of conduct instruction, and syllabus pacing overview.',
+      image: '/ahcas-orientation-students-cohort.jpg',
+      highlights: [
+        'Enrolled Candidates for 200 Level Direct Entry',
+        'Interactive Student-Lecturer Engagement',
+        'Dedicated Study Schedules & Mentorship',
+        'Continuous Assessment Readiness'
+      ]
+    },
+    {
+      id: 'lecture-hall',
+      name: 'Interactive IJMB Lecture Hall (Agyana Road, Abaji)',
+      category: 'Academic Facilities',
+      description: 'Dedicated modern lecture hall located at the JSS Agyana Road Study Centre, Abaji Abuja. Fully arranged with lecture seating, whiteboard instruction facilities, and monitored academic ambiance for A-Level delivery.',
+      image: '/ahcas-classroom-lecture.jpg',
+      highlights: [
+        'Dedicated IJMB Direct Entry Lecture Facility',
         'FCT Higher Education Inspection Approved',
-        'Quiet, Secure Academic Environment',
-        'Direct Access from Main Abaji Arterial Road'
+        'Organized Seating & Focus Ambiance',
+        'Certified Subject Specialists on Site'
+      ]
+    },
+    {
+      id: 'student-cohort',
+      name: 'AHCAS Student Cohort & Academic Assembly',
+      category: 'Student Body & Cohort',
+      description: 'The vibrant student community of Al-Hidayah College of Advanced Studies, demonstrating scholarship, discipline, and shared commitment toward university Direct Entry admission.',
+      image: '/ahcas-student-cohort.jpg',
+      highlights: [
+        'Enrolled IJMB Candidates Across Arts, Sciences & Social Sciences',
+        'Academic Advisory & Peer Study Groups',
+        'High Standards of Conduct & Ethics',
+        'Mentorship by Seasoned Lecturers'
+      ]
+    },
+    {
+      id: 'classrooms',
+      name: 'Dedicated IJMB Intensive Lecture Classrooms',
+      category: 'Classroom Facilities',
+      description: 'Modern, well-ventilated lecture rooms optimized for IJMB syllabus coverage, tutorial sessions, continuous assessments, and direct student-lecturer engagement.',
+      image: '/ahcas-students-learning.jpg',
+      highlights: [
+        'Interactive Student Engagement',
+        'Daily Scheduled Contact Hours',
+        'Regular Progress Assessments',
+        'Personalized Academic Tutoring'
+      ]
+    },
+    {
+      id: 'tutorials',
+      name: 'Direct Entry Academic Coaching & Joint Sessions',
+      category: 'Lecture Sessions',
+      description: 'Spacious lecture sessions delivering rigorous curriculum across Physics, Chemistry, Biology, Mathematics, Government, Literature, Accounting, and Economics.',
+      image: '/ahcas-lecture-session.jpg',
+      highlights: [
+        'Subject-Specific Problem Solving',
+        'Past IJMB Question Review & Modeling',
+        'Dedicated Syllabus Completion Milestones',
+        'Continuous Assessment Documentation'
+      ]
+    },
+    {
+      id: 'instruction',
+      name: 'Standardized Subject Coaching & Boardwork',
+      category: 'Instructional Methodology',
+      description: 'Detailed board-level instructional delivery breaking down complex concepts for candidates preparing for the national ABU IJMB examinations.',
+      image: '/ahcas-class-instruction.jpg',
+      highlights: [
+        'Structured Formula & Derivation Breakdowns',
+        'Interactive Q&A with Senior Tutors',
+        'Standardized IJMB Marking Scheme Training',
+        'Practical Laboratory Preparation Support'
       ]
     },
     {
@@ -30,45 +108,6 @@ export const VirtualTour: React.FC = () => {
         'Executive Leadership Consultation Suite',
         'Official Candidate Physical Filing Vault',
         'Biometric & Verification Terminal'
-      ]
-    },
-    {
-      id: 'cbt',
-      name: '200-Seater CBT Examination Hub',
-      category: 'ICT Infrastructure',
-      description: 'High-performance computer laboratory equipped with modern desktop workstations, gigabit network connectivity, UPS solar power backups, and server-timed examination monitoring systems.',
-      image: '/african-cbt-lab.jpg',
-      highlights: [
-        '200 Synchronous Testing Terminals',
-        'Dedicated Solar & UPS Backup Power',
-        'Air-Conditioned CBT Hall',
-        'Server Monitoring Control Room'
-      ]
-    },
-    {
-      id: 'campus',
-      name: 'Abaji Academic Lawn & Campus Pavilions',
-      category: 'Campus Grounds',
-      description: 'Serene academic surroundings in Abaji Area Council, Federal Capital Territory, designed for focused A-Level scholarship and student study groups.',
-      image: '/african-campus-hero.jpg',
-      highlights: [
-        'Solar Powered Illumination',
-        'Campus High-Speed Wi-Fi Zone',
-        'Modern Outdoor Study Amphitheaters',
-        'Secure 24/7 Gated Perimeter'
-      ]
-    },
-    {
-      id: 'convocation',
-      name: 'Convocation Arena & University Transition Square',
-      category: 'Matriculation & Convocation',
-      description: 'Where AHCAS candidates celebrate their academic success and receive their certified IJMB statements of results for Direct Entry (200 Level) placement into universities across Nigeria.',
-      image: '/african-graduation.jpg',
-      highlights: [
-        'Convocation Ceremonial Arena',
-        'Alumni Transition Secretariat',
-        'Direct Entry Placement Guidance Desk',
-        'Annual Matriculation Ceremonial Grounds'
       ]
     }
   ];
@@ -94,7 +133,7 @@ export const VirtualTour: React.FC = () => {
             </p>
           </div>
           <div className="flex items-center gap-2 text-xs text-slate-600 dark:text-slate-300 bg-white dark:bg-slate-900 px-4 py-2.5 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-xs">
-            <MapPin size={16} className="text-[#006B35]" />
+            <MapPin size={16} className="text-[#196855]" />
             <span className="font-bold">{INSTITUTION_INFO.studyCentre}</span>
           </div>
         </div>
@@ -107,7 +146,7 @@ export const VirtualTour: React.FC = () => {
               onClick={() => setSelectedLocation(loc.id)}
               className={`px-4 py-2.5 rounded-2xl text-xs font-bold transition-all duration-300 flex items-center gap-2 ${
                 selectedLocation === loc.id
-                  ? 'bg-[#006B35] text-white shadow-lg scale-102'
+                  ? 'bg-[#196855] text-white shadow-lg scale-102'
                   : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 border border-slate-200 dark:border-slate-800'
               }`}
             >
@@ -132,7 +171,7 @@ export const VirtualTour: React.FC = () => {
 
           <div className="lg:col-span-6 space-y-5">
             <div>
-              <span className="text-xs font-black text-[#006B35] dark:text-emerald-400 uppercase tracking-widest block">
+              <span className="text-xs font-black text-[#196855] dark:text-emerald-400 uppercase tracking-widest block">
                 {currentLocation.category}
               </span>
               <h2 className="text-2xl font-extrabold font-serif text-slate-900 dark:text-white mt-1">
@@ -151,7 +190,7 @@ export const VirtualTour: React.FC = () => {
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
                 {currentLocation.highlights.map((h, i) => (
                   <div key={i} className="flex items-center gap-2 p-2.5 bg-slate-50 dark:bg-slate-800 rounded-xl border border-slate-100 dark:border-slate-700 text-xs text-slate-800 dark:text-slate-200">
-                    <CheckCircle2 size={15} className="text-[#006B35] shrink-0" />
+                    <CheckCircle2 size={15} className="text-[#196855] shrink-0" />
                     <span>{h}</span>
                   </div>
                 ))}
@@ -160,7 +199,7 @@ export const VirtualTour: React.FC = () => {
 
             <div className="pt-4 border-t border-slate-200 dark:border-slate-800 flex items-center justify-between text-xs text-slate-500">
               <span>Study Centre Code: <strong>AHCAS/ABJ/01</strong></span>
-              <span className="text-[#006B35] dark:text-emerald-400 font-bold">Inspection Ready</span>
+              <span className="text-[#196855] dark:text-emerald-400 font-bold">Inspection Ready</span>
             </div>
           </div>
 

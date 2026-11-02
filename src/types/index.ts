@@ -90,6 +90,7 @@ export interface ApplicationRecord {
   email: string;
   phone: string;
   gender: string;
+  date_of_birth?: string;
   state_of_origin: string;
   lga?: string;
   programme_id: string;
@@ -214,4 +215,57 @@ export interface StaffMember {
   photoUrl: string;
   duties: string;
   email?: string;
+}
+
+export type InstitutionalRole =
+  | 'SUPER_ADMIN'
+  | 'PRINCIPAL'
+  | 'PROVOST'
+  | 'COUNCIL_MEMBER'
+  | 'REGISTRAR'
+  | 'ADMISSIONS_OFFICER'
+  | 'FINANCE_OFFICER'
+  | 'ACADEMIC_OFFICER'
+  | 'LECTURER'
+  | 'EXAMINATION_OFFICER'
+  | 'LIBRARIAN'
+  | 'ICT_OFFICER'
+  | 'QUALITY_ASSURANCE_OFFICER'
+  | 'STUDENT_AFFAIRS_OFFICER'
+  | 'STUDENT'
+  | 'APPLICANT'
+  | 'ALUMNI'
+  | 'PARENT_SPONSOR'
+  | 'STAFF';
+
+// Backwards-compatible UserRole (includes legacy BURSAR alias and GUEST)
+export type UserRole = InstitutionalRole | 'GUEST' | 'BURSAR';
+
+export interface UserProfile {
+  id: string;
+  email: string;
+  full_name: string;
+  phone?: string;
+  avatar_url?: string;
+  role: InstitutionalRole;
+  secondary_roles?: InstitutionalRole[];
+  department?: string;
+  designation?: string;
+  matric_number?: string;
+  ref_number?: string;
+  created_at: string;
+  updated_at?: string;
+}
+
+export interface InstitutionalNotification {
+  id: string;
+  user_id?: string;
+  target_role?: InstitutionalRole | 'ALL';
+  title: string;
+  message: string;
+  category: 'Admissions' | 'Finance' | 'Academic' | 'Council' | 'System' | 'Examinations' | 'Welfare';
+  priority: 'low' | 'normal' | 'high' | 'urgent';
+  created_at: string;
+  read: boolean;
+  action_url?: string;
 }

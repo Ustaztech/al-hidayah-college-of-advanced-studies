@@ -14,7 +14,7 @@ export const FAQS_DATA: FAQItem[] = [
     category: 'Tuition & Fees',
     question: 'What is the approved tuition fee schedule for IJMB at AHCAS?',
     questionHa: 'Menene jadawalin kudin makaranta na IJMB da aka amince da shi?',
-    answer: 'Under Document Code AHC/IJMB/OQAM/2026, tuition is ₦258,500 for full one-time payment. A 2-part installment plan is also approved: 1st Installment of ₦154,000 (covering Acceptance, Tuition Part 1, Lab fees, ID card, and portal access) paid at resumption, and 2nd Installment of ₦105,500 (Tuition balance, Mock exams, and IJMB final exam registration) paid before Second Semester.',
+    answer: 'Tuition is ₦258,500 for full one-time payment. A 2-part installment plan is also approved: 1st Installment of ₦154,000 (covering Acceptance, Tuition Part 1, Lab fees, ID card, and portal access) paid at resumption, and 2nd Installment of ₦105,500 (Tuition balance, Mock exams, and IJMB final exam registration) paid before Second Semester.',
     answerHa: 'Kudin makaranta gaba daya shine ₦258,500 idan za a biya sau daya. Hakanan an amince da biyan kashi biyu: Kashi na 1 shine ₦154,000 lokacin komawa makaranta, kashi na 2 kuma shine ₦105,500 kafin zangon karatu na biyu.'
   },
   {

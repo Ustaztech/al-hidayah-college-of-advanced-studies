@@ -46,14 +46,14 @@ export const FAQAccordion: React.FC = () => {
                   className="w-full text-left p-4 sm:p-5 flex justify-between items-center gap-4 hover:bg-gray-50 dark:hover:bg-gray-800/50 transition-colors"
                 >
                   <div className="flex items-center gap-3">
-                    <span className="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950/60 text-[#006B35] dark:text-emerald-300 text-[10px] font-bold shrink-0">
+                    <span className="px-2 py-0.5 rounded bg-emerald-100 dark:bg-emerald-950/60 text-[#196855] dark:text-emerald-300 text-[10px] font-bold shrink-0">
                       {faq.category}
                     </span>
                     <h3 className="text-sm font-bold text-gray-900 dark:text-white font-serif">
                       {questionText}
                     </h3>
                   </div>
-                  {isOpen ? <ChevronUp size={18} className="text-[#006B35] shrink-0" /> : <ChevronDown size={18} className="text-gray-400 shrink-0" />}
+                  {isOpen ? <ChevronUp size={18} className="text-[#196855] shrink-0" /> : <ChevronDown size={18} className="text-gray-400 shrink-0" />}
                 </button>
 
                 {isOpen && (

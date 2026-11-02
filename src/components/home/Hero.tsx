@@ -1,229 +1,258 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import {
-  ChevronLeft,
-  ChevronRight,
-  Award,
-  Users,
-  Building,
-  GraduationCap,
-  BookOpen,
-  ArrowRight,
-  ShieldCheck,
-  CheckCircle2
-} from 'lucide-react';
-import { INSTITUTION_INFO } from '../../data/ijmbData';
+import { Link, useNavigate } from 'react-router-dom';
+import { Search, ChevronLeft, ChevronRight, Calendar, ArrowRight, Megaphone, Bell } from 'lucide-react';
 
-export const Hero: React.FC<{ onOpenScratchCardModal: () => void }> = () => {
+interface HeroProps {
+  onOpenScratchCardModal?: () => void;
+}
+
+export const Hero: React.FC<HeroProps> = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [searchQuery, setSearchQuery] = useState('');
+  const navigate = useNavigate();
 
   const slides = [
     {
-      title: 'AL-HIDAYAH COLLEGE OF ADVANCED STUDIES',
-      subtitle: 'Pioneering Research. Transforming the Future.',
-      ribbon: 'The Citadel of Learning...',
-      motto: '“Enlightening Minds, Building Nations”',
-      stats: [
-        { icon: Users, label: 'Approved Combinations', value: '73 Courses' },
-        { icon: Award, label: 'Most Subscribed Centre', value: 'No 1 in Abaji' },
-        { icon: Building, label: 'Academic Study Centre', value: 'JSS Agyana Rd' },
-        { icon: GraduationCap, label: 'Direct Entry Pathway', value: '200 Level' }
-      ],
-      image: '/hero-graduate.jpg',
-      imageAlt: 'AHCAS University Graduate Student'
+      title: 'AHCAS Student Orientation & Induction Ceremony',
+      subtitle: 'Official academic orientation and code of conduct induction for newly enrolled IJMB Direct Entry candidates.',
+      image: '/ahcas-director-orientation-address.jpg',
+      fallback: '/ahcas-orientation-speech.jpg',
+      alt: 'AHCAS Student Orientation and Induction Ceremony'
     },
     {
-      title: 'IJMB A-LEVEL & DIRECT ENTRY PROGRAMME',
-      subtitle: 'Fast-Track University Admission without JAMB UTME.',
-      ribbon: 'Academic Excellence & Moral Discipline...',
-      motto: '“Developing the Best Minds for the Future”',
-      stats: [
-        { icon: ShieldCheck, label: 'CAC Registration', value: `RC ${INSTITUTION_INFO.rcNumber}` },
-        { icon: Award, label: 'Tuition Flexibility', value: '2 Installments' },
-        { icon: BookOpen, label: 'OER Digital Library', value: '8 Databases' },
-        { icon: Building, label: 'Main Secretariat', value: 'MBS Close, Abaji' }
-      ],
-      image: '/campus-gate.jpg',
-      imageAlt: 'AHCAS Campus Gate Architectural Entrance'
+      title: 'Enrolled 2026/2027 Student Cohort',
+      subtitle: 'Disciplined and ambitious minds embarking on the 12-month accelerated pathway to 200 Level university admission.',
+      image: '/ahcas-orientation-students-cohort.jpg',
+      fallback: '/ahcas-student-cohort.jpg',
+      alt: 'Al-Hidayah College Student Cohort in Lecture Hall'
+    },
+    {
+      title: 'Study Centre Leadership & Administration',
+      subtitle: 'Dedicated academic guidance and accredited study centre governance at JSS Agyana Road, Abaji.',
+      image: '/ahcas-coordinator-podium.jpg',
+      fallback: '/ahcas-orientation-podium-full.jpg',
+      alt: 'AHCAS Centre Coordinator at the Official Podium'
+    },
+    {
+      title: 'Interactive IJMB Lecture Session',
+      subtitle: 'Structured A-Level learning and dedicated tutorial guidance across Sciences, Arts, and Management disciplines.',
+      image: '/ahcas-classroom-lecture.jpg',
+      fallback: '/campus-gate.jpg',
+      alt: 'Interactive IJMB Lecture Session at Al-Hidayah College'
+    },
+    {
+      title: 'Academic Induction & Code of Conduct',
+      subtitle: 'Fostering academic excellence, moral discipline, and direct university placement readiness.',
+      image: '/ahcas-orientation-speech.jpg',
+      fallback: '/ahcas-director-orientation-address.jpg',
+      alt: 'Orientation Speech at Al-Hidayah College'
+    },
+    {
+      title: 'Focused Academic Classroom Environment',
+      subtitle: 'Subject-matter mastery coordinated directly with the Ahmadu Bello University (ABU) Zaria IJMB syllabus.',
+      image: '/ahcas-students-learning.jpg',
+      fallback: '/ahcas-class-instruction.jpg',
+      alt: 'Focused Academic Classroom Environment'
     }
   ];
 
-  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % slides.length);
-  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
+  const topNews = [
+    {
+      id: 'admission-open',
+      title: 'IJMB 2026/2027 Admissions Open',
+      date: 'Academic Session 2026/2027',
+      image: '/ahcas-director-orientation-address.jpg',
+      fallback: '/hero-graduate.jpg',
+      link: '/apply',
+      badge: 'Apply Now'
+    },
+    {
+      id: 'orientation-held',
+      title: 'Orientation for Newly Enrolled Students',
+      date: 'Induction Milestone',
+      image: '/ahcas-orientation-students-cohort.jpg',
+      fallback: '/campus-gate.jpg',
+      link: '/news',
+      badge: 'View Brief'
+    }
+  ];
 
   useEffect(() => {
     const timer = setInterval(() => {
-      nextSlide();
-    }, 8000);
+      setCurrentSlide((prev) => (prev + 1) % slides.length);
+    }, 5500);
     return () => clearInterval(timer);
-  }, []);
+  }, [slides.length]);
 
-  const slide = slides[currentSlide];
+  const handleSearchSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (searchQuery.trim()) {
+      navigate(`/programmes/ijmb?search=${encodeURIComponent(searchQuery.trim())}`);
+    }
+  };
 
   return (
-    <div className="relative overflow-hidden bg-[#2D0A12] border-b-4 border-[#C98B18] select-none text-white shadow-2xl">
-      
-      {/* Background African / Islamic Geometric Motif Watermark */}
-      <div
-        className="absolute inset-0 opacity-15 pointer-events-none mix-blend-overlay"
-        style={{
-          backgroundImage: `radial-gradient(circle at 25px 25px, rgba(255, 215, 0, 0.4) 2%, transparent 0%), radial-gradient(circle at 75px 75px, rgba(255, 215, 0, 0.4) 2%, transparent 0%)`,
-          backgroundSize: '100px 100px'
-        }}
-      />
-
-      {/* Subtle Radial Gradient Overlay */}
-      <div className="absolute inset-0 bg-gradient-to-r from-[#1E060C] via-[#3B0D18] to-[#120306] opacity-95" />
-
-      {/* Main Container */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12 relative z-10 min-h-[500px] flex flex-col justify-between">
+    <section
+      className="pt-0 select-none"
+      style={{ background: 'linear-gradient(180deg, #196855 0%, #2a7c67 35%, #F4F6F5 100%)' }}
+    >
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-3 pb-8">
         
-        {/* Carousel Circular Left Navigation Buttons (Exact Match to Image 1) */}
-        <div className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 flex flex-col gap-3 z-30">
-          <button
-            onClick={prevSlide}
-            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#E51E2B] hover:bg-[#c9121e] active:scale-95 text-white flex items-center justify-center shadow-2xl border-2 border-white/20 transition-all cursor-pointer"
-            aria-label="Previous Slide"
-          >
-            <ChevronLeft size={24} className="stroke-[3]" />
-          </button>
-          <button
-            onClick={nextSlide}
-            className="w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-[#E51E2B] hover:bg-[#c9121e] active:scale-95 text-white flex items-center justify-center shadow-2xl border-2 border-white/20 transition-all cursor-pointer"
-            aria-label="Next Slide"
-          >
-            <ChevronRight size={24} className="stroke-[3]" />
-          </button>
+        {/* Top Ticker & Search Row */}
+        <div className="flex flex-col md:flex-row items-center justify-between gap-3 mb-4">
+          {/* Announcement Bar */}
+          <div className="w-full md:w-3/4 overflow-hidden text-xs text-white/95 font-medium flex items-center gap-2.5 bg-black/20 backdrop-blur-md px-3.5 py-1.5 rounded-lg border border-white/15 shadow-sm">
+            <span className="inline-flex items-center gap-1.5 bg-[#e69912] text-white px-2.5 py-0.5 rounded text-[10px] font-extrabold uppercase tracking-wider shrink-0 shadow-xs">
+              <Megaphone size={12} className="text-white animate-pulse" />
+              Notice
+            </span>
+            <div className="truncate text-white/90">
+              Welcome to Al-Hidayah College of Advanced Studies - IJMB A-Level 200 Level Direct Entry & Citi Poly ND/HND Admissions Open!
+            </div>
+          </div>
+
+          {/* Search Input Box */}
+          <form onSubmit={handleSearchSubmit} className="w-full md:w-72 relative">
+            <input
+              type="text"
+              placeholder="Search programmes..."
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full bg-white/10 hover:bg-white/20 focus:bg-white text-white focus:text-gray-900 placeholder:text-white/70 focus:placeholder:text-gray-400 text-xs px-3.5 py-2 rounded border border-white/60 focus:border-[#e69912] focus:outline-none transition-all pr-9 shadow-inner"
+            />
+            <button
+              type="submit"
+              aria-label="Submit Search"
+              className="absolute right-1 top-1/2 -translate-y-1/2 p-1.5 text-white hover:text-[#e69912] transition-colors"
+            >
+              <Search size={14} />
+            </button>
+          </form>
         </div>
 
-        {/* Top/Middle Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pl-12 sm:pl-16">
+        {/* Main Grid: 10-Col Slider + 2-Col Right News */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-5 items-start">
           
-          {/* Left Text Column */}
-          <div className="lg:col-span-8 space-y-4">
-            
-            {/* Crest Badge */}
-            <div className="flex items-center gap-3">
-              <div className="p-1.5 bg-gradient-to-b from-[#E5A823] to-[#B47B14] rounded-xl shadow-lg border border-amber-200/40">
-                <img
-                  src="/official-logo.jpg"
-                  alt="AHCAS Official Crest"
-                  className="h-14 sm:h-16 w-auto object-contain bg-white rounded-lg p-0.5"
-                />
-              </div>
-              <div>
-                <span className="text-[10px] sm:text-xs uppercase tracking-widest font-black text-amber-300 block">
-                  Official Institution Portal • RC: {INSTITUTION_INFO.rcNumber}
-                </span>
-                <span className="text-xs text-slate-300 font-medium">
-                  Approved QA Manual: {INSTITUTION_INFO.documentCode}
-                </span>
-              </div>
-            </div>
+          {/* Main Slider (10 cols on desktop) */}
+          <div className="lg:col-span-9 xl:col-span-10 relative">
+            <div className="relative rounded-md overflow-hidden bg-black shadow-2xl border-[5px] border-white aspect-[16/9] sm:aspect-[21/10] max-h-[460px] group">
+              {slides.map((s, idx) => (
+                <div
+                  key={idx}
+                  className={`absolute inset-0 transition-opacity duration-700 ease-in-out ${
+                    idx === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0 pointer-events-none'
+                  }`}
+                >
+                  <img
+                    src={s.image}
+                    alt={s.alt}
+                    onError={(e) => {
+                      (e.currentTarget as HTMLImageElement).src = s.fallback;
+                    }}
+                    className="w-full h-full object-cover object-center"
+                  />
+                  {/* Overlay Gradient & Caption */}
+                  <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/40 to-transparent p-4 sm:p-6 text-white flex flex-col justify-end">
+                    <span className="text-[11px] font-bold uppercase tracking-widest text-[#e69912] mb-1">
+                      Al-Hidayah College Campus
+                    </span>
+                    <h2 className="text-base sm:text-xl md:text-2xl font-bold font-serif leading-tight">
+                      {s.title}
+                    </h2>
+                    <p className="text-xs sm:text-sm text-gray-200 mt-1 max-w-2xl line-clamp-2">
+                      {s.subtitle}
+                    </p>
+                  </div>
+                </div>
+              ))}
 
-            {/* Monumental Headline */}
-            <h1 className="text-2xl sm:text-4xl lg:text-5xl font-black font-sans tracking-tight text-white leading-tight uppercase drop-shadow-md">
-              {slide.title}
-            </h1>
-
-            {/* Subtitle */}
-            <p className="text-base sm:text-xl text-slate-200 font-medium tracking-wide">
-              {slide.subtitle}
-            </p>
-
-            {/* Gold Serif Ribbon: "The Citadel of Learning..." (Exact Match to Image 1) */}
-            <div className="relative inline-block my-2">
-              <div className="bg-gradient-to-r from-[#DDA734] via-[#F3C85C] to-[#C49121] text-[#2D0A12] px-6 sm:px-10 py-2 sm:py-2.5 rounded-lg shadow-xl border-t border-b-2 border-amber-100 flex items-center gap-3 font-serif italic text-lg sm:text-2xl font-black tracking-wide">
-                <span>{slide.ribbon}</span>
-              </div>
-            </div>
-
-            {/* Quick Action CTAs */}
-            <div className="flex flex-wrap gap-3 pt-2">
-              <Link
-                to="/apply"
-                className="flex items-center gap-2 px-6 py-3 bg-[#E5A823] hover:bg-[#c99015] text-slate-950 font-black rounded-xl text-xs sm:text-sm uppercase tracking-wider shadow-xl transition-all active:scale-95"
+              {/* Prev / Next Controls */}
+              <button
+                onClick={() => setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length)}
+                aria-label="Previous Slide"
+                className="absolute left-2.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/40 hover:bg-[#e69912] text-white flex items-center justify-center transition-all opacity-80 group-hover:opacity-100"
               >
-                <span>Apply for 2026/2027</span>
-                <ArrowRight size={16} />
-              </Link>
-              <Link
-                to="/student/dashboard"
-                className="flex items-center gap-2 px-5 py-3 bg-[#006B35] hover:bg-[#004D26] text-white font-bold rounded-xl text-xs sm:text-sm border border-emerald-400 shadow-xl transition-all active:scale-95"
+                <ChevronLeft size={20} />
+              </button>
+              <button
+                onClick={() => setCurrentSlide((prev) => (prev + 1) % slides.length)}
+                aria-label="Next Slide"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 z-20 w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-black/40 hover:bg-[#e69912] text-white flex items-center justify-center transition-all opacity-80 group-hover:opacity-100"
               >
-                <GraduationCap size={16} />
-                <span>Student Portal</span>
-              </Link>
-              <Link
-                to="/admissions/requirements"
-                className="flex items-center gap-2 px-4 py-3 bg-white/10 hover:bg-white/20 text-white font-bold rounded-xl text-xs sm:text-sm backdrop-blur-md border border-white/20 transition-all"
-              >
-                <span>View 73 Combinations</span>
-              </Link>
-            </div>
+                <ChevronRight size={20} />
+              </button>
 
-          </div>
-
-          {/* Right Column: Hero Graduate Student (Exact Match to Image 1) */}
-          <div className="lg:col-span-4 relative flex justify-center lg:justify-end">
-            <div className="relative w-72 sm:w-80 lg:w-96 aspect-square rounded-2xl overflow-hidden shadow-2xl border-4 border-[#C98B18]/70 bg-[#1A050A]">
-              <img
-                src={slide.image}
-                alt={slide.imageAlt}
-                className="w-full h-full object-cover object-top filter brightness-105 contrast-105 hover:scale-105 transition-transform duration-700"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent" />
-              
-              <div className="absolute bottom-3 left-3 right-3 p-3 bg-black/60 backdrop-blur-md rounded-xl border border-white/20 text-center">
-                <span className="text-xs font-bold text-amber-300 block">
-                  Al-Hidayah College of Advanced Studies
-                </span>
-                <span className="text-[10px] text-slate-300">
-                  Developing the Best Minds for the Future
-                </span>
+              {/* Slide Indicators */}
+              <div className="absolute bottom-3 right-4 z-20 flex items-center space-x-1.5">
+                {slides.map((_, i) => (
+                  <button
+                    key={i}
+                    onClick={() => setCurrentSlide(i)}
+                    aria-label={`Go to slide ${i + 1}`}
+                    className={`h-2 rounded-full transition-all ${
+                      i === currentSlide ? 'w-6 bg-[#e69912]' : 'w-2 bg-white/60 hover:bg-white'
+                    }`}
+                  />
+                ))}
               </div>
             </div>
           </div>
 
-        </div>
+          {/* Top News and Events Minor Column (2 cols / 3 cols on xl) */}
+          <div className="lg:col-span-3 xl:col-span-2 space-y-3">
+            <Link
+              to="/news"
+              className="w-full btn-fill-white py-2 text-xs font-bold uppercase tracking-wider text-center block shadow-sm"
+            >
+              Top News and Events
+            </Link>
 
-        {/* ========================================================================= */}
-        {/* BOTTOM STATISTICS RIBBON (EXACT MATCH TO IMAGE 1) */}
-        {/* ========================================================================= */}
-        <div className="mt-8 pt-4 pl-12 sm:pl-16">
-          <div className="bg-gradient-to-r from-[#170308]/90 via-[#27060E]/95 to-[#170308]/90 border-2 border-[#DDA734] rounded-2xl p-3 sm:p-4 shadow-2xl relative">
-            
-            {/* "OUR STATISTICS" Header Banner */}
-            <div className="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-gradient-to-r from-[#DDA734] via-[#F3C85C] to-[#C49121] text-[#2D0A12] px-6 py-0.5 rounded-full text-xs font-black uppercase tracking-wider shadow-md">
-              OUR STATISTICS
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-4 pt-2">
-              {slide.stats.map((st, i) => {
-                const Icon = st.icon;
-                return (
-                  <div key={i} className="flex items-center gap-3 justify-center text-left">
-                    <div className="w-10 h-10 rounded-full bg-gradient-to-b from-[#E5A823] to-[#A87410] text-slate-950 flex items-center justify-center shrink-0 shadow-md">
-                      <Icon size={18} className="stroke-[2.5]" />
-                    </div>
-                    <div>
-                      <span className="block text-[10px] sm:text-[11px] text-slate-300 font-semibold leading-tight">
-                        {st.label}
-                      </span>
-                      <span className="block text-sm sm:text-base font-black text-amber-300 font-sans tracking-tight">
-                        {st.value}
-                      </span>
+            <div className="space-y-3">
+              {topNews.map((news) => (
+                <div
+                  key={news.id}
+                  className="card-view overflow-hidden hover:shadow-lg transition-shadow bg-white text-gray-800"
+                >
+                  <div className="relative aspect-[16/10] bg-gray-100">
+                    <img
+                      src={news.image}
+                      alt={news.title}
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).src = news.fallback;
+                      }}
+                      className="w-full h-full object-cover"
+                    />
+                    <span className="absolute top-2 left-2 bg-[#196855] text-white text-[9px] font-bold px-2 py-0.5 rounded">
+                      Updates
+                    </span>
+                  </div>
+                  <div className="p-3">
+                    <h3 className="font-bold text-xs text-[#196855] leading-snug line-clamp-2">
+                      {news.title}
+                    </h3>
+                    <p className="text-[10px] text-gray-500 mt-1 flex items-center gap-1 font-medium">
+                      <Calendar size={11} className="text-[#196855]" />
+                      <span>{news.date}</span>
+                    </p>
+                    <div className="mt-2.5 flex justify-end">
+                      <Link
+                        to={news.link}
+                        className="bg-[#e69912] hover:bg-[#c98207] text-white text-[10px] font-bold px-2.5 py-1 rounded transition-colors"
+                      >
+                        {news.badge}
+                      </Link>
                     </div>
                   </div>
-                );
-              })}
+                </div>
+              ))}
             </div>
-
           </div>
+
         </div>
 
       </div>
-
-    </div>
+    </section>
   );
 };
+
+export default Hero;

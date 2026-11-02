@@ -36,7 +36,7 @@ export const AccessibilityBar: React.FC = () => {
           title="Switch Language (English / Hausa)"
           aria-label="Language Toggle"
         >
-          <Globe size={13} className="text-[#D4A62A]" />
+          <Globe size={13} className="text-[#e69912]" />
           <span className="text-amber-300 font-bold">{language === 'en' ? 'ENG' : 'HAU'}</span>
         </button>
 
@@ -45,19 +45,19 @@ export const AccessibilityBar: React.FC = () => {
           <Type size={12} className="text-gray-400 mr-1" />
           <button
             onClick={() => setTextScale('small')}
-            className={`px-1 rounded text-[10px] font-bold ${textScale === 'small' ? 'bg-[#006B35] text-white' : 'text-gray-300 hover:text-white'}`}
+            className={`px-1 rounded text-[10px] font-bold ${textScale === 'small' ? 'bg-[#196855] text-white' : 'text-gray-300 hover:text-white'}`}
           >
             S
           </button>
           <button
             onClick={() => setTextScale('normal')}
-            className={`px-1 rounded text-[11px] font-bold ${textScale === 'normal' ? 'bg-[#006B35] text-white' : 'text-gray-300 hover:text-white'}`}
+            className={`px-1 rounded text-[11px] font-bold ${textScale === 'normal' ? 'bg-[#196855] text-white' : 'text-gray-300 hover:text-white'}`}
           >
             M
           </button>
           <button
             onClick={() => setTextScale('large')}
-            className={`px-1 rounded text-[12px] font-bold ${textScale === 'large' ? 'bg-[#006B35] text-white' : 'text-gray-300 hover:text-white'}`}
+            className={`px-1 rounded text-[12px] font-bold ${textScale === 'large' ? 'bg-[#196855] text-white' : 'text-gray-300 hover:text-white'}`}
           >
             L
           </button>
@@ -87,7 +87,7 @@ export const AccessibilityBar: React.FC = () => {
         {/* Search */}
         <button
           onClick={() => setIsSearchOpen(true)}
-          className="flex items-center gap-1 bg-[#006B35] hover:bg-[#004D26] text-white px-2.5 py-0.5 rounded font-medium transition-colors"
+          className="flex items-center gap-1 bg-[#196855] hover:bg-[#196855] text-white px-2.5 py-0.5 rounded font-medium transition-colors"
           title="Search AHCAS Portal"
         >
           <Search size={13} />

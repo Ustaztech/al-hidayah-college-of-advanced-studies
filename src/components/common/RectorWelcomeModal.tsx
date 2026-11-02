@@ -49,8 +49,8 @@ export const RectorWelcomeModal: React.FC = () => {
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black via-black/40 to-transparent"></div>
             
-            <div className="relative z-10 p-5 space-y-1 bg-black/80 backdrop-blur-md border-t border-[#D4A62A]/40">
-              <span className="text-[10px] bg-[#D4A62A] text-black font-extrabold px-2 py-0.5 rounded uppercase tracking-wider inline-block">
+            <div className="relative z-10 p-5 space-y-1 bg-black/80 backdrop-blur-md border-t border-[#e69912]/40">
+              <span className="text-[10px] bg-[#e69912] text-black font-extrabold px-2 py-0.5 rounded uppercase tracking-wider inline-block">
                 Executive Chairman & Founder
               </span>
               <h4 className="font-extrabold text-sm sm:text-base text-white font-serif leading-tight mt-1">
@@ -66,12 +66,9 @@ export const RectorWelcomeModal: React.FC = () => {
           </div>
 
           {/* Right Column: Institutional Message */}
-          <div className="md:col-span-7 bg-gradient-to-br from-[#004D26] via-[#006B35] to-[#0F172A] p-6 sm:p-8 flex flex-col justify-between text-white relative">
+          <div className="md:col-span-7 bg-gradient-to-br from-[#196855] via-[#196855] to-[#0F172A] p-6 sm:p-8 flex flex-col justify-between text-white relative">
             
-            {/* Watermark Crest */}
-            <div className="absolute top-1/2 right-4 -translate-y-1/2 opacity-10 pointer-events-none">
-              <img src="/official-logo.jpg" alt="" className="w-72 h-72 object-contain" />
-            </div>
+
 
             <div className="space-y-4 relative z-10 pr-6">
               
@@ -114,19 +111,19 @@ export const RectorWelcomeModal: React.FC = () => {
               {/* Key Highlights */}
               <div className="grid grid-cols-2 gap-2 pt-1 text-[11px]">
                 <div className="flex items-center gap-1.5 p-2 bg-black/30 rounded-lg border border-white/10">
-                  <Check size={14} className="text-[#D4A62A]" />
+                  <Check size={14} className="text-[#e69912]" />
                   <span>Direct 200L Admission</span>
                 </div>
                 <div className="flex items-center gap-1.5 p-2 bg-black/30 rounded-lg border border-white/10">
-                  <Check size={14} className="text-[#D4A62A]" />
+                  <Check size={14} className="text-[#e69912]" />
                   <span>JAMB Moderated & ABU Aligned</span>
                 </div>
                 <div className="flex items-center gap-1.5 p-2 bg-black/30 rounded-lg border border-white/10">
-                  <Check size={14} className="text-[#D4A62A]" />
+                  <Check size={14} className="text-[#e69912]" />
                   <span>73 Approved Subject Combinations</span>
                 </div>
                 <div className="flex items-center gap-1.5 p-2 bg-black/30 rounded-lg border border-white/10">
-                  <Check size={14} className="text-[#D4A62A]" />
+                  <Check size={14} className="text-[#e69912]" />
                   <span>Study Centre at JSS Agyana Rd</span>
                 </div>
               </div>
@@ -138,7 +135,7 @@ export const RectorWelcomeModal: React.FC = () => {
               <Link
                 to="/apply/register"
                 onClick={handleClose}
-                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#D4A62A] hover:bg-[#b88d1d] text-black font-extrabold rounded-xl text-xs shadow-lg transition-transform hover:scale-105"
+                className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#e69912] hover:bg-[#b88d1d] text-black font-extrabold rounded-xl text-xs shadow-lg transition-transform hover:scale-105"
               >
                 <span>Apply for 2026/2027 Diet</span>
                 <ArrowRight size={14} />

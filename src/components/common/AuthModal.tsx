@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useAuth } from '../../context/AuthContext';
-import { LogIn, UserPlus, Shield, X, CheckCircle, AlertCircle, Eye, EyeOff, Lock, Mail, User, Phone, Sparkles } from 'lucide-react';
+import { LogIn, UserPlus, Shield, ShieldCheck, X, CheckCircle, AlertCircle, Eye, EyeOff, Lock, Mail, User, Phone, Sparkles, KeyRound } from 'lucide-react';
 
 interface AuthModalProps {
   isOpen: boolean;
@@ -65,7 +65,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTa
       <div className="bg-white dark:bg-slate-900 w-full max-w-md rounded-3xl shadow-2xl border border-slate-200 dark:border-slate-800 overflow-hidden flex flex-col max-h-[95vh]">
         
         {/* Modal Header */}
-        <div className="bg-gradient-to-r from-[#006B35] to-[#004D26] text-white p-5 flex justify-between items-center relative overflow-hidden shrink-0">
+        <div className="bg-gradient-to-r from-[#196855] to-[#196855] text-white p-5 flex justify-between items-center relative overflow-hidden shrink-0">
           <div className="flex items-center gap-3 relative z-10">
             <img src="/official-logo.jpg" alt="AHCAS Official Logo" className="h-11 w-auto bg-white p-0.5 rounded-xl border border-emerald-400 shadow-md" />
             <div>
@@ -84,7 +84,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTa
             onClick={() => { setTab('login'); setAuthError(''); }}
             className={`flex-1 py-3 text-center transition-colors ${
               tab === 'login'
-                ? 'text-[#006B35] dark:text-emerald-400 border-b-2 border-[#006B35] bg-emerald-50/50 dark:bg-emerald-950/20'
+                ? 'text-[#196855] dark:text-emerald-400 border-b-2 border-[#196855] bg-emerald-50/50 dark:bg-emerald-950/20'
                 : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
@@ -94,7 +94,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTa
             onClick={() => { setTab('register'); setAuthError(''); }}
             className={`flex-1 py-3 text-center transition-colors ${
               tab === 'register'
-                ? 'text-[#006B35] dark:text-emerald-400 border-b-2 border-[#006B35] bg-emerald-50/50 dark:bg-emerald-950/20'
+                ? 'text-[#196855] dark:text-emerald-400 border-b-2 border-[#196855] bg-emerald-50/50 dark:bg-emerald-950/20'
                 : 'text-slate-500 hover:text-slate-900 dark:hover:text-white'
             }`}
           >
@@ -168,11 +168,31 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTa
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2.5 bg-[#006B35] hover:bg-[#004D26] text-white font-extrabold rounded-xl text-xs shadow-md transition-all flex items-center justify-center gap-2"
+                className="w-full py-2.5 bg-[#196855] hover:opacity-90 text-white font-extrabold rounded-xl text-xs shadow-md transition-all flex items-center justify-center gap-2 cursor-pointer"
               >
                 <LogIn size={16} />
                 <span>{loading ? 'Authenticating...' : 'Sign In'}</span>
               </button>
+
+              {/* Administrator Sign-In */}
+              <div className="pt-2 border-t border-slate-200 dark:border-slate-800">
+                <button
+                  type="button"
+                  onClick={() => {
+                    setEmail('admin@alhidayahcollege.com.ng');
+                    setPassword('Admin@AHCAS2026!');
+                  }}
+                  className="w-full p-2 text-left rounded-lg bg-emerald-50 dark:bg-emerald-950/40 border border-emerald-200 dark:border-emerald-800 hover:border-[#196855] text-xs font-bold text-slate-800 dark:text-slate-200 flex items-center justify-between"
+                >
+                  <span className="flex items-center gap-1.5 text-emerald-800 dark:text-emerald-300">
+                    <KeyRound size={13} />
+                    Administrator Sign-In
+                  </span>
+                  <span className="text-[10px] text-slate-500 font-mono">
+                    admin@alhidayahcollege.com.ng
+                  </span>
+                </button>
+              </div>
             </form>
           ) : (
             <form onSubmit={handleRegisterSubmit} className="space-y-3.5">
@@ -252,7 +272,7 @@ export const AuthModal: React.FC<AuthModalProps> = ({ isOpen, onClose, defaultTa
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full py-2.5 bg-[#D4A62A] hover:bg-[#b88d1d] text-black font-extrabold rounded-xl text-xs shadow-md transition-all flex items-center justify-center gap-2"
+                className="w-full py-2.5 bg-[#e69912] hover:bg-[#b88d1d] text-black font-extrabold rounded-xl text-xs shadow-md transition-all flex items-center justify-center gap-2"
               >
                 <UserPlus size={16} />
                 <span>Register Account</span>

@@ -12,14 +12,14 @@ export const NewsDetail: React.FC = () => {
     <div className="py-12 bg-white dark:bg-[#1A222C] transition-colors">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 space-y-8">
         
-        <Link to="/news" className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-500 hover:text-[#006B35]">
+        <Link to="/news" className="inline-flex items-center gap-1.5 text-xs font-bold text-gray-500 hover:text-[#196855]">
           <ArrowLeft size={14} />
           Back to Newsroom
         </Link>
 
         <div className="space-y-4">
           <div className="flex items-center gap-3 text-xs text-gray-500">
-            <span className="px-3 py-1 bg-[#006B35] text-white font-bold rounded-full">
+            <span className="px-3 py-1 bg-[#196855] text-white font-bold rounded-full">
               {article.category}
             </span>
             <span>Published: {article.publishDate}</span>
@@ -31,7 +31,7 @@ export const NewsDetail: React.FC = () => {
           </h1>
         </div>
 
-        <div className="p-4 bg-emerald-50 dark:bg-emerald-950/40 border-l-4 border-[#006B35] rounded-r-xl text-sm italic text-gray-800 dark:text-gray-200">
+        <div className="p-4 bg-emerald-50 dark:bg-emerald-950/40 border-l-4 border-[#196855] rounded-r-xl text-sm italic text-gray-800 dark:text-gray-200">
           {article.summary}
         </div>
 
@@ -41,7 +41,7 @@ export const NewsDetail: React.FC = () => {
 
         <div className="pt-6 border-t border-gray-200 dark:border-gray-800 flex justify-between items-center text-xs">
           <span className="text-gray-500">Official Release • Al-Hidayah College of Advanced Studies, Abaji</span>
-          <button onClick={() => alert('Article link copied to clipboard!')} className="flex items-center gap-1 text-[#006B35] font-bold">
+          <button onClick={() => alert('Article link copied to clipboard!')} className="flex items-center gap-1 text-[#196855] font-bold">
             <Share2 size={14} />
             <span>Share Article</span>
           </button>

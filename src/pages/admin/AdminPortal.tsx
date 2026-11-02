@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import { PortalLayout } from '../../components/layout/PortalLayout';
 import { useAuth } from '../../context/AuthContext';
+import { useNotifications } from '../../context/NotificationContext';
 import { db, calculateIJMBGrade } from '../../services/db';
+import { logAuditEvent } from '../../services/audit';
 import { ScratchCard, ApplicationRecord, CBTQuestion, StudentRecord, PaymentReceipt } from '../../types';
 import { INSTITUTION_INFO, TUITION_SCHEDULE } from '../../data/ijmbData';
 import { RegistrationSlipModal } from '../../components/common/RegistrationSlipModal';
@@ -34,6 +36,7 @@ import {
 
 export const AdminPortal: React.FC = () => {
   const { currentUser, role } = useAuth();
+  const { addNotification } = useNotifications();
   const [activeTab, setActiveTab] = useState<'applications' | 'grading' | 'bursary' | 'students' | 'cards' | 'cbt' | 'audit'>('applications');
 
   // Database Data States
@@ -99,7 +102,47 @@ export const AdminPortal: React.FC = () => {
     setApplications(db.getApplications());
     setStudents(db.getStudents());
     setAuditLogs(db.getAuditLogs());
+
+    logAuditEvent(
+      currentUser?.name || 'Academic Registrar',
+      role,
+      'ADMISSION_APPROVED',
+      `Admission authorized for applicant ${refNumber}. Matriculation account provisioned.`
+    );
+
+    addNotification({
+      target_role: 'STUDENT',
+      title: 'Admission Approved',
+      message: `Applicant ${refNumber} has been officially admitted. Official student portal account provisioned.`,
+      category: 'Admissions',
+      priority: 'urgent',
+      action_url: '/student/dashboard'
+    });
+
     alert(`Admission authorized for applicant ${refNumber}! Student matriculation account provisioned.`);
+  };
+
+  const handleRejectAdmission = (refNumber: string) => {
+    if (!confirm(`Are you sure you want to decline admission for application ${refNumber}?`)) return;
+    db.updateApplicationStatus(refNumber, 'Rejected');
+    setApplications(db.getApplications());
+    setAuditLogs(db.getAuditLogs());
+
+    logAuditEvent(
+      currentUser?.name || 'Academic Registrar',
+      role,
+      'ADMISSION_DECLINED',
+      `Admission declined for applicant ${refNumber} due to incomplete credentials.`
+    );
+
+    addNotification({
+      target_role: 'APPLICANT',
+      title: 'Application Decision',
+      message: `Application ${refNumber} was reviewed and declined. Please check details in your portal.`,
+      category: 'Admissions',
+      priority: 'high',
+      action_url: '/admissions/status'
+    });
   };
 
   const handleCommitGrading = (e: React.FormEvent) => {
@@ -207,7 +250,7 @@ export const AdminPortal: React.FC = () => {
       <div className="max-w-7xl mx-auto space-y-8">
         
         {/* Admin Header Banner */}
-        <div className="p-6 bg-slate-950 text-white rounded-3xl border-b-4 border-[#006B35] shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
+        <div className="p-6 bg-slate-950 text-white rounded-3xl border-b-4 border-[#196855] shadow-xl flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
           <div className="flex items-center gap-4">
             <img
               src="/official-logo.jpg"
@@ -225,7 +268,7 @@ export const AdminPortal: React.FC = () => {
                 {currentUser?.name || 'Staff Executive'}
               </h2>
               <p className="text-xs text-slate-400 font-mono">
-                Official Post: {currentUser?.subRole || role} • Doc Ref: {INSTITUTION_INFO.documentCode} • RC: {INSTITUTION_INFO.rcNumber}
+                Role: {currentUser?.subRole || role} • Directorate of Academic Administration
               </p>
             </div>
           </div>
@@ -246,7 +289,7 @@ export const AdminPortal: React.FC = () => {
         <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
           <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
             <span className="text-[11px] font-bold text-slate-500 uppercase">Total Applicants</span>
-            <p className="text-2xl font-black text-[#006B35] dark:text-emerald-400 mt-1">{applications.length}</p>
+            <p className="text-2xl font-black text-[#196855] dark:text-emerald-400 mt-1">{applications.length}</p>
             <span className="text-[10px] text-slate-400">2026/2027 Session Intake</span>
           </div>
           <div className="bg-white dark:bg-slate-900 p-4 rounded-2xl border border-slate-200 dark:border-slate-800 shadow-sm">
@@ -285,7 +328,7 @@ export const AdminPortal: React.FC = () => {
                 onClick={() => setActiveTab(t.id as any)}
                 className={`px-4 py-2.5 rounded-2xl font-bold text-xs sm:text-sm flex items-center gap-2 transition-all cursor-pointer ${
                   active
-                    ? 'bg-[#006B35] text-white shadow-md'
+                    ? 'bg-[#196855] text-white shadow-md'
                     : 'bg-white dark:bg-slate-900 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 border border-slate-200 dark:border-slate-800'
                 }`}
               >
@@ -309,7 +352,7 @@ export const AdminPortal: React.FC = () => {
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b border-slate-200 dark:border-slate-800 pb-4">
               <div>
                 <h3 className="font-extrabold text-lg text-slate-900 dark:text-white font-serif flex items-center gap-2">
-                  <UserCheck className="text-[#006B35]" size={20} />
+                  <UserCheck className="text-[#196855]" size={20} />
                   Candidate Application Review (2026/2027 Session)
                 </h3>
                 <p className="text-xs text-slate-500">
@@ -359,7 +402,7 @@ export const AdminPortal: React.FC = () => {
                   {filteredApps.map(app => (
                     <tr key={app.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-colors">
                       <td className="p-3">
-                        <span className="font-mono font-bold text-[#006B35] dark:text-emerald-400 block">
+                        <span className="font-mono font-bold text-[#196855] dark:text-emerald-400 block">
                           {app.ref_number}
                         </span>
                         <span className="text-[10px] text-slate-400">{app.submitted_at}</span>
@@ -391,7 +434,7 @@ export const AdminPortal: React.FC = () => {
                       <td className="p-3">
                         <span className={`px-2.5 py-1 rounded-full font-extrabold text-[10px] inline-flex items-center gap-1 ${
                           app.status === 'Admitted'
-                            ? 'bg-emerald-100 text-[#006B35] dark:bg-emerald-950 dark:text-emerald-300'
+                            ? 'bg-emerald-100 text-[#196855] dark:bg-emerald-950 dark:text-emerald-300'
                             : 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300'
                         }`}>
                           {app.status === 'Admitted' && <CheckCircle2 size={12} />}
@@ -420,12 +463,23 @@ export const AdminPortal: React.FC = () => {
 
                           {/* Admission Action */}
                           {app.status !== 'Admitted' ? (
-                            <button
-                              onClick={() => handleApproveAdmission(app.ref_number)}
-                              className="px-3 py-1.5 bg-[#006B35] hover:bg-[#004D26] text-white font-extrabold rounded-lg text-[11px] shadow-sm cursor-pointer transition-colors"
-                            >
-                              Authorize Admission
-                            </button>
+                            <div className="flex items-center gap-1">
+                              <button
+                                onClick={() => handleApproveAdmission(app.ref_number)}
+                                className="px-2.5 py-1.5 bg-[#196855] hover:bg-[#196855] text-white font-extrabold rounded-lg text-[11px] shadow-sm cursor-pointer transition-colors"
+                              >
+                                Authorize Admission
+                              </button>
+                              {app.status !== 'Rejected' && (
+                                <button
+                                  onClick={() => handleRejectAdmission(app.ref_number)}
+                                  className="px-2 py-1.5 bg-red-50 hover:bg-red-100 text-red-700 dark:bg-red-950/60 dark:text-red-300 font-bold rounded-lg text-[10px] cursor-pointer transition-colors"
+                                  title="Decline Application"
+                                >
+                                  Decline
+                                </button>
+                              )}
+                            </div>
                           ) : (
                             <span className="text-[11px] font-bold text-emerald-600 dark:text-emerald-400 px-2 py-1 bg-emerald-50 dark:bg-emerald-950/50 rounded-lg">
                               Admitted & Matriculated
@@ -460,13 +514,13 @@ export const AdminPortal: React.FC = () => {
               <div className="border-b border-slate-200 dark:border-slate-800 pb-4 flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
                 <div>
                   <div className="flex items-center gap-2">
-                    <Award className="text-[#D4A62A]" size={20} />
+                    <Award className="text-[#e69912]" size={20} />
                     <h3 className="font-extrabold text-lg text-slate-900 dark:text-white font-serif">
                       IJMB Continuous Assessment & Examination Grading Terminal
                     </h3>
                   </div>
                   <p className="text-xs text-slate-500 mt-1">
-                    Operated by: <span className="font-bold text-[#006B35]">Mall. Usman Saidu (Registrar & Examination Officer)</span>.
+                    Operated by: <span className="font-bold text-[#196855]">Mall. Usman Saidu (Registrar & Examination Officer)</span>.
                     Grading standard: CA (20%) + Exam (80%) = 100%. One (+1) Bonus Point awarded if student passes all 3 A-level subjects.
                   </p>
                 </div>
@@ -513,7 +567,7 @@ export const AdminPortal: React.FC = () => {
                     </div>
 
                     <div className="flex gap-2">
-                      <span className="px-3 py-1 bg-[#006B35] text-white text-xs font-bold rounded-xl">
+                      <span className="px-3 py-1 bg-[#196855] text-white text-xs font-bold rounded-xl">
                         Study Centre: {INSTITUTION_INFO.studyCentre.split(',')[0]}
                       </span>
                     </div>
@@ -534,11 +588,11 @@ export const AdminPortal: React.FC = () => {
                         return (
                           <div key={idx} className="p-4 rounded-2xl bg-white dark:bg-slate-900 border-2 border-slate-200 dark:border-slate-800 space-y-3 shadow-xs">
                             <div className="flex justify-between items-center border-b pb-2">
-                              <span className="text-xs font-black text-[#006B35] dark:text-emerald-400">
+                              <span className="text-xs font-black text-[#196855] dark:text-emerald-400">
                                 Subject {idx + 1}: {subName}
                               </span>
                               <span className={`px-2 py-0.5 rounded text-xs font-black ${
-                                gradeCalc.grade === 'A' ? 'bg-emerald-100 text-[#006B35]' :
+                                gradeCalc.grade === 'A' ? 'bg-emerald-100 text-[#196855]' :
                                 gradeCalc.grade === 'B' ? 'bg-blue-100 text-blue-700' :
                                 gradeCalc.grade === 'C' ? 'bg-amber-100 text-amber-700' :
                                 gradeCalc.grade === 'F' ? 'bg-red-100 text-red-700' : 'bg-slate-100 text-slate-700'
@@ -614,14 +668,14 @@ export const AdminPortal: React.FC = () => {
                         <div className="flex items-center gap-4">
                           <div className="text-right">
                             <span className="text-[10px] uppercase font-bold text-slate-500">Total Points</span>
-                            <div className="text-2xl font-black font-mono text-[#006B35] dark:text-emerald-400">
+                            <div className="text-2xl font-black font-mono text-[#196855] dark:text-emerald-400">
                               {totalCumulative} / 16 Points
                             </div>
                           </div>
 
                           <button
                             type="submit"
-                            className="px-6 py-2.5 bg-[#006B35] hover:bg-[#004D26] text-white font-extrabold rounded-xl text-xs shadow-md cursor-pointer transition-colors"
+                            className="px-6 py-2.5 bg-[#196855] hover:bg-[#196855] text-white font-extrabold rounded-xl text-xs shadow-md cursor-pointer transition-colors"
                           >
                             Certify & Publish Result
                           </button>
@@ -654,7 +708,7 @@ export const AdminPortal: React.FC = () => {
           <div className="space-y-6">
             
             {/* Tuition Breakdown Card */}
-            <div className="bg-gradient-to-r from-slate-900 via-slate-950 to-[#004D26] text-white p-6 rounded-3xl border-2 border-emerald-800 shadow-xl space-y-4">
+            <div className="bg-gradient-to-r from-slate-900 via-slate-950 to-[#196855] text-white p-6 rounded-3xl border-2 border-emerald-800 shadow-xl space-y-4">
               <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
                 <div>
                   <span className="text-xs font-bold uppercase tracking-wider text-amber-300">
@@ -699,7 +753,7 @@ export const AdminPortal: React.FC = () => {
             {/* Payment Recording Form */}
             <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
               <h4 className="font-black text-base text-slate-900 dark:text-white font-serif flex items-center gap-2">
-                <Receipt size={18} className="text-[#006B35]" />
+                <Receipt size={18} className="text-[#196855]" />
                 Record & Reconcile Official Student Tuition Receipt
               </h4>
 
@@ -760,7 +814,7 @@ export const AdminPortal: React.FC = () => {
 
                 <button
                   type="submit"
-                  className="py-2.5 bg-[#006B35] hover:bg-[#004D26] text-white font-extrabold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md cursor-pointer transition-colors"
+                  className="py-2.5 bg-[#196855] hover:bg-[#196855] text-white font-extrabold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md cursor-pointer transition-colors"
                 >
                   <Plus size={16} />
                   <span>Issue Official Receipt</span>
@@ -790,7 +844,7 @@ export const AdminPortal: React.FC = () => {
                   <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
                     {receipts.map(rec => (
                       <tr key={rec.reference} className="hover:bg-slate-50 dark:hover:bg-slate-800/50">
-                        <td className="p-3 font-mono font-bold text-[#006B35] dark:text-emerald-400">{rec.receiptNumber}</td>
+                        <td className="p-3 font-mono font-bold text-[#196855] dark:text-emerald-400">{rec.receiptNumber}</td>
                         <td className="p-3 font-bold text-slate-900 dark:text-white">{rec.studentName}</td>
                         <td className="p-3 font-mono text-slate-600 dark:text-slate-400">{rec.matricNumber}</td>
                         <td className="p-3 font-medium">{rec.feeType}</td>
@@ -828,7 +882,7 @@ export const AdminPortal: React.FC = () => {
             <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4 border-b pb-4">
               <div>
                 <h3 className="font-extrabold text-lg text-slate-900 dark:text-white font-serif flex items-center gap-2">
-                  <Users className="text-[#006B35]" size={20} />
+                  <Users className="text-[#196855]" size={20} />
                   Enrolled Students Registry & Digital Identity Records
                 </h3>
                 <p className="text-xs text-slate-500">
@@ -863,7 +917,7 @@ export const AdminPortal: React.FC = () => {
                 <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
                   {filteredStudents.map(std => (
                     <tr key={std.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50">
-                      <td className="p-3 font-mono font-bold text-[#006B35] dark:text-emerald-400">
+                      <td className="p-3 font-mono font-bold text-[#196855] dark:text-emerald-400">
                         {std.matric_number}
                       </td>
                       <td className="p-3">
@@ -879,7 +933,7 @@ export const AdminPortal: React.FC = () => {
                       <td className="p-3">
                         <span className={`px-2.5 py-1 rounded-full font-bold text-[10px] ${
                           std.tuition_status === 'Paid'
-                            ? 'bg-emerald-100 text-[#006B35] dark:bg-emerald-950 dark:text-emerald-300'
+                            ? 'bg-emerald-100 text-[#196855] dark:bg-emerald-950 dark:text-emerald-300'
                             : std.tuition_status === 'Partial'
                             ? 'bg-blue-100 text-blue-800 dark:bg-blue-950 dark:text-blue-300'
                             : 'bg-amber-100 text-amber-800 dark:bg-amber-950 dark:text-amber-300'
@@ -888,7 +942,7 @@ export const AdminPortal: React.FC = () => {
                         </span>
                       </td>
                       <td className="p-3">
-                        <span className="font-mono font-extrabold text-[#006B35] dark:text-emerald-400 text-sm">
+                        <span className="font-mono font-extrabold text-[#196855] dark:text-emerald-400 text-sm">
                           {std.cumulative_grade_points || 0} Points
                         </span>
                         {std.has_bonus_point && (
@@ -898,7 +952,7 @@ export const AdminPortal: React.FC = () => {
                       <td className="p-3 text-right">
                         <button
                           onClick={() => setSelectedStudentForID(std)}
-                          className="px-3 py-1.5 bg-[#D4A62A] hover:bg-[#b88d1d] text-black font-extrabold rounded-lg text-xs flex items-center gap-1.5 ml-auto cursor-pointer shadow-xs transition-colors"
+                          className="px-3 py-1.5 bg-[#e69912] hover:bg-[#b88d1d] text-black font-extrabold rounded-lg text-xs flex items-center gap-1.5 ml-auto cursor-pointer shadow-xs transition-colors"
                         >
                           <Eye size={13} />
                           <span>View Official ID</span>
@@ -929,7 +983,7 @@ export const AdminPortal: React.FC = () => {
             
             <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
               <h3 className="font-extrabold text-base text-slate-900 dark:text-white font-serif border-b pb-3 flex items-center gap-2">
-                <KeyRound size={18} className="text-[#D4A62A]" />
+                <KeyRound size={18} className="text-[#e69912]" />
                 Generate Secure Scratch Card Batch
               </h3>
 
@@ -978,7 +1032,7 @@ export const AdminPortal: React.FC = () => {
                     className="w-full px-3 py-2 bg-slate-50 dark:bg-slate-800 border rounded-xl text-xs font-mono font-bold"
                   />
                 </div>
-                <button type="submit" className="py-2.5 bg-[#006B35] hover:bg-[#004D26] text-white font-extrabold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md cursor-pointer transition-colors">
+                <button type="submit" className="py-2.5 bg-[#196855] hover:bg-[#196855] text-white font-extrabold rounded-xl text-xs flex items-center justify-center gap-1.5 shadow-md cursor-pointer transition-colors">
                   <Plus size={16} />
                   <span>Generate Batch</span>
                 </button>
@@ -1005,12 +1059,12 @@ export const AdminPortal: React.FC = () => {
                   <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
                     {cards.map(c => (
                       <tr key={c.serial_number} className="hover:bg-slate-50 dark:hover:bg-slate-800/50">
-                        <td className="p-3 font-mono font-bold text-[#006B35] dark:text-emerald-400">{c.serial_number}</td>
+                        <td className="p-3 font-mono font-bold text-[#196855] dark:text-emerald-400">{c.serial_number}</td>
                         <td className="p-3 font-bold">{c.card_type}</td>
                         <td className="p-3 font-mono">₦{c.price_ngn.toLocaleString()}</td>
                         <td className="p-3">
                           <span className={`px-2 py-0.5 rounded font-bold ${
-                            c.status === 'Active' ? 'bg-emerald-100 text-[#006B35]' : 'bg-slate-200 text-slate-700'
+                            c.status === 'Active' ? 'bg-emerald-100 text-[#196855]' : 'bg-slate-200 text-slate-700'
                           }`}>
                             {c.status}
                           </span>
@@ -1040,7 +1094,7 @@ export const AdminPortal: React.FC = () => {
           <div className="space-y-6">
             <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
               <h3 className="font-extrabold text-base text-slate-900 dark:text-white font-serif border-b pb-3 flex items-center gap-2">
-                <Monitor size={18} className="text-[#006B35]" />
+                <Monitor size={18} className="text-[#196855]" />
                 Add New Question to IJMB CBT Bank
               </h3>
 
@@ -1096,7 +1150,7 @@ export const AdminPortal: React.FC = () => {
                   <input type="text" placeholder="Option D" value={optionD} onChange={e => setOptionD(e.target.value)} className="px-3 py-2 bg-slate-50 dark:bg-slate-800 border rounded-xl text-xs" />
                 </div>
 
-                <button type="submit" className="px-6 py-2.5 bg-[#006B35] text-white font-extrabold rounded-xl text-xs shadow-md cursor-pointer">
+                <button type="submit" className="px-6 py-2.5 bg-[#196855] text-white font-extrabold rounded-xl text-xs shadow-md cursor-pointer">
                   Save Question to CBT Bank
                 </button>
               </form>
@@ -1110,7 +1164,7 @@ export const AdminPortal: React.FC = () => {
         {activeTab === 'audit' && (
           <div className="bg-white dark:bg-slate-900 p-6 rounded-3xl border border-slate-200 dark:border-slate-800 shadow-xl space-y-4">
             <h3 className="font-extrabold text-base text-slate-900 dark:text-white font-serif border-b pb-3 flex items-center gap-2">
-              <ShieldCheck size={18} className="text-[#006B35]" />
+              <ShieldCheck size={18} className="text-[#196855]" />
               Immutable Administrative Audit Trails ({auditLogs.length})
             </h3>
 
@@ -1130,7 +1184,7 @@ export const AdminPortal: React.FC = () => {
                     <tr key={log.id} className="hover:bg-slate-50 dark:hover:bg-slate-800/50">
                       <td className="p-3 font-mono text-slate-500">{log.timestamp}</td>
                       <td className="p-3 font-bold text-slate-900 dark:text-white">{log.actor}</td>
-                      <td className="p-3 font-bold text-[#006B35] dark:text-emerald-400 font-mono">{log.action}</td>
+                      <td className="p-3 font-bold text-[#196855] dark:text-emerald-400 font-mono">{log.action}</td>
                       <td className="p-3 text-slate-700 dark:text-slate-300">{log.details}</td>
                       <td className="p-3 font-mono text-slate-400">{log.ip_address}</td>
                     </tr>

@@ -48,25 +48,12 @@ export const ScratchCardModal: React.FC<ScratchCardModalProps> = ({
     }, 600);
   };
 
-  const handleFillDemo = () => {
-    const demoSerials: Record<ScratchCardType, { serial: string; pin: string }> = {
-      APPLICATION: { serial: 'AHCAS-APP-98214', pin: '984120482910' },
-      ADMISSION_STATUS: { serial: 'AHCAS-ADM-44102', pin: '883920147721' },
-      RESULT_CHECKING: { serial: 'AHCAS-RES-77189', pin: '119283746509' },
-      TRANSCRIPT: { serial: 'AHCAS-TRN-11045', pin: '774620194832' }
-    };
-    const demo = demoSerials[expectedType];
-    setSerialNumber(demo.serial);
-    setPin(demo.pin);
-    setErrorMsg('');
-  };
-
   return (
     <div className="fixed inset-0 z-50 bg-black/70 backdrop-blur-xs flex items-center justify-center p-4 animate-fade-in">
       <div className="bg-white dark:bg-[#1A222C] w-full max-w-md rounded-xl shadow-2xl border border-gray-200 dark:border-gray-800 overflow-hidden">
         
         {/* Modal Header */}
-        <div className="bg-[#006B35] text-white p-4 flex justify-between items-center">
+        <div className="bg-[#196855] text-white p-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
             <CreditCard className="text-amber-400" size={20} />
             <h3 className="font-bold text-base font-serif">{title}</h3>
@@ -111,7 +98,7 @@ export const ScratchCardModal: React.FC<ScratchCardModalProps> = ({
               placeholder="e.g. AHCAS-ADM-44102"
               value={serialNumber}
               onChange={e => setSerialNumber(e.target.value)}
-              className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-sm uppercase tracking-wider font-mono focus:ring-2 focus:ring-[#006B35]"
+              className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-sm uppercase tracking-wider font-mono focus:ring-2 focus:ring-[#196855]"
             />
           </div>
 
@@ -126,18 +113,11 @@ export const ScratchCardModal: React.FC<ScratchCardModalProps> = ({
               placeholder="•••• •••• ••••"
               value={pin}
               onChange={e => setPin(e.target.value)}
-              className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-sm font-mono tracking-widest focus:ring-2 focus:ring-[#006B35]"
+              className="w-full px-3 py-2 bg-gray-50 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-sm font-mono tracking-widest focus:ring-2 focus:ring-[#196855]"
             />
           </div>
 
-          <div className="flex items-center justify-between pt-2">
-            <button
-              type="button"
-              onClick={handleFillDemo}
-              className="text-xs text-[#006B35] dark:text-emerald-400 hover:underline font-medium"
-            >
-              [Auto-fill Demo Card]
-            </button>
+          <div className="flex items-center justify-end pt-2">
             <span className="text-[11px] text-gray-500">
               Failed Attempts: {failedAttempts}/5
             </span>
@@ -146,7 +126,7 @@ export const ScratchCardModal: React.FC<ScratchCardModalProps> = ({
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2.5 bg-[#006B35] hover:bg-[#004D26] text-white font-bold rounded-lg text-sm shadow-md transition-all flex items-center justify-center gap-2"
+            className="w-full py-2.5 bg-[#196855] hover:bg-[#196855] text-white font-bold rounded-lg text-sm shadow-md transition-all flex items-center justify-center gap-2"
           >
             {loading ? (
               <span>Validating PIN Hash...</span>

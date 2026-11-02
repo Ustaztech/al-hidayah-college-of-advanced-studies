@@ -22,18 +22,18 @@ export const RegistrationSlipModal: React.FC<RegistrationSlipModalProps> = ({
 
   return (
     <div className="fixed inset-0 z-50 bg-black/85 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 overflow-y-auto animate-fade-in">
-      <div className="bg-white text-slate-900 w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden my-6 border-4 border-[#006B35] flex flex-col max-h-[95vh]">
+      <div className="bg-white text-slate-900 w-full max-w-4xl rounded-2xl shadow-2xl overflow-hidden my-6 border-4 border-[#196855] flex flex-col max-h-[95vh]">
         
         {/* Modal Controls (No Print) */}
-        <div className="bg-[#0B132B] text-white p-3.5 px-6 flex justify-between items-center no-print shrink-0 border-b-2 border-[#D4A62A]">
+        <div className="bg-[#0B132B] text-white p-3.5 px-6 flex justify-between items-center no-print shrink-0 border-b-2 border-[#e69912]">
           <div className="flex items-center gap-2">
-            <ShieldCheck className="text-[#D4A62A]" size={18} />
+            <ShieldCheck className="text-[#e69912]" size={18} />
             <span className="font-bold text-xs sm:text-sm">Official AHCAS Examination Registration Slip (PDF Form Standard)</span>
           </div>
           <div className="flex items-center gap-3">
             <button
               onClick={() => window.print()}
-              className="flex items-center gap-1.5 px-3.5 py-1.5 bg-[#D4A62A] hover:bg-[#b88d1d] text-black font-extrabold rounded-xl text-xs transition-colors shadow-md cursor-pointer"
+              className="flex items-center gap-1.5 px-3.5 py-1.5 bg-[#e69912] hover:bg-[#b88d1d] text-black font-extrabold rounded-xl text-xs transition-colors shadow-md cursor-pointer"
             >
               <Printer size={14} />
               <span>Print Registration Slip</span>
@@ -48,7 +48,7 @@ export const RegistrationSlipModal: React.FC<RegistrationSlipModalProps> = ({
         <div className="p-6 sm:p-8 space-y-4 printable-document bg-white font-sans overflow-y-auto text-[11px] leading-tight text-slate-800">
           
           {/* Header Section */}
-          <div className="border-2 border-[#006B35] p-3 rounded-xl flex flex-col sm:flex-row justify-between items-center gap-3 relative">
+          <div className="border-2 border-[#196855] p-3 rounded-xl flex flex-col sm:flex-row justify-between items-center gap-3 relative">
             
             <div className="flex items-center gap-3">
               <img
@@ -57,7 +57,7 @@ export const RegistrationSlipModal: React.FC<RegistrationSlipModalProps> = ({
                 className="h-16 w-auto object-contain"
               />
               <div>
-                <h1 className="text-xl sm:text-2xl font-black text-[#006B35] tracking-tight font-serif">
+                <h1 className="text-xl sm:text-2xl font-black text-[#196855] tracking-tight font-serif">
                   AL-HIDAYAH
                 </h1>
                 <p className="text-xs font-black uppercase tracking-wider text-slate-900">
@@ -76,7 +76,7 @@ export const RegistrationSlipModal: React.FC<RegistrationSlipModalProps> = ({
 
             <div className="flex sm:flex-col items-center sm:items-end justify-between w-full sm:w-auto gap-2">
               <div className="text-right">
-                <span className="text-[10px] font-black text-slate-700 block">RC: {INSTITUTION_INFO.rcNumber}</span>
+                <span className="text-[10px] font-bold text-slate-600 block">Abaji, FCT Abuja</span>
                 <span className="text-[9px] font-bold text-emerald-800 block">“Developing the best minds for the future”</span>
               </div>
               <div className="p-1 border border-slate-300 rounded bg-white shadow-xs">
@@ -88,11 +88,11 @@ export const RegistrationSlipModal: React.FC<RegistrationSlipModalProps> = ({
 
           {/* Banner Strip */}
           <div className="grid grid-cols-12 gap-2 text-center text-xs font-bold items-center">
-            <div className="col-span-12 sm:col-span-8 bg-[#006B35] text-white py-1.5 px-3 rounded-lg flex justify-between items-center">
+            <div className="col-span-12 sm:col-span-8 bg-[#196855] text-white py-1.5 px-3 rounded-lg flex justify-between items-center">
               <span>STUDY CENTRE: {INSTITUTION_INFO.studyCentre.toUpperCase()}</span>
               <span className="text-[10px] text-amber-300 font-mono">CENTRE NUMBER: AHCAS/ABJ/01</span>
             </div>
-            <div className="col-span-6 sm:col-span-2 bg-[#D4A62A] text-black py-1.5 px-2 rounded-lg font-black text-[10px] uppercase">
+            <div className="col-span-6 sm:col-span-2 bg-[#e69912] text-black py-1.5 px-2 rounded-lg font-black text-[10px] uppercase">
               REGISTRATION FORM
             </div>
             <div className="col-span-6 sm:col-span-2 bg-slate-100 border border-slate-300 text-slate-800 py-1.5 px-2 rounded-lg text-[10px]">
@@ -129,7 +129,7 @@ export const RegistrationSlipModal: React.FC<RegistrationSlipModalProps> = ({
           <div className="border border-slate-300 rounded-xl overflow-hidden">
             <div className="bg-slate-100 font-bold px-3 py-1 text-slate-800 text-[10px] uppercase tracking-wider border-b border-slate-300 flex justify-between items-center">
               <span>SECTION B: APPLICANT INFORMATION</span>
-              <span className="text-[9px] text-slate-500 font-normal">Our Ref: <strong className="font-mono text-[#006B35]">{application.ref_number}</strong></span>
+              <span className="text-[9px] text-slate-500 font-normal">Our Ref: <strong className="font-mono text-[#196855]">{application.ref_number}</strong></span>
             </div>
 
             <div className="p-3 grid grid-cols-1 sm:grid-cols-12 gap-3 items-start">
@@ -207,7 +207,7 @@ export const RegistrationSlipModal: React.FC<RegistrationSlipModalProps> = ({
 
             <div className="grid grid-cols-1 sm:grid-cols-2 divide-y sm:divide-y-0 sm:divide-x divide-slate-300 p-3 gap-3">
               <div>
-                <h4 className="font-bold text-xs text-[#006B35] mb-1">
+                <h4 className="font-bold text-xs text-[#196855] mb-1">
                   Selected IJMB Combinable Subject Code: <span className="font-mono text-sm underline">{application.subject_combination_code || '030'}</span>
                 </h4>
                 <p className="text-[11px] text-slate-700 font-semibold mb-2">
@@ -259,14 +259,14 @@ export const RegistrationSlipModal: React.FC<RegistrationSlipModalProps> = ({
           </div>
 
           {/* FOOTER & SECURITY CODE (Matching PDF Page 6 bottom) */}
-          <div className="border-t-2 border-[#006B35] pt-3 flex flex-col sm:flex-row justify-between items-center gap-3">
+          <div className="border-t-2 border-[#196855] pt-3 flex flex-col sm:flex-row justify-between items-center gap-3">
             <div className="flex items-center gap-2">
               <div className="p-2 bg-emerald-950 text-white rounded-lg text-center font-bold text-[9px] font-mono">
                 OFFICIAL SEAL<br />AHCAS VALID
               </div>
               <div>
                 <span className="text-[9px] text-slate-500 uppercase block font-bold">SECURITY CODE:</span>
-                <span className="font-mono font-black text-xs text-[#006B35] tracking-widest">{securityCode}</span>
+                <span className="font-mono font-black text-xs text-[#196855] tracking-widest">{securityCode}</span>
               </div>
             </div>
 

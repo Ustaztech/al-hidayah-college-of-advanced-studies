@@ -89,12 +89,14 @@ export const AHCASChatbot: React.FC = () => {
       {!isOpen && (
         <button
           onClick={() => setIsOpen(true)}
-          className="flex items-center gap-2 bg-[#006B35] hover:bg-[#004D26] text-white px-4 py-3 rounded-full shadow-2xl transition-all border-2 border-[#D4A62A]"
-          title="Open AHCAS AI Assistant"
+          className="flex items-center gap-2.5 bg-[#196855] hover:opacity-95 text-white px-4 py-2.5 rounded-full shadow-2xl transition-all border-2 border-[#e69912] cursor-pointer"
+          title="Open AHCAS Digital Helpdesk"
         >
-          <Bot size={22} className="text-amber-300" />
-          <span className="font-bold text-sm hidden sm:inline">AHCAS Assistant</span>
-          <Sparkles size={14} className="text-amber-300" />
+          <div className="w-7 h-7 bg-amber-400 text-slate-950 rounded-full flex items-center justify-center shadow-sm">
+            <Bot size={18} />
+          </div>
+          <span className="font-bold text-sm hidden sm:inline">Enquire & Chat</span>
+          <span className="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-pulse"></span>
         </button>
       )}
 
@@ -102,17 +104,17 @@ export const AHCASChatbot: React.FC = () => {
         <div className="w-80 sm:w-96 bg-white dark:bg-[#1A222C] rounded-2xl shadow-2xl border border-gray-200 dark:border-gray-800 overflow-hidden flex flex-col h-[480px] animate-fade-in">
           
           {/* Header */}
-          <div className="bg-[#006B35] text-white p-3.5 flex items-center justify-between">
+          <div className="bg-[#196855] text-white p-3.5 flex items-center justify-between">
             <div className="flex items-center gap-2.5">
-              <div className="w-8 h-8 rounded-full bg-amber-400 flex items-center justify-center text-black font-bold">
-                <Bot size={18} />
+              <div className="w-9 h-9 rounded-full bg-amber-400 text-slate-950 flex items-center justify-center shadow">
+                <Bot size={20} />
               </div>
               <div>
-                <span className="font-bold text-sm block leading-none">AHCAS AI Assistant</span>
-                <span className="text-[10px] text-amber-200">Abaji Campus Digital Helpdesk</span>
+                <span className="font-bold text-sm block leading-none">AHCAS Digital Helpdesk</span>
+                <span className="text-[10px] text-amber-200">Official Admissions & Academic Enquiries</span>
               </div>
             </div>
-            <button onClick={() => setIsOpen(false)} className="text-white hover:text-amber-300 p-1">
+            <button onClick={() => setIsOpen(false)} className="text-white hover:text-amber-300 p-1 cursor-pointer">
               <X size={18} />
             </button>
           </div>
@@ -121,19 +123,19 @@ export const AHCASChatbot: React.FC = () => {
           <div className="p-2 bg-gray-50 dark:bg-gray-800/60 border-b border-gray-200 dark:border-gray-800 flex gap-1.5 overflow-x-auto text-[11px]">
             <button
               onClick={() => handleSend('How do I apply for ND courses?')}
-              className="px-2.5 py-1 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-full whitespace-nowrap text-gray-700 dark:text-gray-200 hover:border-[#006B35]"
+              className="px-2.5 py-1 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-full whitespace-nowrap text-gray-700 dark:text-gray-200 hover:border-[#196855]"
             >
               Requirements
             </button>
             <button
               onClick={() => handleSend('Tell me about tuition fees')}
-              className="px-2.5 py-1 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-full whitespace-nowrap text-gray-700 dark:text-gray-200 hover:border-[#006B35]"
+              className="px-2.5 py-1 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-full whitespace-nowrap text-gray-700 dark:text-gray-200 hover:border-[#196855]"
             >
               Tuition Fees
             </button>
             <button
               onClick={() => handleSend('Where is AHCAS located?')}
-              className="px-2.5 py-1 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-full whitespace-nowrap text-gray-700 dark:text-gray-200 hover:border-[#006B35]"
+              className="px-2.5 py-1 bg-white dark:bg-gray-700 border border-gray-200 dark:border-gray-600 rounded-full whitespace-nowrap text-gray-700 dark:text-gray-200 hover:border-[#196855]"
             >
               Location
             </button>
@@ -147,14 +149,14 @@ export const AHCASChatbot: React.FC = () => {
                 className={`flex gap-2.5 ${m.sender === 'user' ? 'justify-end' : 'justify-start'}`}
               >
                 {m.sender === 'bot' && (
-                  <div className="w-7 h-7 rounded-full bg-[#006B35] text-amber-300 flex items-center justify-center text-xs font-bold shrink-0 mt-1">
-                    <Bot size={14} />
+                  <div className="w-7 h-7 rounded-full bg-emerald-100 dark:bg-emerald-950 text-[#196855] dark:text-emerald-300 border border-[#196855] flex items-center justify-center shrink-0 mt-1 shadow-xs">
+                    <Bot size={15} />
                   </div>
                 )}
                 <div
                   className={`max-w-[78%] p-3 rounded-2xl text-xs leading-relaxed ${
                     m.sender === 'user'
-                      ? 'bg-[#006B35] text-white rounded-br-none'
+                      ? 'bg-[#196855] text-white rounded-br-none'
                       : 'bg-gray-100 dark:bg-gray-800 text-gray-800 dark:text-gray-200 rounded-bl-none border border-gray-200 dark:border-gray-700'
                   }`}
                 >
@@ -162,7 +164,7 @@ export const AHCASChatbot: React.FC = () => {
                   <span className="text-[9px] opacity-60 block text-right mt-1">{m.timestamp}</span>
                 </div>
                 {m.sender === 'user' && (
-                  <div className="w-7 h-7 rounded-full bg-[#D4A62A] text-black flex items-center justify-center text-xs font-bold shrink-0 mt-1">
+                  <div className="w-7 h-7 rounded-full bg-[#e69912] text-black flex items-center justify-center text-xs font-bold shrink-0 mt-1">
                     <User size={14} />
                   </div>
                 )}
@@ -179,11 +181,11 @@ export const AHCASChatbot: React.FC = () => {
               value={input}
               onChange={e => setInput(e.target.value)}
               onKeyDown={e => e.key === 'Enter' && handleSend()}
-              className="flex-1 px-3 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-[#006B35]"
+              className="flex-1 px-3 py-2 bg-gray-100 dark:bg-gray-800 border border-gray-300 dark:border-gray-700 rounded-lg text-xs focus:outline-none focus:ring-2 focus:ring-[#196855]"
             />
             <button
               onClick={() => handleSend()}
-              className="p-2 bg-[#006B35] text-white rounded-lg hover:bg-[#004D26] transition-colors"
+              className="p-2 bg-[#196855] text-white rounded-lg hover:bg-[#196855] transition-colors"
             >
               <Send size={15} />
             </button>

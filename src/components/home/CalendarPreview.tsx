@@ -26,7 +26,7 @@ export const CalendarPreview: React.FC = () => {
               key={ev.id}
               className="p-5 bg-[#F3F6F3] dark:bg-gray-800/60 rounded-xl border border-gray-200 dark:border-gray-700 flex items-start gap-4"
             >
-              <div className="p-3 bg-[#006B35] text-white rounded-xl text-center shrink-0 min-w-[70px]">
+              <div className="p-3 bg-[#196855] text-white rounded-xl text-center shrink-0 min-w-[70px]">
                 <Clock size={16} className="mx-auto text-amber-300 mb-1" />
                 <span className="text-[10px] font-bold uppercase tracking-wider block text-amber-300">
                   {ev.category}
@@ -34,7 +34,7 @@ export const CalendarPreview: React.FC = () => {
               </div>
 
               <div>
-                <span className="text-xs font-bold text-[#006B35] dark:text-emerald-400 block mb-0.5">
+                <span className="text-xs font-bold text-[#196855] dark:text-emerald-400 block mb-0.5">
                   {ev.date}
                 </span>
                 <h3 className="text-sm font-bold text-gray-900 dark:text-white font-serif leading-snug">

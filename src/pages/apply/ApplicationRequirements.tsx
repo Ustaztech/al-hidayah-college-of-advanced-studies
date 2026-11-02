@@ -46,7 +46,7 @@ export const ApplicationRequirements: React.FC = () => {
             className="h-12 w-auto object-contain bg-white p-1 rounded-xl border border-slate-300"
           />
           <div>
-            <h1 className="text-lg font-black font-serif text-[#006B35] dark:text-emerald-400 leading-none">
+            <h1 className="text-lg font-black font-serif text-[#196855] dark:text-emerald-400 leading-none">
               Al-Hidayah College of Advanced Studies
             </h1>
             <span className="text-xs font-bold text-slate-600 dark:text-slate-300">
@@ -56,10 +56,10 @@ export const ApplicationRequirements: React.FC = () => {
         </div>
 
         <nav className="flex items-center gap-6 text-sm font-bold text-slate-800 dark:text-slate-200">
-          <Link to="/apply" className="hover:text-[#006B35] dark:hover:text-emerald-400 transition-colors">
+          <Link to="/apply" className="hover:text-[#196855] dark:hover:text-emerald-400 transition-colors">
             Home
           </Link>
-          <Link to="/apply/requirements" className="text-[#006B35] dark:text-emerald-400 hover:underline">
+          <Link to="/apply/requirements" className="text-[#196855] dark:text-emerald-400 hover:underline">
             Requirements
           </Link>
           <Link to="/" className="text-xs bg-slate-100 dark:bg-slate-800 px-3 py-1.5 rounded-lg border hover:bg-slate-200">
@@ -98,7 +98,7 @@ export const ApplicationRequirements: React.FC = () => {
                     const progs = PROGRAMMES_DATA.filter(p => p.category === newType);
                     if (progs.length > 0) setSelectedProgId(progs[0].id);
                   }}
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-medium focus:ring-1 focus:ring-[#006B35] focus:border-[#006B35]"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-medium focus:ring-1 focus:ring-[#196855] focus:border-[#196855]"
                 >
                   <option value="ND">Undergraduate (National Diploma)</option>
                   <option value="HND">Higher National Diploma (HND)</option>
@@ -114,7 +114,7 @@ export const ApplicationRequirements: React.FC = () => {
                 <select
                   value={selectedProgId}
                   onChange={e => setSelectedProgId(e.target.value)}
-                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-medium focus:ring-1 focus:ring-[#006B35] focus:border-[#006B35]"
+                  className="w-full px-3.5 py-2.5 bg-slate-50 border border-slate-300 rounded-xl text-xs font-medium focus:ring-1 focus:ring-[#196855] focus:border-[#196855]"
                 >
                   {filteredProgrammes.map(p => (
                     <option key={p.id} value={p.id}>{p.title}</option>
@@ -124,7 +124,7 @@ export const ApplicationRequirements: React.FC = () => {
 
               <button
                 type="submit"
-                className="w-full py-3 bg-[#006B35] hover:bg-[#004D26] text-white font-extrabold rounded-xl text-xs shadow-md transition-all mt-2"
+                className="w-full py-3 bg-[#196855] hover:bg-[#196855] text-white font-extrabold rounded-xl text-xs shadow-md transition-all mt-2"
               >
                 Continue
               </button>
@@ -134,7 +134,7 @@ export const ApplicationRequirements: React.FC = () => {
               <span className="text-xs text-slate-500 font-medium">Ready to apply?</span>
               <Link
                 to="/apply/register"
-                className="text-xs font-extrabold text-[#006B35] hover:underline flex items-center gap-1"
+                className="text-xs font-extrabold text-[#196855] hover:underline flex items-center gap-1"
               >
                 <span>Start Application</span>
                 <ArrowRight size={14} />
@@ -148,7 +148,7 @@ export const ApplicationRequirements: React.FC = () => {
             <div className="lg:col-span-7 bg-white rounded-2xl shadow-2xl p-6 sm:p-8 text-slate-900 border border-slate-200 animate-fade-in space-y-6">
               
               <div className="border-b border-slate-200 pb-4">
-                <span className="text-[11px] font-mono font-extrabold text-[#006B35] uppercase tracking-wider block">
+                <span className="text-[11px] font-mono font-extrabold text-[#196855] uppercase tracking-wider block">
                   ENTRY SPECIFICATION • {selectedProgramme.category} PROGRAMME
                 </span>
                 <h3 className="text-2xl font-black font-serif text-slate-900 mt-1">
@@ -204,7 +204,7 @@ export const ApplicationRequirements: React.FC = () => {
               <div className="pt-4 flex items-center gap-4">
                 <Link
                   to="/apply/register"
-                  className="px-6 py-3 bg-[#006B35] hover:bg-[#004D26] text-white font-extrabold rounded-xl text-xs shadow-md flex items-center gap-2"
+                  className="px-6 py-3 bg-[#196855] hover:bg-[#196855] text-white font-extrabold rounded-xl text-xs shadow-md flex items-center gap-2"
                 >
                   <Sparkles size={16} />
                   <span>Apply Now For This Programme</span>

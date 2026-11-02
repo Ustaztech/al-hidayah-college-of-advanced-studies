@@ -109,11 +109,11 @@ export const ApplicationPortalHome: React.FC = () => {
             className="h-12 w-auto object-contain bg-white p-1 rounded-xl border border-slate-300 shadow-sm"
           />
           <div>
-            <h1 className="text-lg font-black font-serif text-[#006B35] dark:text-emerald-400 leading-none">
+            <h1 className="text-lg font-black font-serif text-[#196855] dark:text-emerald-400 leading-none">
               Al-Hidayah College of Advanced Studies
             </h1>
             <span className="text-xs font-bold text-slate-600 dark:text-slate-300">
-              Online Admissions & Registration Portal (RC: {INSTITUTION_INFO.rcNumber})
+              Online Admissions & Registration Portal
             </span>
           </div>
         </div>
@@ -122,10 +122,10 @@ export const ApplicationPortalHome: React.FC = () => {
           <Link to="/" className="text-xs text-slate-500 hover:text-slate-900 dark:hover:text-white transition-colors">
             Main Campus Website →
           </Link>
-          <Link to="/apply/requirements" className="hover:text-[#006B35] dark:hover:text-emerald-400 transition-colors">
+          <Link to="/apply/requirements" className="hover:text-[#196855] dark:hover:text-emerald-400 transition-colors">
             Requirements
           </Link>
-          <Link to="/admissions/status" className="hover:text-[#006B35] dark:hover:text-emerald-400 transition-colors">
+          <Link to="/admissions/status" className="hover:text-[#196855] dark:hover:text-emerald-400 transition-colors">
             Check Status
           </Link>
         </nav>
@@ -135,8 +135,8 @@ export const ApplicationPortalHome: React.FC = () => {
       <main className="relative z-10 flex-1 max-w-6xl mx-auto px-4 py-12 flex flex-col justify-center items-center w-full">
         
         <div className="text-center max-w-3xl space-y-4 mb-10">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-[#D4A62A]/20 border border-[#D4A62A]/50 rounded-full text-xs font-black text-amber-300 shadow-md">
-            <Award size={14} className="text-[#D4A62A]" />
+          <div className="inline-flex items-center gap-2 px-3.5 py-1 bg-[#e69912]/20 border border-[#e69912]/50 rounded-full text-xs font-black text-amber-300 shadow-md">
+            <Award size={14} className="text-[#e69912]" />
             <span>2026/2027 Academic Session Direct Entry Admissions</span>
           </div>
 
@@ -163,17 +163,17 @@ export const ApplicationPortalHome: React.FC = () => {
             className="p-6 bg-white rounded-2xl shadow-xl hover:shadow-2xl border-2 border-emerald-500 hover:-translate-y-1 transition-all group flex flex-col justify-between text-slate-900"
           >
             <div className="space-y-3">
-              <div className="w-12 h-12 rounded-xl bg-emerald-100 text-[#006B35] flex items-center justify-center group-hover:bg-[#006B35] group-hover:text-white transition-colors">
+              <div className="w-12 h-12 rounded-xl bg-emerald-100 text-[#196855] flex items-center justify-center group-hover:bg-[#196855] group-hover:text-white transition-colors">
                 <PlayCircle size={26} />
               </div>
-              <h3 className="font-bold text-base font-serif group-hover:text-[#006B35]">
+              <h3 className="font-bold text-base font-serif group-hover:text-[#196855]">
                 Start Application
               </h3>
               <p className="text-xs text-slate-600 leading-relaxed">
                 Begin new candidate registration for the 12-month IJMB A-Level academic cycle.
               </p>
             </div>
-            <div className="pt-4 border-t border-slate-100 text-xs font-bold text-[#006B35] flex items-center gap-1 mt-4">
+            <div className="pt-4 border-t border-slate-100 text-xs font-bold text-[#196855] flex items-center gap-1 mt-4">
               <span>Begin Application</span>
               <ArrowRight size={14} className="group-hover:translate-x-1 transition-transform" />
             </div>
@@ -182,10 +182,10 @@ export const ApplicationPortalHome: React.FC = () => {
           {/* Card 2: Continue Application */}
           <button
             onClick={() => setContinueModalOpen(true)}
-            className="p-6 bg-white rounded-2xl shadow-xl hover:shadow-2xl border-2 border-slate-200 hover:border-[#D4A62A] hover:-translate-y-1 transition-all group flex flex-col justify-between text-slate-900 text-left cursor-pointer"
+            className="p-6 bg-white rounded-2xl shadow-xl hover:shadow-2xl border-2 border-slate-200 hover:border-[#e69912] hover:-translate-y-1 transition-all group flex flex-col justify-between text-slate-900 text-left cursor-pointer"
           >
             <div className="space-y-3">
-              <div className="w-12 h-12 rounded-xl bg-amber-100 text-[#D4A62A] flex items-center justify-center group-hover:bg-[#D4A62A] group-hover:text-black transition-colors">
+              <div className="w-12 h-12 rounded-xl bg-amber-100 text-[#e69912] flex items-center justify-center group-hover:bg-[#e69912] group-hover:text-black transition-colors">
                 <RotateCw size={26} />
               </div>
               <h3 className="font-bold text-base font-serif group-hover:text-amber-700">
@@ -254,7 +254,7 @@ export const ApplicationPortalHome: React.FC = () => {
         <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-xs flex items-center justify-center p-4">
           <div className="bg-white rounded-2xl shadow-2xl p-6 sm:p-8 max-w-md w-full text-slate-900 border border-slate-200">
             <div className="flex justify-between items-center mb-4">
-              <h3 className="text-lg font-bold font-serif text-[#006B35]">
+              <h3 className="text-lg font-bold font-serif text-[#196855]">
                 Candidate Application Sign-In
               </h3>
               <button onClick={() => setContinueModalOpen(false)} className="p-1 text-slate-400 hover:text-slate-600">
@@ -298,15 +298,10 @@ export const ApplicationPortalHome: React.FC = () => {
                 />
               </div>
 
-              <div className="p-2.5 bg-slate-100 rounded-xl text-[11px] text-slate-600">
-                <span>Demo test candidate:</span>
-                <strong className="block font-mono text-emerald-800">AHCAS/IJMB/2026/00142 • Abdullahi</strong>
-              </div>
-
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full py-2.5 bg-[#006B35] hover:bg-[#004D26] text-white font-bold rounded-xl text-xs shadow-md"
+                className="w-full py-2.5 bg-[#196855] hover:bg-[#196855] text-white font-bold rounded-xl text-xs shadow-md"
               >
                 {isSubmitting ? 'Verifying...' : 'Sign In to Portal'}
               </button>

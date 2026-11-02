@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, Globe, Building2, ShieldCheck } from 'lucide-react';
+import { MapPin, Phone, Mail, Clock, Send, CheckCircle2, Globe, Building2, ShieldCheck, Headphones, PhoneCall, Camera } from 'lucide-react';
 import { INSTITUTION_INFO } from '../../data/ijmbData';
 
 export const Contact: React.FC = () => {
@@ -24,11 +24,9 @@ export const Contact: React.FC = () => {
         {/* Header */}
         <div className="border-b border-slate-200 dark:border-slate-800 pb-6">
           <div className="flex items-center gap-2 mb-1">
-            <span className="text-xs font-black text-[#006B35] dark:text-emerald-400 uppercase tracking-wider">
+            <span className="text-xs font-black text-[#196855] dark:text-emerald-400 uppercase tracking-wider">
               Official Campus Communication Desk
             </span>
-            <span className="text-slate-400">•</span>
-            <span className="text-xs text-[#D4A62A] font-bold">RC: {INSTITUTION_INFO.rcNumber}</span>
           </div>
           <h1 className="text-3xl sm:text-4xl font-extrabold font-serif text-slate-900 dark:text-white">
             Contact Al-Hidayah College of Advanced Studies
@@ -44,23 +42,28 @@ export const Contact: React.FC = () => {
           <div className="lg:col-span-5 space-y-6">
             
             <div className="p-6 sm:p-8 bg-[#F8FAFC] dark:bg-slate-800 rounded-3xl border border-slate-200 dark:border-slate-700 space-y-5 shadow-sm">
-              <div className="flex items-center gap-3">
-                <img
-                  src="/official-logo.jpg"
-                  alt="Official Crest"
-                  className="h-12 w-auto bg-white p-0.5 rounded-xl border border-emerald-400 shadow-sm"
-                />
-                <div>
-                  <h3 className="text-base font-bold font-serif text-slate-900 dark:text-white leading-tight">
-                    Al-Hidayah College
-                  </h3>
-                  <p className="text-[11px] text-amber-600 font-bold uppercase">Abaji FCT Abuja</p>
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <img
+                    src="/official-logo.jpg"
+                    alt="Official Crest"
+                    className="h-12 w-auto bg-white p-0.5 rounded-xl border border-emerald-400 shadow-sm"
+                  />
+                  <div>
+                    <h3 className="text-base font-bold font-serif text-slate-900 dark:text-white leading-tight">
+                      Al-Hidayah College
+                    </h3>
+                    <p className="text-[11px] text-amber-600 font-bold uppercase">Abaji FCT Abuja</p>
+                  </div>
+                </div>
+                <div className="w-9 h-9 rounded-xl bg-emerald-100 dark:bg-emerald-950 flex items-center justify-center text-[#196855] dark:text-emerald-400">
+                  <Headphones size={20} />
                 </div>
               </div>
 
               <div className="space-y-4 text-xs text-slate-700 dark:text-slate-300">
                 <div className="flex items-start gap-3">
-                  <MapPin size={18} className="text-[#006B35] shrink-0 mt-0.5" />
+                  <MapPin size={18} className="text-[#196855] shrink-0 mt-0.5" />
                   <div>
                     <strong className="text-slate-900 dark:text-white block">Administrative Secretariat:</strong>
                     <span>{INSTITUTION_INFO.address}</span>
@@ -68,18 +71,20 @@ export const Contact: React.FC = () => {
                 </div>
 
                 <div className="flex items-start gap-3">
-                  <Building2 size={18} className="text-[#F58220] shrink-0 mt-0.5" />
+                  <Building2 size={18} className="text-[#e69912] shrink-0 mt-0.5" />
                   <div>
                     <strong className="text-slate-900 dark:text-white block">Academic Study Centre:</strong>
-                    <span className="text-[#006B35] dark:text-emerald-400 font-bold">{INSTITUTION_INFO.studyCentre}</span>
+                    <span className="text-[#196855] dark:text-emerald-400 font-bold">{INSTITUTION_INFO.studyCentre}</span>
                   </div>
                 </div>
 
                 <div className="flex items-center gap-3">
-                  <Phone size={18} className="text-[#D4A62A] shrink-0" />
+                  <div className="w-5 h-5 flex items-center justify-center shrink-0 text-[#196855]">
+                    <PhoneCall size={18} />
+                  </div>
                   <div>
                     <strong className="text-slate-900 dark:text-white block">Direct Telephone Hotline:</strong>
-                    <a href={`tel:${INSTITUTION_INFO.phone}`} className="font-mono text-sm font-bold text-slate-900 dark:text-white hover:text-[#006B35]">
+                    <a href={`tel:${INSTITUTION_INFO.phone}`} className="font-mono text-sm font-bold text-slate-900 dark:text-white hover:text-[#196855]">
                       {INSTITUTION_INFO.phone}
                     </a>
                   </div>
@@ -117,10 +122,32 @@ export const Contact: React.FC = () => {
 
             {/* Quality Assurance Note */}
             <div className="p-4 bg-emerald-50 dark:bg-emerald-950/40 rounded-2xl border border-emerald-200 text-xs text-emerald-900 dark:text-emerald-200 flex items-start gap-2.5">
-              <ShieldCheck size={18} className="text-[#006B35] shrink-0 mt-0.5" />
+              <ShieldCheck size={18} className="text-[#196855] shrink-0 mt-0.5" />
               <span>
-                All official candidate correspondence is logged under Quality Assurance Manual Code <strong>{INSTITUTION_INFO.documentCode}</strong>.
+                All official candidate inquiries are processed promptly by the Academic Registry helpdesk.
               </span>
+            </div>
+
+            {/* Authentic Study Centre Leadership Photo */}
+            <div className="rounded-3xl overflow-hidden border border-gray-200 dark:border-slate-700 shadow-md bg-white dark:bg-slate-800">
+              <div className="relative aspect-4/3 overflow-hidden bg-black">
+                <img
+                  src="/ahcas-coordinator-podium.jpg"
+                  alt="AHCAS Study Centre Coordinator at Official Podium"
+                  className="w-full h-full object-cover hover:scale-105 transition-transform duration-500"
+                />
+              </div>
+              <div className="p-4 space-y-2">
+                <div className="flex items-center gap-2">
+                  <Headphones size={16} className="text-[#196855] dark:text-emerald-400" />
+                  <span className="text-[11px] font-bold text-[#196855] dark:text-emerald-400 uppercase tracking-wider">
+                    Study Centre Helpdesk & Consultation
+                  </span>
+                </div>
+                <p className="text-xs text-gray-600 dark:text-gray-400">
+                  Need direct one-on-one consultation? Visit the administrative study centre at JSS Agyana Road, Abaji, or reach our admissions helpdesk line.
+                </p>
+              </div>
             </div>
 
           </div>
@@ -129,7 +156,7 @@ export const Contact: React.FC = () => {
           <div className="lg:col-span-7 bg-[#F8FAFC] dark:bg-slate-800 p-8 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm">
             {submitted ? (
               <div className="text-center py-12 space-y-4 animate-fade-in">
-                <CheckCircle2 size={52} className="mx-auto text-[#006B35]" />
+                <CheckCircle2 size={52} className="mx-auto text-[#196855]" />
                 <h3 className="text-xl font-bold font-serif text-slate-900 dark:text-white">
                   Message Dispatched Successfully!
                 </h3>
@@ -138,7 +165,7 @@ export const Contact: React.FC = () => {
                 </p>
                 <button
                   onClick={() => setSubmitted(false)}
-                  className="px-5 py-2.5 bg-[#006B35] text-white text-xs font-bold rounded-xl hover:bg-[#004D26]"
+                  className="px-5 py-2.5 bg-[#196855] text-white text-xs font-bold rounded-xl hover:bg-[#196855]"
                 >
                   Send Another Message
                 </button>
@@ -220,7 +247,7 @@ export const Contact: React.FC = () => {
 
                 <button
                   type="submit"
-                  className="w-full py-3 bg-[#006B35] hover:bg-[#004D26] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow-md transition-all"
+                  className="w-full py-3 bg-[#196855] hover:bg-[#196855] text-white font-bold rounded-xl text-xs flex items-center justify-center gap-2 shadow-md transition-all"
                 >
                   <Send size={15} />
                   <span>Transmit Inquiry to Admissions Desk</span>
